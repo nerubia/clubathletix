@@ -11,15 +11,17 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { RefundMember } from './refund'
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  let member = await getMember(params.id)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const {id} = await params
+  let member = await getMember(id)
 
   return {
     title: member && `Member #${member.id}`,
   }
 }
 
-export default async function Member({ params }: { params: { id: string } }) {
+export default async function Member({ params }: { params: Promise<{ id: string }> }) {
+  const {id} = await params
   let member = await getMember(params.id)
 
   if (!member) {
