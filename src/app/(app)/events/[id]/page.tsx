@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function Event({ params }: { params: Promise<{ id: string }> }) {
+export default async function Event({ params }: { params: Promise<{ [k: string]: string }> }) {
   const { id } = await params
   let event = await getEvent(id)
   let members = await getEventMembers(id)
