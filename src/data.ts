@@ -1,5 +1,5 @@
 export async function getMember(id: string) {
-  return (await getMembers()).find((member) => order.id.toString() === id)!
+  return (await getMembers()).find((member) => member.id.toString() === id)!
 }
 
 export async function getRecentMembers() {
