@@ -718,7 +718,7 @@ export async function getEvent(id: string) {
 }
 
 export async function getEventMembers(id: string) {
-  return (await getMembers()).filter((member) => order.event.id.toString() === id)
+  return (await getMembers()).filter((member) => member.event.id.toString() === id)
 }
 
 export async function getEvents() {
