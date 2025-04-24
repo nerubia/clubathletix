@@ -17,9 +17,10 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function Event({ params }: { params: { id: string } }) {
-  let event = await getEvent(params.id)
-  let members = await getEventMembers(params.id)
+export default async function Event({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  let event = await getEvent(id)
+  let members = await getEventMembers(id)
 
   if (!event) {
     notFound()

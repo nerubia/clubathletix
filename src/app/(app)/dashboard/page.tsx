@@ -4,17 +4,13 @@ import { Heading, Subheading } from '@/components/heading'
 import { Select } from '@/components/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/table'
 import { getRecentMembers } from '@/data'
-import { headers } from 'next/headers'
 
 export default async function Home() {
-  const h = await headers()
-  const host = h.get('host') || ''
-  const hostname = host.startsWith('localhost') || !host ? 'local' : host.split('.').at(0);
   let members = await getRecentMembers()
 
   return (
     <>
-      <Heading>Good afternoon, {hostname}</Heading>
+      <Heading>Good afternoon, Erica</Heading>
       <div className="mt-8 flex items-end justify-between">
         <Subheading>Overview</Subheading>
         <div>
