@@ -3,9 +3,25 @@
 import { useEffect, useState } from 'react'
 import { Listbox, ListboxLabel, ListboxOption } from '../listbox'
 
+const slots: {
+  [k: string]: {
+    [a: string]: string
+  }
+} = {
+  youth: {
+    days: 'Wednesdays & Fridays',
+    start: 'July 4, 2025'
+  },
+
+  kids: {
+    days: 'Tuesdays & Thursdays',
+    start: 'July 3, 2025'
+  }
+}
 export default function Birthdate(props: { id: string; defaultValue?: string; onChange(v: string): void }) {
   let bdate = (props.defaultValue || '').split(' ') || []
   const [ageGroup, setAgeGroup] = useState<string>()
+  const [timeSlot, setTimeslot] = useState<string>()
   const [query, setQuery] = useState<{
     month?: string
     year?: string
@@ -68,13 +84,18 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
       let n = new Date().getFullYear() - Number(selectedYear) + (new Date().getMonth() > 7 ? 1 : 0)
       if (n > 6) setAgeGroup(`U${n}`)
       else setAgeGroup('Micro')
+
+      if (Number(selectedYear) >= 2012) {
+        setTimeslot('youth')
+      } else setTimeslot('kids')
     }
     if (selectedDay && selectedMonth && selectedYear)
     props.onChange([selectedYear!, selectedMonth!, selectedDay!].join('-'))
   }, [selectedDay, selectedMonth, selectedYear])
 
   return (
-    <div className='flex gap-2 mt-2.5 items-center col-span-2'>
+    <div className='flex gap-2 mt-2.5 items-center col-span-2 flex-wrap'>
+        <div className='w-36'>
         <Listbox
                 aria-label="Month"
                 name="birth_month"
@@ -89,9 +110,9 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
                     <ListboxLabel>{month.label}</ListboxLabel>
                   </ListboxOption>
                 ))}
-          </Listbox>
+          </Listbox></div>
 
-        <div className='w-28'>
+        <div className='w-16'>
           <Listbox
                 aria-label="Day"
                 name="birth_date"
@@ -109,7 +130,7 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
         </div>
 
 
-        <div className='w-36'>
+        <div className='w-28'>
         <Listbox
               aria-label="Year"
               name="birth_year"
@@ -126,7 +147,7 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
         </Listbox>
         </div>
       <div className='text-zinc-800 font-semibold w-20 text-right'>{ageGroup}</div>
-      
+      <div className='text-zinc-800 w-full'>{timeSlot && slots[timeSlot].days || ''}</div>
     </div>
   )
 }

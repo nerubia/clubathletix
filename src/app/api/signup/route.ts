@@ -184,7 +184,7 @@ export async function POST(request: NextRequest) {
                                 },
                                 {
                                     "type": "mrkdwn",
-                                    "text": `*Plan:* ${code} ${price}`
+                                    "text": `*Plan:* ${code || 'Training only'} ${price}`
                                 },
                                 {
                                     "type": "mrkdwn",
