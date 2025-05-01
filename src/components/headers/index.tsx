@@ -172,7 +172,7 @@ export default function HomePageHeader() {
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
                     </div>
                   </div>
-                  <div className="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
+                  <div className="mr-auto w-44 flex-none space-y-8 sm:mr-0 pt-40 sm:pt-52 lg:pt-36">
                     <div className="relative">
                     <video width="100%" autoPlay loop playsInline muted className="overflow-hidden rounded-2xl -mt-48">
                     <source src="/pf/video.mp4" type="video/mp4" height="240" />Your browser does not support the video tag.</video>

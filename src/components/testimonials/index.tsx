@@ -28,7 +28,7 @@ export default function Testimonials() {
                 </svg>
                 <blockquote className="text-xl/8 font-semibold text-white sm:text-2xl/9">
                   <p>
-                  The team at PF Football Academy went above and beyond with our child’s development, even finding a way to unleash his inner confidence in front of goal.
+                  The team at PF Football Academy went above and beyond with our child’s development, even finding a way to unleash their inner confidence in front of goal.
                   </p>
                 </blockquote>
                 <figcaption className="mt-8 text-base">

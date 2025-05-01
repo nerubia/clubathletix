@@ -36,9 +36,10 @@ const WaiverAgreementForm: React.FC = () => {
       I, the undersigned parent or legal guardian of the participant, understand that participation in football activities involves risk of injury, 
       including but not limited to sprains, fractures, concussions, or other serious harm. I assume full responsibility for any risks, injuries, 
       or damages known or unknown, which may be incurred as a result of participation in this program.
-
-      I waive, release, and hold harmless Progress Footy Football Academy Inc., its directors, coaches, volunteers, affiliates, and facility providers from any 
-      and all liability for injuries or damages sustained by my child during participation, including transportation to and from events.
+      
+      I hereby for myself, my heirs, executors and administrators, waive and release any and all rights and claims that I may have or that may arise against 
+      the City of Surrey, the Surrey Parks and Recreation representatives, Surrey Youth Soccer Association and Profress Footy Football Academy Inc. representatives 
+      for any and all injuries or losses suffered by my child, named on this form, while competing in connection with the program(s).
       </p>
 
       <Heading force='text-slate-700'>2. Medical Authorization</Heading>

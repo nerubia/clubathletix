@@ -36,7 +36,7 @@ export default function FormContents() {
         setDisabled(!yes)
     }
 
-    return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
+    return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-sm">
     <section>
         <div className="border-b border-gray-200 pb-5 mb-5">
             <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>
@@ -234,7 +234,7 @@ export default function FormContents() {
             </CheckboxField>
         </div>
     </section>
-    <div className="mt-8 flex items-center">
+    <div className="mt-8 flex flex-col sm:flex-row items-center">
         <Button type="submit" className="w-32" color="dark" disabled={disabled} onClick={async (e: FormEvent<HTMLButtonElement>) => {
             e.preventDefault();
             toggleLoader(true)
@@ -254,7 +254,7 @@ export default function FormContents() {
         }}>
             {loading ? 'Loading...' : 'Sign up'}
         </Button>
-        <p className="text-slate-500 sm:ml-8 text-xs">Payment instructions will be sent to your phone.</p>
+        <p className="text-slate-500 sm:ml-8 mt-8 sm:mt-0 text-xs">Payment instructions will be sent to your phone.</p>
     </div>
 
     <Dialog open={success} onClose={() => {
