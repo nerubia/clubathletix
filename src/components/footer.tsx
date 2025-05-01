@@ -3,7 +3,7 @@ import { InstagramIcon, YouTubeIcon } from "./icons/social-media"
 const navigation = [
   {
     name: 'Instagram',
-    href: '#',
+    href: 'https://instagram.com/progressfooty',
     icon: InstagramIcon,
   },
   {
