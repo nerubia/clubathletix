@@ -9,9 +9,12 @@ import { Description, Label } from "../fieldset";
 import DialogButton from "../dialog-button";
 import WaiverAgreementForm from "./waiver-contents";
 import { FormEvent, useState } from "react";
+import { Dialog, DialogActions, DialogBody, DialogTitle } from "../dialog";
 
 export default function FormContents() {
+    const [success, toggleSuccessDialog] = useState(true)
     const [disabled, setDisabled] = useState(true)
+    const [loading, toggleLoader] = useState(false)
     const [formData, setFormData] = useState<{
         [k: string]: string | boolean
     }>({
@@ -22,8 +25,13 @@ export default function FormContents() {
         country: 'Canada',
     })
     function toggleAgreement(yes: boolean) {
+        setFormData(prev => ({
+            ...prev,
+            signed_agreement: true,
+        }))
         setDisabled(!yes)
     }
+
     return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
     <section>
         <div className="border-b border-gray-200 pb-5 mb-5">
@@ -37,11 +45,17 @@ export default function FormContents() {
                 <div className="mt-2.5">
                 <Input
                     id="child-first-name"
-                    name="fname"
+                    name="cfname"
                     type="text"
                     autoComplete="given-name"
                     data-theme="light"
                     required
+                    onChange={e => {
+                        setFormData(prev => ({
+                            ...prev,
+                            [e.target.name]: e.target.value
+                        }))
+                    }}
                 />
                 </div>
             </div>
@@ -52,11 +66,17 @@ export default function FormContents() {
                 <div className="mt-2.5">
                 <Input
                     id="child-last-name"
-                    name="lname"
+                    name="clname"
                     type="text"
                     autoComplete="family-name"
                     data-theme='light'
                     required
+                    onChange={e => {
+                        setFormData(prev => ({
+                            ...prev,
+                            [e.target.name]: e.target.value
+                        }))
+                    }}
                 />
                 </div>
             </div>
@@ -65,7 +85,12 @@ export default function FormContents() {
                 Child&rsquo;s date of birth
                 </label>
                 
-                <Birthdate id="child-birthdate" />
+                <Birthdate id="child-birthdate" onChange={e => {
+                    setFormData(prev => ({
+                        ...prev,
+                        date_of_birth: e
+                    }))
+                }} />
             </div>
         </div>
 
@@ -86,6 +111,12 @@ export default function FormContents() {
                         autoComplete="first-name"
                         data-theme="light"
                         required
+                        onChange={e => {
+                            setFormData(prev => ({
+                                ...prev,
+                                [e.target.name]: e.target.value
+                            }))
+                        }}
                     />
                 </div>
             </div>
@@ -101,6 +132,12 @@ export default function FormContents() {
                         autoComplete="last-name"
                         data-theme="light"
                         required
+                        onChange={e => {
+                            setFormData(prev => ({
+                                ...prev,
+                                [e.target.name]: e.target.value
+                            }))
+                        }}
                     />
                 </div>
             </div>
@@ -108,7 +145,12 @@ export default function FormContents() {
                 <label htmlFor="street_1" className="block text-sm/6 font-semibold text-gray-900 mb-4">
                     Address
                 </label>
-                <Address {...formData as any} data-theme="light" />
+                <Address {...formData as any} data-theme="light" onChange={address => {
+                    setFormData(prev => ({
+                        ...prev,
+                        ...address,
+                    }))
+                }} />
             </div>
             <div>
                 <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
@@ -121,6 +163,13 @@ export default function FormContents() {
                         type="email"
                         autoComplete="email"
                         data-theme="light"
+                        required
+                        onChange={e => {
+                            setFormData(prev => ({
+                                ...prev,
+                                [e.target.name]: e.target.value
+                            }))
+                        }}
                     />
                 </div>
             </div>
@@ -131,10 +180,17 @@ export default function FormContents() {
                 <div className="mt-2.5">
                     <Input
                         id="phone-number"
-                        name="phone-number"
+                        name="phone"
                         type="tel"
                         autoComplete="tel"
                         data-theme="light"
+                        required
+                        onChange={e => {
+                            setFormData(prev => ({
+                                ...prev,
+                                [e.target.name]: e.target.value
+                            }))
+                        }}
                     />
                 </div>
             </div>
@@ -144,7 +200,12 @@ export default function FormContents() {
         </div>
         <div className="col-span-2 mt-8">
             <CheckboxField data-theme="light">          
-                <Checkbox color="rose" aria-required name="media_release" value="yes" data-theme="light" />
+                <Checkbox color="rose" aria-required name="media_release" value="yes" data-theme="light" onChange={yes => {
+                    setFormData(prev => ({
+                        ...prev,
+                        media_release: yes
+                    }))
+                }} />
                 <Label data-theme="light">Media release</Label>
                 <Description data-theme="light">I grant permission to Progress Footy Academy Inc. to use photos, videos, or recordings of my child for marketing, social media, or promotional purposes.</Description>
             </CheckboxField>
@@ -162,13 +223,40 @@ export default function FormContents() {
         </div>
     </section>
     <div className="mt-8 flex items-center">
-        <Button type="submit" color="dark" disabled={disabled} onClick={(e: FormEvent<HTMLButtonElement>) => {
+        <Button type="submit" className="w-32" color="dark" disabled={disabled} onClick={async (e: FormEvent<HTMLButtonElement>) => {
             e.preventDefault();
+            toggleLoader(true)
+            const xhr = await fetch('/api/signup', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    contentType: 'application/json'
+                }
+            })
+            toggleLoader(false)
 
+            if (xhr.ok) {
+                const response = await xhr.json()
+                toggleSuccessDialog(true)
+            }
         }}>
-            Sign up
+            {loading ? 'Loading...' : 'Sign up'}
         </Button>
         <p className="text-slate-500 sm:ml-8 text-xs">Payment instructions will be sent to your phone.</p>
     </div>
+
+    <Dialog open={success} onClose={() => {}}>
+        <DialogTitle>Beauty!</DialogTitle>
+        <DialogBody className="flex flex-col gap-y-4">
+            <p>Hey {(formData.fname as string).split(' ').reverse().pop()}! Thanks for signing {(formData.cfname as string).split(' ').reverse().pop()} up.</p>
+            <p>We&rsquo;re so thrilled to have you and {(formData.cfname as string).split(' ').reverse().pop()} join the PF Academy family!<br />We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and individual both on and off the field.
+            </p>
+            <p>You should be getting a WhatsApp message shortly.</p></DialogBody>
+        <DialogActions>
+            <Button type="button" onClick={() => {
+                toggleSuccessDialog(false)
+            }}>Close</Button>
+        </DialogActions>
+    </Dialog>
 </div>
 }

@@ -3,7 +3,7 @@
 import { Input } from '@/components/input'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { getCountries } from '@/data'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export type Address = {
   street_1: string
@@ -15,11 +15,15 @@ export type Address = {
 }
 export function Address({
   ['data-theme']: dataTheme,
+  onChange,
   ...address
-}: Address & { 'data-theme'?: 'light' | 'dark' }) {
+}: Address & { 'data-theme'?: 'light' | 'dark'; onChange?(addr: Address): void }) {
   let countries = getCountries()
   let [country, setCountry] = useState(countries[0])
-
+  const [addr, setAddress] = useState<Address>()
+  useEffect(() => {
+    onChange && onChange(addr as unknown as Address)
+  }, [addr])
   return (
     <div className="grid grid-cols-2 gap-6" data-theme={dataTheme}>
       <div className='grid grid-cols-3 gap-6 col-span-2'>
@@ -30,6 +34,12 @@ export function Address({
           defaultValue={address.street_1}
           className="col-span-2"
           data-theme={dataTheme}
+          onChange={v => {
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              [v.target.name]: v.target.value,
+            }))
+          }}
         />
         <Input
           aria-label="No."
@@ -38,24 +48,53 @@ export function Address({
           defaultValue={address.street_2}
           className="col-span-1"
           data-theme={dataTheme}
+          onChange={v => {
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              [v.target.name]: v.target.value,
+            }))
+          }}
         />
       </div>
-      <Input aria-label="City" name="city_town" placeholder="City / Town" defaultValue={address.city_town} className="col-span-2 sm:col-span-1" data-theme={dataTheme} />
-      <Listbox aria-label="Region" name="region" placeholder="Region" defaultValue={address.state_province} data-theme={dataTheme}>
+      <Input aria-label="City" name="city_town" placeholder="City / Town" defaultValue={address.city_town} className="col-span-2 sm:col-span-1" data-theme={dataTheme} 
+          onChange={v => {
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              [v.target.name]: v.target.value,
+            }))
+          }}/>
+      <Listbox aria-label="Region" name="region" placeholder="Region" defaultValue={address.state_province || 'British Columbia'} data-theme={dataTheme} onChange={v => {
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              state_province: v,
+            }))
+          }}>
         {country.regions.map((region) => (
           <ListboxOption key={region} value={region} data-theme='light'>
             <ListboxLabel>{region}</ListboxLabel>
           </ListboxOption>
         ))}
       </Listbox>
-      <Input aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" defaultValue={address.postal_zip_code} data-theme={dataTheme} />
+      <Input aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" defaultValue={address.postal_zip_code} data-theme={dataTheme} 
+          onChange={v => {
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              [v.target.name]: v.target.value,
+            }))
+          }}/>
       <Listbox
         aria-label="Country"
         name="country"
         placeholder="Country"
         by="name"
         value={countries.find(c => c.name === address.country)}
-        onChange={(country) => setCountry(country)}
+        onChange={(v) => {
+            setCountry(v)
+            setAddress(prev => ({
+              ...prev as unknown as Address,
+              country: v.name,
+            }))
+        }}
         className="col-span-2 sm:col-span-1"
         data-theme={dataTheme}
       >
