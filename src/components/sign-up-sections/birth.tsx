@@ -75,14 +75,13 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
 
   return (
     <div className='flex gap-2 mt-2.5 items-center col-span-2'>
-      <div className="relative w-full sm:w-40">
         <Listbox
                 aria-label="Month"
                 name="birth_month"
                 placeholder="Month"
                 defaultValue={months.find(c => c.value === selectedMonth)?.value || ''}
                 onChange={setSelectedMonth}
-                className="w-full"
+                className="w-12"
                 data-theme='light'
               >
                 {(filteredMonths.length ? filteredMonths : months).map((month) => (
@@ -91,33 +90,32 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
                   </ListboxOption>
                 ))}
           </Listbox>
-      </div>
 
-      <div className='flex flex-col sm:flex-row gap-2 w-full sm:w-1/2 items-center'>
-        <Listbox
-              aria-label="Day"
-              name="birth_date"
-              placeholder="Day"
-              defaultValue={days.find(c => c.value === selectedDay)?.value || ''}
-              onChange={setSelectedDay}
-              data-theme='light'
-            >
-              {days.map((d) => (
-                <ListboxOption key={d.label} value={d.value} data-theme='light'>
-                  <ListboxLabel className='w-6 text-center'>{d.label}</ListboxLabel>
-                </ListboxOption>
-              ))}
-        </Listbox>
+        <div className='w-28'>
+          <Listbox
+                aria-label="Day"
+                name="birth_date"
+                placeholder="Day"
+                defaultValue={days.find(c => c.value === selectedDay)?.value || ''}
+                onChange={setSelectedDay}
+                data-theme='light'
+              >
+                {days.map((d) => (
+                  <ListboxOption key={d.label} value={d.value} data-theme='light'>
+                    <ListboxLabel className='text-center w-6'>{d.label}</ListboxLabel>
+                  </ListboxOption>
+                ))}
+          </Listbox>
+        </div>
 
 
-        
+        <div className='w-36'>
         <Listbox
               aria-label="Year"
               name="birth_year"
               placeholder="Year"
               defaultValue={years.find(c => c.value === selectedYear)?.value || ''}
               onChange={setSelectedYear}
-              className="w-28"
               data-theme='light'
             >
               {years.map((d) => (
@@ -126,8 +124,9 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
                 </ListboxOption>
               ))}
         </Listbox>
-      <div className='text-zinc-800 font-semibold'>{ageGroup}</div>
-      </div>
+        </div>
+      <div className='text-zinc-800 font-semibold w-20 text-right'>{ageGroup}</div>
+      
     </div>
   )
 }
