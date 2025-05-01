@@ -3,7 +3,7 @@
 
 const plans = [
   { id: 'training', name: 'Training', description: 'Technical ball mastery • Speed and agility • Games' },
-  { id: 'competitive', name: 'Train & Compete', description: 'Game IQ • Speed + Agility • Fitness • Matches' },
+  { id: 'competitive', name: 'Train & Compete (Jersey included)', description: 'Game IQ • Speed + Agility • Fitness • Matches' },
 ]
 
 export default function PlanOptions(p: {
