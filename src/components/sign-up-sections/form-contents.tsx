@@ -159,7 +159,7 @@ export default function FormContents() {
                     }))
                 }} />
             </div>
-            <div>
+            <div className="sm:pr-1">
                 <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
                     Email
                 </label>
@@ -180,7 +180,7 @@ export default function FormContents() {
                     />
                 </div>
             </div>
-            <div>
+            <div className="sm:pl-1">
                 <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-gray-900">
                     Phone number
                 </label>
