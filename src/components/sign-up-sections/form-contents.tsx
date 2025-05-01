@@ -62,7 +62,7 @@ export default function FormContents() {
             </div>
             <div className="col-span-2">
                 <label htmlFor="child-birthdate" className="block text-sm/6 font-semibold text-gray-900">
-                Child's date of birth
+                Child&rsquo;s date of birth
                 </label>
                 
                 <Birthdate id="child-birthdate" />
@@ -152,7 +152,7 @@ export default function FormContents() {
         <div className="col-span-2 mt-8">
             <CheckboxField data-theme="light">          
                 <Checkbox color="rose" aria-required name="signed_agreement" value="yes" data-theme="light" onChange={toggleAgreement} />
-                <Label data-theme="light">Parent's agreement</Label>
+                <Label data-theme="light">Parent&rsquo;s agreement</Label>
                 <Description data-theme="light">By signing up, you agree to our <DialogButton dialog={{
                     title: 'Progress Footy Football Academy Inc. Waiver and Parent\'s Agreement',
                     action: 'Yes, I agree',
