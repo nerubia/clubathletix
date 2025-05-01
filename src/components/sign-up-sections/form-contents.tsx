@@ -12,12 +12,16 @@ import { FormEvent, useState } from "react";
 import { Dialog, DialogActions, DialogBody, DialogTitle } from "../dialog";
 
 export default function FormContents() {
-    const [success, toggleSuccessDialog] = useState(true)
+    const [success, toggleSuccessDialog] = useState(false)
     const [disabled, setDisabled] = useState(true)
     const [loading, toggleLoader] = useState(false)
     const [formData, setFormData] = useState<{
         [k: string]: string | boolean
     }>({
+        fname: '',
+        lname: '',
+        cfname: '',
+        clname: '',
         street_1: '',
         city_town: '',
         state_province: '',
@@ -50,6 +54,7 @@ export default function FormContents() {
                     autoComplete="given-name"
                     data-theme="light"
                     required
+                    defaultValue={`${formData?.cfname || ''}`}
                     onChange={e => {
                         setFormData(prev => ({
                             ...prev,
@@ -71,6 +76,7 @@ export default function FormContents() {
                     autoComplete="family-name"
                     data-theme='light'
                     required
+                    defaultValue={`${formData?.clname || ''}`}
                     onChange={e => {
                         setFormData(prev => ({
                             ...prev,
@@ -85,7 +91,8 @@ export default function FormContents() {
                 Child&rsquo;s date of birth
                 </label>
                 
-                <Birthdate id="child-birthdate" onChange={e => {
+                <Birthdate id="child-birthdate" 
+                    defaultValue={`${formData?.date_of_birth || ''}`} onChange={e => {
                     setFormData(prev => ({
                         ...prev,
                         date_of_birth: e
@@ -196,7 +203,12 @@ export default function FormContents() {
             </div>
         </div>
         <div className="col-span-2 mt-8">
-            <PlanSelect />
+            <PlanSelect onChange={p => {
+                setFormData(prev => ({
+                    ...prev,
+                    plan: p
+                }))
+            }} />
         </div>
         <div className="col-span-2 mt-8">
             <CheckboxField data-theme="light">          
@@ -226,6 +238,7 @@ export default function FormContents() {
         <Button type="submit" className="w-32" color="dark" disabled={disabled} onClick={async (e: FormEvent<HTMLButtonElement>) => {
             e.preventDefault();
             toggleLoader(true)
+ 
             const xhr = await fetch('/api/signup', {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -236,8 +249,7 @@ export default function FormContents() {
             toggleLoader(false)
 
             if (xhr.ok) {
-                const response = await xhr.json()
-                toggleSuccessDialog(true)
+                toggleSuccessDialog(true);
             }
         }}>
             {loading ? 'Loading...' : 'Sign up'}
@@ -245,7 +257,20 @@ export default function FormContents() {
         <p className="text-slate-500 sm:ml-8 text-xs">Payment instructions will be sent to your phone.</p>
     </div>
 
-    <Dialog open={success} onClose={() => {}}>
+    <Dialog open={success} onClose={() => {
+        location.href = '/';
+        setFormData({
+            fname: '',
+            lname: '',
+            cfname: '',
+            clname: '',
+            street_1: '',
+            city_town: '',
+            state_province: 'British Columbia',
+            postal_zip_code: '',
+            country: 'Canada',
+        })
+    }}>
         <DialogTitle>Beauty!</DialogTitle>
         <DialogBody className="flex flex-col gap-y-4">
             <p>Hey {(formData.fname as string).split(' ').reverse().pop()}! Thanks for signing {(formData.cfname as string).split(' ').reverse().pop()} up.</p>
@@ -254,7 +279,19 @@ export default function FormContents() {
             <p>You should be getting a WhatsApp message shortly.</p></DialogBody>
         <DialogActions>
             <Button type="button" onClick={() => {
+                setFormData({
+                    fname: '',
+                    lname: '',
+                    cfname: '',
+                    clname: '',
+                    street_1: '',
+                    city_town: '',
+                    state_province: 'British Columbia',
+                    postal_zip_code: '',
+                    country: 'Canada',
+                })
                 toggleSuccessDialog(false)
+                
             }}>Close</Button>
         </DialogActions>
     </Dialog>

@@ -3,16 +3,17 @@
 import { useEffect, useState } from 'react'
 import { Listbox, ListboxLabel, ListboxOption } from '../listbox'
 
-export default function Birthdate(props: { id: string; onChange(v: string): void }) {
+export default function Birthdate(props: { id: string; defaultValue?: string; onChange(v: string): void }) {
+  let bdate = (props.defaultValue || '').split(' ') || []
   const [ageGroup, setAgeGroup] = useState<string>()
   const [query, setQuery] = useState<{
     month?: string
     year?: string
     date?: string
   }>({})
-  const [selectedMonth, setSelectedMonth] = useState<string>()
-  const [selectedDay, setSelectedDay] = useState<string>()
-  const [selectedYear, setSelectedYear] = useState<string>()
+  const [selectedYear, setSelectedYear] = useState<string>(bdate.pop() || '')
+  const [selectedMonth, setSelectedMonth] = useState<string>(bdate.pop() || '')
+  const [selectedDay, setSelectedDay] = useState<string>(bdate.pop() || '')
     const months = [
         { label: 'January', value: '01' },
         { label: 'February', value: '02' },
@@ -79,7 +80,7 @@ export default function Birthdate(props: { id: string; onChange(v: string): void
                 aria-label="Month"
                 name="birth_month"
                 placeholder="Month"
-                value={months.find(c => c.value === selectedMonth)?.value || ''}
+                defaultValue={months.find(c => c.value === selectedMonth)?.value || ''}
                 onChange={setSelectedMonth}
                 className="w-full"
                 data-theme='light'
@@ -97,7 +98,7 @@ export default function Birthdate(props: { id: string; onChange(v: string): void
               aria-label="Day"
               name="birth_date"
               placeholder="Day"
-              value={days.find(c => c.value === selectedDay)?.value || ''}
+              defaultValue={days.find(c => c.value === selectedDay)?.value || ''}
               onChange={setSelectedDay}
               data-theme='light'
             >
@@ -114,7 +115,7 @@ export default function Birthdate(props: { id: string; onChange(v: string): void
               aria-label="Year"
               name="birth_year"
               placeholder="Year"
-              value={years.find(c => c.value === selectedYear)?.value || ''}
+              defaultValue={years.find(c => c.value === selectedYear)?.value || ''}
               onChange={setSelectedYear}
               className="w-28"
               data-theme='light'

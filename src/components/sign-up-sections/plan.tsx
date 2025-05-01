@@ -6,7 +6,9 @@ const plans = [
   { id: 'competitive', name: 'Train & Compete', description: 'Game IQ • Speed + Agility • Fitness • Matches' },
 ]
 
-export default function PlanOptions() {
+export default function PlanOptions(p: {
+  onChange(p: string): void
+}) {
   return (
     <fieldset aria-label="Plan">
       <label htmlFor="training" className="block text-sm/6 font-semibold text-gray-900">
@@ -22,6 +24,7 @@ export default function PlanOptions() {
                 name="plan"
                 type="radio"
                 aria-describedby={`${plan.id}-description`}
+                onClick={() => p.onChange(plan.id)}
                 className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-red-600 checked:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
               />
             </div>
