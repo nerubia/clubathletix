@@ -37,7 +37,7 @@ export default function FormContents() {
     }
 
     return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-sm">
-    <section>
+    <section id="signup-form">
         <div className="border-b border-gray-200 pb-5 mb-5">
             <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>
         </div>
