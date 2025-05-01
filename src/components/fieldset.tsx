@@ -17,14 +17,15 @@ export function Fieldset({
 export function Legend({
   className,
   ...props
-}: { className?: string } & Omit<Headless.LegendProps, 'as' | 'className'>) {
+}: { className?: string;  'data-theme'?: 'light' | 'dark' } & Omit<Headless.LegendProps, 'as' | 'className'>) {
   return (
     <Headless.Legend
       data-slot="legend"
       {...props}
       className={clsx(
         className,
-        'text-base/6 font-semibold text-zinc-950 data-disabled:opacity-50 sm:text-sm/6 dark:text-white'
+        'text-base/6 font-semibold text-zinc-950 data-disabled:opacity-50 sm:text-sm/6',
+        props['data-theme'] !== 'light' && 'dark:text-white'
       )}
     />
   )
@@ -51,14 +52,15 @@ export function Field({ className, ...props }: { className?: string } & Omit<Hea
   )
 }
 
-export function Label({ className, ...props }: { className?: string } & Omit<Headless.LabelProps, 'as' | 'className'>) {
+export function Label({ className, ...props }: { className?: string; 'data-theme'?: 'light' | 'dark' } & Omit<Headless.LabelProps, 'as' | 'className'>) {
   return (
     <Headless.Label
       data-slot="label"
       {...props}
       className={clsx(
         className,
-        'text-base/6 text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white'
+        'text-base/6 text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6',
+        props['data-theme'] !== 'light' && 'dark:text-white'
       )}
     />
   )
@@ -67,12 +69,13 @@ export function Label({ className, ...props }: { className?: string } & Omit<Hea
 export function Description({
   className,
   ...props
-}: { className?: string } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
+}: { className?: string; 'data-theme'?: 'light' | 'dark' } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
   return (
     <Headless.Description
       data-slot="description"
       {...props}
-      className={clsx(className, 'text-base/6 text-zinc-500 data-disabled:opacity-50 sm:text-sm/6 dark:text-zinc-400')}
+      className={clsx(className, 'text-base/6 text-zinc-500 data-disabled:opacity-50 sm:text-sm/6',
+        props['data-theme'] !== 'light' && 'dark:text-zinc-400')}
     />
   )
 }
@@ -80,12 +83,13 @@ export function Description({
 export function ErrorMessage({
   className,
   ...props
-}: { className?: string } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
+}: { className?: string; 'data-theme'?: 'light' | 'dark' } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
   return (
     <Headless.Description
       data-slot="error"
       {...props}
-      className={clsx(className, 'text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 dark:text-red-500')}
+      className={clsx(className, 'text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6',
+        props['data-theme'] !== 'light' && 'dark:text-red-500')}
     />
   )
 }

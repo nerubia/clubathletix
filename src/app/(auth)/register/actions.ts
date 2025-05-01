@@ -1,6 +1,5 @@
 'use server'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 
 export async function signup(formData: FormData) {
@@ -12,9 +11,10 @@ export async function signup(formData: FormData) {
     password: formData.get('password') as string,
   }
   const { error } = await supabase.auth.signUp(data)
+  console.log(JSON.stringify({ data, error }, null, 2))
   if (error) {
-    redirect('/error')
+    // redirect('/register?error=' + error.code)
   }
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  // redirect('/dashboard')
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { Account } from '@/app.types'
 import { Avatar } from '@/components/avatar'
 import {
   Dropdown,
@@ -32,6 +33,7 @@ import {
   PlusIcon,
   ShieldCheckIcon,
   UserCircleIcon,
+  UserGroupIcon,
 } from '@heroicons/react/16/solid'
 import {
   Cog6ToothIcon,
@@ -46,7 +48,7 @@ import { usePathname } from 'next/navigation'
 function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' }) {
   return (
     <DropdownMenu className="min-w-64" anchor={anchor}>
-      <DropdownItem href="#">
+      <DropdownItem href="/d/account">
         <UserCircleIcon />
         <DropdownLabel>My account</DropdownLabel>
       </DropdownItem>
@@ -70,13 +72,15 @@ function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' })
 
 export function ApplicationLayout({
   events,
+  account,
   children,
 }: {
   events: Awaited<ReturnType<typeof getEvents>>
+  account: Account
   children: React.ReactNode
 }) {
   let pathname = usePathname()
-
+console.log({account})
   return (
     <SidebarLayout
       navbar={
@@ -84,9 +88,9 @@ export function ApplicationLayout({
           <NavbarSpacer />
           <NavbarSection>
             <Dropdown>
-              <DropdownButton as={NavbarItem}>
+              {/* <DropdownButton as={NavbarItem}>
                 <Avatar src="/users/erica.jpg" square />
-              </DropdownButton>
+              </DropdownButton> */}
               <AccountDropdownMenu anchor="bottom end" />
             </Dropdown>
           </NavbarSection>
@@ -97,12 +101,12 @@ export function ApplicationLayout({
           <SidebarHeader>
             <Dropdown>
               <DropdownButton as={SidebarItem}>
-                <Avatar src="/teams/catalyst.svg" />
-                <SidebarLabel>Catalyst</SidebarLabel>
+                <Avatar src="/favicon.png" />
+                <SidebarLabel>ClubAthletix</SidebarLabel>
                 <ChevronDownIcon />
               </DropdownButton>
               <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
-                <DropdownItem href="/settings">
+                <DropdownItem href="/d/settings">
                   <Cog8ToothIcon />
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
@@ -126,19 +130,19 @@ export function ApplicationLayout({
 
           <SidebarBody>
             <SidebarSection>
-              <SidebarItem href="/" current={pathname === '/'}>
+              <SidebarItem href="/d" current={pathname === '/'}>
                 <HomeIcon />
                 <SidebarLabel>Home</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/events" current={pathname.startsWith('/events')}>
+              <SidebarItem href="/d/events" current={pathname.startsWith('/d/events')}>
                 <Square2StackIcon />
                 <SidebarLabel>Events</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/members" current={pathname.startsWith('/members')}>
-                <TicketIcon />
+              <SidebarItem href="/d/members" current={pathname.startsWith('/d/members')}>
+                <UserGroupIcon />
                 <SidebarLabel>Members</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/settings" current={pathname.startsWith('/settings')}>
+              <SidebarItem href="/d/settings" current={pathname.startsWith('/d/settings')}>
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
@@ -173,9 +177,9 @@ export function ApplicationLayout({
                 <span className="flex min-w-0 items-center gap-3">
                   <Avatar src="/users/erica.jpg" className="size-10" square alt="" />
                   <span className="min-w-0">
-                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">Erica</span>
+                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{account.full_name}</span>
                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                      erica@example.com
+                      {account.email}
                     </span>
                   </span>
                 </span>

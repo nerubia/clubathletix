@@ -7,13 +7,21 @@ import { Input } from '@/components/input'
 import { Strong, Text, TextLink } from '@/components/text'
 import { hashData } from '@/lib/encryption'
 import type { Metadata } from 'next'
-import { login } from './actions'
+import { login, signOut } from './actions'
+import { headers } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Login',
 }
 
-export default function Login() {
+export default async function Login() {
+  const h = await headers()
+  if (h.get('referer')) {
+    const { pathname } = new URL(h.get('referer') as string)
+    if (pathname === '/d' || pathname.startsWith('/d/')) {
+      await signOut()
+    }
+  }
   return (
     <form
       action={login}

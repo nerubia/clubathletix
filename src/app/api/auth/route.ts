@@ -1,5 +1,19 @@
+import { createClient } from '@/utils/supabase/server';
 import { NextResponse } from 'next/server';
 
+export async function GET() {
+    try {
+        const supabase = await createClient()
+        const res = await supabase.from('customers')
+        console.log(res)
+    }  catch (error) {
+        console.error('Error during fetching account:', error);
+        return NextResponse.json(
+            { error: 'An error occurred while fetching account.' },
+            { status: 500 }
+        );
+    }
+}
 export async function POST(request: Request) {
     try {
         const { email, password, passkey } = await request.json();
