@@ -41,8 +41,8 @@ export default function FormContents() {
         <div className="border-b border-gray-200 pb-5 mb-5">
             <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>
         </div>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <div>
+        <div className="flex gap-y-6 flex-wrap">
+            <div className="w-1/2 pr-1">
                 <label htmlFor="child-first-name" className="block text-sm/6 font-semibold text-gray-900">
                 First name
                 </label>
@@ -64,7 +64,7 @@ export default function FormContents() {
                 />
                 </div>
             </div>
-            <div>
+            <div className="w-1/2 pl-1">
                 <label htmlFor="child-last-name" className="block text-sm/6 font-semibold text-gray-900">
                 Last name
                 </label>
@@ -86,7 +86,7 @@ export default function FormContents() {
                 />
                 </div>
             </div>
-            <div className="col-span-2">
+            <div className="w-full">
                 <label htmlFor="child-birthdate" className="block text-sm/6 font-semibold text-gray-900">
                 Child&rsquo;s date of birth
                 </label>
@@ -105,8 +105,8 @@ export default function FormContents() {
         <div className="border-b border-gray-200 pt-15 pb-5 mb-5">
             <Heading className="text-base font-semibold" force="text-gray-900">Parent / guardian information</Heading>
         </div>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <div>
+        <div className="flex gap-y-6 flex-wrap">
+            <div className="w-1/2 pr-1">
                 <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900">
                     First name
                 </label>
@@ -127,7 +127,7 @@ export default function FormContents() {
                     />
                 </div>
             </div>
-            <div>
+            <div className="w-1/2 pl-1">
                 <label htmlFor="last-name" className="block text-sm/6 font-semibold text-gray-900">
                     Last name
                 </label>

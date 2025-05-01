@@ -63,6 +63,7 @@ export function Address({
               [v.target.name]: v.target.value,
             }))
           }}/>
+          <div className='col-span-2 sm:col-span-1'>
       <Listbox aria-label="Region" name="region" placeholder="Region" defaultValue={address.state_province || 'British Columbia'} data-theme={dataTheme} onChange={v => {
             setAddress(prev => ({
               ...prev as unknown as Address,
@@ -74,37 +75,43 @@ export function Address({
             <ListboxLabel>{region}</ListboxLabel>
           </ListboxOption>
         ))}
-      </Listbox>
-      <Input aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" defaultValue={address.postal_zip_code} data-theme={dataTheme} 
+      </Listbox></div>
+      <Input
+        className='w-1/3'
+         aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" defaultValue={address.postal_zip_code} data-theme={dataTheme} 
           onChange={v => {
             setAddress(prev => ({
               ...prev as unknown as Address,
               [v.target.name]: v.target.value,
             }))
           }}/>
-      <Listbox
-        aria-label="Country"
-        name="country"
-        placeholder="Country"
-        by="name"
-        value={countries.find(c => c.name === address.country)}
-        onChange={(v) => {
-            setCountry(v)
-            setAddress(prev => ({
-              ...prev as unknown as Address,
-              country: v.name,
-            }))
-        }}
-        className="col-span-2 sm:col-span-1"
-        data-theme={dataTheme}
-      >
-        {countries.map((country) => (
-          <ListboxOption key={country.code} value={country} data-theme='light'>
-            <img className="w-5 sm:w-4" src={country.flagUrl} alt="" />
-            <ListboxLabel>{country.name}</ListboxLabel>
-          </ListboxOption>
-        ))}
-      </Listbox>
+
+
+    <div className='col-span-1'>
+        <Listbox
+          aria-label="Country"
+          name="country"
+          placeholder="Country"
+          by="name"
+          value={countries.find(c => c.name === address.country)}
+          onChange={(v) => {
+              setCountry(v)
+              setAddress(prev => ({
+                ...prev as unknown as Address,
+                country: v.name,
+              }))
+          }}
+          className="col-span-2 sm:col-span-1"
+          data-theme={dataTheme}
+        >
+          {countries.map((country) => (
+            <ListboxOption key={country.code} value={country} data-theme='light'>
+              <img className="w-5 sm:w-4" src={country.flagUrl} alt="" />
+              <ListboxLabel>{country.name}</ListboxLabel>
+            </ListboxOption>
+          ))}
+        </Listbox>
+      </div>
     </div>
   )
 }
