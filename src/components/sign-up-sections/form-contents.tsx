@@ -240,14 +240,28 @@ export default function FormContents() {
 
             {formData.date_of_birth && <section className="text-slate">
                 <dl className="mt-16 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-2 xl:mt-8 bg-slate-100 py-4 rounded-xl">
+
                     <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
-                    <dt className="text-sm/6 text-gray-600">Registration fee</dt>
-                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">${formData.plan === 'training' || !isElite ? 350 : 400}</dd>
+                        <dt className="text-sm/6 text-gray-600">{Number(`${formData.date_of_birth || ''}`.split('-')?.[0]) < 2013 ? 'Weds & Fri' : 'Tues & Thurs'}</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">6-7PM</dd>
                     </div>
 
                     <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6">
-                    <dt className="text-sm/6 text-gray-600">{Number(`${formData.date_of_birth || ''}`.split('-')?.[0]) < 2013 ? 'Weds & Fri' : 'Tues & Thurs'}</dt>
-                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">6-7PM</dd>
+                        <dt className="text-sm/6 text-gray-600">Registration fee</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">${formData.plan === 'training' || !isElite ? 350 : 400}</dd>
+                    </div>
+
+                    {formData.plan === 'training' || !isElite ? <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
+                        <dt className="text-sm/6 text-gray-600">PF Summer Cup</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">August 31</dd>
+                    </div> : <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
+                        <dt className="text-sm/6 text-gray-600">Matches</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">4 + 1</dd>
+                    </div>}
+
+                    <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6">
+                        <dt className="text-sm/6 text-gray-600">Total sessions</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">15</dd>
                     </div>
                 </dl>
             </section>}
