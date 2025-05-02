@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
                 }
             }
 
-            if (code === 'competitive') price = 400;
+            if (code === 'compete') price = 400;
 
             const {id: athlete_id} = athlete as { id: number }
             const subscription = await supabase
