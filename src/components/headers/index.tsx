@@ -89,7 +89,7 @@ export default function HomePageHeader() {
                     href="#signup"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                   >
-                    Sign Up
+                    Sign Up for Summer
                   </a>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function HomePageHeader() {
                       href="#signup"
                       className="rounded-md hover:bg-red-500 bg-red-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Sign up
+                      Sign up for Summer training
                     </a>
                     <a href="#signup" className="text-sm/6 font-semibold text-gray-900">
                       Learn more <span aria-hidden="true">→</span>
