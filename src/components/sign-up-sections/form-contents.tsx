@@ -323,9 +323,23 @@ export default function FormContents() {
         <DialogTitle>Beauty!</DialogTitle>
         <DialogBody className="flex flex-col gap-y-4">
             <p>Hey {(formData.fname as string).split(' ').reverse().pop()}! Thanks for signing {(formData.cfname as string).split(' ').reverse().pop()} up.</p>
-            <p>We&rsquo;re so thrilled to have you and {(formData.cfname as string).split(' ').reverse().pop()} join the PF Academy family!<br />We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
+            <p className="text-sm">
+                We&rsquo;re so thrilled to have you and {(formData.cfname as string).split(' ').reverse().pop()} join the PF Academy family!
+                <br />
+                We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
             </p>
-            <p>You should be getting a WhatsApp message shortly.</p></DialogBody>
+
+            <p><strong>Your total registration fee is ${formData.plan === 'training' || !isElite ? 350 : 400}.</strong></p>
+
+            <p style={{
+                backgroundImage: 'url(/interac.png)'
+            }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p>
+            
+            <p className="text-sm">You&rsquo;ll receive a WhatsApp message with your payment receipt from (236) 777-1283 shortly after payment is received.</p>
+            <p className="text-sm">For any questions or inquiries, feel free to call or text us at the same number.</p>
+
+            <p>⚽ We&rsquo;re excited to have you on board! ⚽</p>
+        </DialogBody>
         <DialogActions>
             <Button type="button" onClick={() => {
                 setFormData({
