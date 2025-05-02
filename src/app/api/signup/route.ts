@@ -85,16 +85,18 @@ export async function POST(request: NextRequest) {
                 ignoreDuplicates: false
             }).select('id')
         if (customers?.[0]?.id) {
-            await updateOrInsertMembership({
+            const membershipResults = await updateOrInsertMembership({
                 email,
                 organization_id,
                 role: 'parent',
             })
 
+            console.log(JSON.stringify({ membershipResults }, null, 2))
+
             const full_name = [clname, cfname].join(', ')
             let { data: existing } = await supabase
                 .from('athletes')
-                .select('id, full_name, date_of_birth')
+                .select('id, full_name, date_of_birth, subscription_code')
                 .eq('customer_id', customers?.[0]?.id)
 
             const found = (existing || []).find(a => 
@@ -109,6 +111,7 @@ export async function POST(request: NextRequest) {
                         date_of_birth,
                         customer_id: customers?.[0]?.id,
                         media_release,
+                        subscription_code: code,
                     }).select()
                     
                 athlete = {
@@ -121,6 +124,7 @@ export async function POST(request: NextRequest) {
                     full_name,
                     date_of_birth,
                     media_release,
+                    subscription_code: found.subscription_code || code,
                 }).eq('id', found.id).select()
                 
                 athlete = {

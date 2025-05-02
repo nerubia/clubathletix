@@ -33,6 +33,7 @@ export default function FormContents() {
         city_town: 'White Rock',
         state_province: 'British Columbia',
         country: 'Canada',
+        media_release: true,
         plan: 'training',
     })
     function toggleAgreement(yes: boolean) {
@@ -120,12 +121,7 @@ export default function FormContents() {
                     }))
                 }} />
             </div>
-            
-            <section className="text-zinc-600">
-                
 
-                {isElite ? 'Wednesdays & Fridays' : 'Tuesdays & Thursdays'}
-            </section>
         </div>
 
 
@@ -281,7 +277,7 @@ export default function FormContents() {
                     title: 'Progress Footy Football Academy Inc. Waiver and Parent\'s Agreement',
                     action: 'Yes, I agree',
                     body: <WaiverAgreementForm />,
-                }}><span className="underline font-semibold text-red-700 cursor-pointer">terms of services</span></DialogButton>.</Description>
+                }}><span className="underline font-semibold text-red-700 cursor-pointer">terms of services</span></DialogButton>. <br/>  You&rsquo;ll have to agree to this prior to registration.</Description>
             </CheckboxField>
         </div>
     </section>
@@ -316,10 +312,12 @@ export default function FormContents() {
             cfname: '',
             clname: '',
             street_1: '',
-            city_town: '',
-            state_province: 'British Columbia',
             postal_zip_code: '',
+            city_town: 'White Rock',
+            state_province: 'British Columbia',
             country: 'Canada',
+            media_release: true,
+            plan: 'training',
         })
     }}>
         <DialogTitle>Beauty!</DialogTitle>
@@ -336,10 +334,12 @@ export default function FormContents() {
                     cfname: '',
                     clname: '',
                     street_1: '',
-                    city_town: '',
-                    state_province: 'British Columbia',
                     postal_zip_code: '',
+                    city_town: 'White Rock',
+                    state_province: 'British Columbia',
                     country: 'Canada',
+                    media_release: true,
+                    plan: 'training',
                 })
                 toggleSuccessDialog(false)
                 
