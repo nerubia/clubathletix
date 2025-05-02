@@ -255,12 +255,12 @@ export default function FormContents() {
                         <dt className="text-sm/6 text-gray-600">PF Summer Cup</dt>
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">August 31</dd>
                     </div> : <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
-                        <dt className="text-sm/6 text-gray-600">Matches</dt>
+                        <dt className="text-xs/6 text-gray-600">Matches + Summer Cup</dt>
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">4 + 1</dd>
                     </div>}
 
                     <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6">
-                        <dt className="text-sm/6 text-gray-600">Total sessions</dt>
+                        <dt className="text-xs/6 text-gray-600">Total sessions</dt>
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">15</dd>
                     </div>
                 </dl>
