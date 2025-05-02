@@ -9,7 +9,7 @@ const posts = [
         '/clubs/pfa/toddler-boy.jpg',
       age_group: 'Ages 4-6',
       coach: {
-        name: 'Khartik • Alisha D.',
+        name: 'Khartik N. • Alisha D.',
         role: 'Co-coaches',
         href: '#',
         imageUrl:
