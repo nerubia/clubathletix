@@ -1,17 +1,20 @@
 'use client'
 
+import { useState } from "react"
+
 
 const plans = [
   { id: 'training', name: 'Training', description: 'Technical ball mastery • Speed and agility • Games' },
-  { id: 'competitive', name: 'Train & Compete (Jersey included)', description: 'Game IQ • Speed + Agility • Fitness • Matches' },
+  { id: 'compete', name: 'Train & Compete (Jersey included)', description: 'Game IQ • Speed + Agility • Fitness • Matches' },
 ]
 
 export default function PlanOptions(p: {
+  defaultValue?: string;
   onChange(p: string): void
 }) {
   return (
     <fieldset aria-label="Plan">
-      <label htmlFor="training" className="block text-sm/6 font-semibold text-gray-900">
+      <label htmlFor="training" className="block text-lg font-bold text-gray-900">
           Choose a plan
       </label>
       <div className="space-y-5 mt-2">
@@ -19,7 +22,7 @@ export default function PlanOptions(p: {
           <div key={plan.id} className="relative flex items-start">
             <div className="flex h-6 items-center">
               <input
-                defaultChecked={plan.id === 'training'}
+                defaultChecked={plan.id === (p.defaultValue || 'training')}
                 id={plan.id}
                 name="plan"
                 type="radio"

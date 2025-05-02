@@ -8,13 +8,19 @@ import { Checkbox, CheckboxField } from "../checkbox";
 import { Description, Label } from "../fieldset";
 import DialogButton from "../dialog-button";
 import WaiverAgreementForm from "./waiver-contents";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Dialog, DialogActions, DialogBody, DialogTitle } from "../dialog";
-
+const stats = [
+    { id: 1, name: 'Creators on the platform', value: '8,000+' },
+    { id: 2, name: 'Flat platform fee', value: '3%' },
+    { id: 3, name: 'Uptime guarantee', value: '99.9%' },
+    { id: 4, name: 'Paid out to creators', value: '$70M' },
+  ]
 export default function FormContents() {
     const [success, toggleSuccessDialog] = useState(false)
     const [disabled, setDisabled] = useState(true)
     const [loading, toggleLoader] = useState(false)
+    const [isElite, toggleElite] = useState(false)
     const [formData, setFormData] = useState<{
         [k: string]: string | boolean
     }>({
@@ -23,10 +29,11 @@ export default function FormContents() {
         cfname: '',
         clname: '',
         street_1: '',
-        city_town: '',
-        state_province: '',
         postal_zip_code: '',
+        city_town: 'White Rock',
+        state_province: 'British Columbia',
         country: 'Canada',
+        plan: 'training',
     })
     function toggleAgreement(yes: boolean) {
         setFormData(prev => ({
@@ -35,6 +42,20 @@ export default function FormContents() {
         }))
         setDisabled(!yes)
     }
+
+    useEffect(() => {
+        if (formData.date_of_birth) {
+            const [year] = `${formData.date_of_birth}`.split('-').map(Number)
+            year && toggleElite(year <= 2013)
+        }
+    }, [formData.plan, formData.date_of_birth])
+
+    useEffect(() => {
+        if (!isElite) setFormData(prev => ({
+            ...prev,
+            plan: 'training'
+        }))
+    }, [isElite])
 
     return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-sm">
     <section id="signup-form">
@@ -99,6 +120,12 @@ export default function FormContents() {
                     }))
                 }} />
             </div>
+            
+            <section className="text-zinc-600">
+                
+
+                {isElite ? 'Wednesdays & Fridays' : 'Tuesdays & Thursdays'}
+            </section>
         </div>
 
 
@@ -159,7 +186,9 @@ export default function FormContents() {
                     }))
                 }} />
             </div>
-            <div className="sm:pr-1">
+
+            <section className="flex flex-col sm:flex-row gap-2">
+            <div>
                 <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
                     Email
                 </label>
@@ -180,7 +209,7 @@ export default function FormContents() {
                     />
                 </div>
             </div>
-            <div className="sm:pl-1">
+            <div>
                 <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-gray-900">
                     Phone number
                 </label>
@@ -201,18 +230,40 @@ export default function FormContents() {
                     />
                 </div>
             </div>
+            </section>
         </div>
-        <div className="col-span-2 mt-8">
-            <PlanSelect onChange={p => {
+        <div className="col-span-2 mt-24">
+            {isElite && <PlanSelect
+                defaultValue={`${formData.plan || ''}`}
+                onChange={p => {
                 setFormData(prev => ({
                     ...prev,
                     plan: p
                 }))
-            }} />
+            }} />}
+
+            {formData.date_of_birth && <section className="text-slate">
+                <dl className="mt-16 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-2 xl:mt-8 bg-slate-100 py-4 rounded-xl">
+                    <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
+                    <dt className="text-sm/6 text-gray-600">Registration fee</dt>
+                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">${formData.plan === 'training' || !isElite ? 350 : 400}</dd>
+                    </div>
+
+                    <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6">
+                    <dt className="text-sm/6 text-gray-600">{Number(`${formData.date_of_birth || ''}`.split('-')?.[0]) < 2013 ? 'Weds & Fri' : 'Tues & Thurs'}</dt>
+                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">6-7PM</dd>
+                    </div>
+                </dl>
+            </section>}
+        </div>
+
+
+        <div className="border-b border-gray-200 pb-5 mb-0 mt-8">
+            <Heading className="text-base font-semibold" force="text-zinc-900">Terms & Waiver Agreement</Heading>
         </div>
         <div className="col-span-2 mt-8">
             <CheckboxField data-theme="light">          
-                <Checkbox color="rose" aria-required name="media_release" value="yes" data-theme="light" onChange={yes => {
+                <Checkbox color="rose" aria-required name="media_release" value="yes" defaultChecked data-theme="light" onChange={yes => {
                     setFormData(prev => ({
                         ...prev,
                         media_release: yes
