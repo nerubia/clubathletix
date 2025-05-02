@@ -325,7 +325,7 @@ export default function FormContents() {
         <DialogTitle>Beauty!</DialogTitle>
         <DialogBody className="flex flex-col gap-y-4">
             <p>Hey {(formData.fname as string).split(' ').reverse().pop()}! Thanks for signing {(formData.cfname as string).split(' ').reverse().pop()} up.</p>
-            <p>We&rsquo;re so thrilled to have you and {(formData.cfname as string).split(' ').reverse().pop()} join the PF Academy family!<br />We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and individual both on and off the field.
+            <p>We&rsquo;re so thrilled to have you and {(formData.cfname as string).split(' ').reverse().pop()} join the PF Academy family!<br />We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
             </p>
             <p>You should be getting a WhatsApp message shortly.</p></DialogBody>
         <DialogActions>
