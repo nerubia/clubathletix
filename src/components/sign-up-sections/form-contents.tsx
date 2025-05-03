@@ -36,6 +36,22 @@ export default function FormContents() {
         media_release: true,
         plan: 'training',
     })
+
+    function isSummer() {
+        const month = new Date().getMonth();
+
+        if (month > 5 && month < 8) return true
+    }
+    function getRate() {
+        let rate = formData.plan === 'training' || !isElite ? 24 : 27
+
+        if (!isSummer()) {
+            if (rate === 27) return 30
+            return 25
+        }
+
+        return rate
+    }
     function toggleAgreement(yes: boolean) {
         setFormData(prev => ({
             ...prev,
@@ -58,7 +74,7 @@ export default function FormContents() {
         }))
     }, [isElite])
 
-    return <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-sm">
+    return <div className="mx-auto max-w-xl xl:mr-0 lg:max-w-sm">
     <section id="signup-form">
         <div className="border-b border-gray-200 pb-5 mb-5">
             <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>
@@ -228,7 +244,7 @@ export default function FormContents() {
             </div>
             </section>
         </div>
-        <div className="col-span-2 mt-24">
+        <div className="col-span-2 mt-16">
             {isElite && <PlanSelect
                 defaultValue={`${formData.plan || ''}`}
                 onChange={p => {
@@ -238,22 +254,25 @@ export default function FormContents() {
                 }))
             }} />}
 
-            {formData.date_of_birth && <section className="text-slate">
+            {/* {formData.date_of_birth && <section className="text-slate">
                 <dl className="mt-16 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-2 xl:mt-8 bg-slate-100 py-4 rounded-xl">
 
-                    <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
+                    {isSummer() ? <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
                         <dt className="text-sm/6 text-gray-600">{Number(`${formData.date_of_birth || ''}`.split('-')?.[0]) < 2013 ? 'Weds & Fri' : 'Tues & Thurs'}</dt>
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">6-7PM</dd>
-                    </div>
+                    </div> : <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
+                        <dt className="text-sm/6 text-gray-600">5:30-6:45PM</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">Fridays</dd>
+                    </div>}
 
                     <div className="flex flex-col gap-y-3 border-l border-gray-900/10 pl-6">
-                        <dt className="text-sm/6 text-gray-600">Registration fee</dt>
-                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">${formData.plan === 'training' || !isElite ? 350 : 400}</dd>
+                        <dt className="text-sm/6 text-gray-600">per session</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">${getRate()}</dd>
                     </div>
 
                     {formData.plan === 'training' || !isElite ? <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
-                        <dt className="text-sm/6 text-gray-600">PF Summer Cup</dt>
-                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">August 31</dd>
+                        <dt className="text-sm/6 text-gray-600">PF {isSummer() ? 'Summer' : 'Spring'} Cup</dt>
+                        <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">{isSummer() ? 'August 31' : 'June 22'}</dd>
                     </div> : <div className="flex flex-col gap-y-3 border-l border-transparent pl-6">
                         <dt className="text-xs/6 text-gray-600">Matches + Summer Cup</dt>
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">4 + 1</dd>
@@ -264,7 +283,7 @@ export default function FormContents() {
                         <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">15</dd>
                     </div>
                 </dl>
-            </section>}
+            </section>} */}
         </div>
 
 
