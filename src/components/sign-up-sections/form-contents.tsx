@@ -162,6 +162,7 @@ export default function FormContents() {
                         autoComplete="first-name"
                         data-theme="light"
                         required
+                        value={`${formData?.fname || ''}`}
                         onChange={e => {
                             setFormData(prev => ({
                                 ...prev,
@@ -183,6 +184,7 @@ export default function FormContents() {
                         autoComplete="last-name"
                         data-theme="light"
                         required
+                        value={`${formData?.lname || ''}`}
                         onChange={e => {
                             setFormData(prev => ({
                                 ...prev,
@@ -217,6 +219,7 @@ export default function FormContents() {
                         autoComplete="email"
                         data-theme="light"
                         required
+                        value={`${formData?.email || ''}`}
                         onChange={e => {
                             setFormData(prev => ({
                                 ...prev,
@@ -238,6 +241,7 @@ export default function FormContents() {
                         autoComplete="tel"
                         data-theme="light"
                         required
+                        value={`${formData?.phone || ''}`}
                         onChange={e => {
                             setFormData(prev => ({
                                 ...prev,
