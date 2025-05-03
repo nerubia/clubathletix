@@ -63,11 +63,22 @@ export async function POST(request: NextRequest) {
         let price = 350;
         let organization_id = 1;
 
-
-        if (!phone || !email || !cfname || !clname || !lname || !date_of_birth || !signed_agreement || !country)
-            return NextResponse.json({ message: 'Required fields must be filled' }, { status: 400 });
-
         const full_name = [lname, fname].join(', ');
+        if (!phone || !email || !cfname || !clname || !lname || !date_of_birth || !signed_agreement || !country) {
+            console.log({
+                street_1,
+                street_2, 
+                city_town,
+                state_province,
+                postal_zip_code,
+                country,
+                full_name,
+                email,
+                phone,
+            })
+            return NextResponse.json({ message: 'Required fields must be filled' }, { status: 400 });
+        }
+
         let { data: customers, error } = await supabase
             .from('customers')
             .upsert({

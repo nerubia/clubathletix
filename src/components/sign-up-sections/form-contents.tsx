@@ -46,11 +46,16 @@ export default function FormContents() {
         let rate = formData.plan === 'training' || !isElite ? 24 : 27
 
         if (!isSummer()) {
-            if (rate === 27) return 30
-            return 25
+            if (rate === 27) rate = 30
+            rate = 25
         }
 
-        return rate
+        let finalMonth = 5
+        if (new Date().getMonth() >= finalMonth) finalMonth = 7
+
+        let sessionsRemaining = (new Date(2025, 5, 27).getTime() - new Date().getTime()) / 7 / 24 / 60 / 60000
+        sessionsRemaining = Math.floor(sessionsRemaining)
+        return `${rate * sessionsRemaining} for ${sessionsRemaining} sessions`
     }
     function toggleAgreement(yes: boolean) {
         setFormData(prev => ({
@@ -92,7 +97,7 @@ export default function FormContents() {
                     autoComplete="given-name"
                     data-theme="light"
                     required
-                    defaultValue={`${formData?.cfname || ''}`}
+                    value={`${formData?.cfname || ''}`}
                     onChange={e => {
                         setFormData(prev => ({
                             ...prev,
@@ -114,7 +119,7 @@ export default function FormContents() {
                     autoComplete="family-name"
                     data-theme='light'
                     required
-                    defaultValue={`${formData?.clname || ''}`}
+                    value={`${formData?.clname || ''}`}
                     onChange={e => {
                         setFormData(prev => ({
                             ...prev,
@@ -362,13 +367,13 @@ export default function FormContents() {
                 We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
             </p>
 
-            <p><strong>Your total registration fee is ${formData.plan === 'training' || !isElite ? 350 : 400}.</strong></p>
+            <p><strong>Your total registration fee is ${getRate()}.</strong></p>
 
             <p style={{
                 backgroundImage: 'url(/interac.png)'
             }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p>
             
-            <p className="text-sm">You&rsquo;ll receive a WhatsApp message with your payment receipt from (236) 777-1283 shortly after payment is received.</p>
+            <p className="text-sm">You&rsquo;ll receive a WhatsApp message with your payment confirmation from (236) 777-1283 shortly after payment is received.</p>
             <p className="text-sm">For any questions or inquiries, feel free to call or text us at the same number.</p>
 
             <p>⚽ We&rsquo;re excited to have you on board! ⚽</p>

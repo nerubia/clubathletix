@@ -20,7 +20,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <link rel="icon" href="/clubs/pfa/logo.png" />
         <link rel="apple-touch-icon" href="/clubs/pfa/logo.png" />
-        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body>{children}</body>
     </html>
