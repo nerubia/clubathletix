@@ -1,3 +1,13 @@
+export type Program = {
+  name: string
+  description: string
+  min_age: number
+  max_age: number
+  coaches: string[]
+  is_active?: boolean
+  imageUrl?: string
+}
+
 export default function AgeGroups({groups = [
   {
     name: 'Pre-schoolers / Kindergarten',
@@ -33,7 +43,9 @@ export default function AgeGroups({groups = [
     
     coaches: ['Shaan S.']
   },
-]}) {
+]}: {
+  groups: Program[]
+}) {
 
   function getImage(min_age: number) {
     if (min_age < 6) return '/clubs/pfa/toddler-boy.jpg'

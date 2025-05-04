@@ -3,7 +3,7 @@ import { Address } from "@/app/(app)/d/account/address";
 import { useCallback, useEffect, useState } from "react";
 import { Heading } from "../heading";
 import { ClockIcon, MapPinIcon } from "@heroicons/react/16/solid";
-import AgeGroups from "./age-groups";
+import AgeGroups, { Program } from "./age-groups";
 
 type Schedule = {
     id: number;
@@ -20,14 +20,7 @@ type Schedule = {
     is_active?: boolean;
 
     locations: Address & { name: string }
-    programs: {
-        name: string
-        description: string
-        min_age: number
-        max_age: number
-        coaches: string[]
-        imageUrl?: string
-    }[]
+    programs: Program[]
 };
 
 export default function ScheduleTable(p: { 'data-organization': number }) {
