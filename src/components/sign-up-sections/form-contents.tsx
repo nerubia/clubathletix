@@ -368,9 +368,7 @@ export default function FormContents() {
                 We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
             </p>
 
-            <p>The training season is currently underway at the moment but we accept players any time of the year</p>
-
-            <p>Our training schedule is as follows:training during the <strong>spring break</strong>, it's Tuesdays to Fridays every week from 5:00PM to 6:00PM</p>
+            <p className="text-sm">The training season is currently underway at the moment but we accept players any time of the year.</p>
 
             {/* <p><strong>Your total registration fee is ${getRate()}.</strong></p>
 
@@ -378,7 +376,6 @@ export default function FormContents() {
                 backgroundImage: 'url(/interac.png)'
             }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p> */}
             
-            <p className="text-sm">You&rsquo;ll receive a WhatsApp message with your payment confirmation from (236) 777-1283 shortly after payment is received.</p>
             <p className="text-sm">For any questions or inquiries, feel free to call or text us at the same number.</p>
 
             <p>⚽ We&rsquo;re excited to have you on board! ⚽</p>
