@@ -71,7 +71,7 @@ export default function ScheduleTable(p: { 'data-organization': number }) {
                 s.fridays ? `Fridays, ${s.fridays}` : '',
                 s.saturdays ? `Saturdays, ${s.saturdays}` : '',
                 s.sundays ? `Sundays, ${s.sundays}` : '',
-              ].filter(Boolean).map(w => <p>{w}</p>)}
+              ].filter(Boolean).map((w, idx) => <p key={idx}>{w}</p>)}
             </dd>
           </div>
         </dl>
