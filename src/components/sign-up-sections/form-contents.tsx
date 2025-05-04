@@ -35,6 +35,7 @@ export default function FormContents() {
         country: 'Canada',
         media_release: true,
         plan: 'training',
+        signed_agreement: false,
     })
 
     function isSummer() {
@@ -347,20 +348,16 @@ export default function FormContents() {
     </div>
 
     <Dialog open={success} onClose={() => {
-        location.href = '/';
-        setFormData({
+        setFormData(prev => ({
+            ...prev,
             fname: '',
             lname: '',
             cfname: '',
             clname: '',
-            street_1: '',
-            postal_zip_code: '',
-            city_town: 'White Rock',
-            state_province: 'British Columbia',
-            country: 'Canada',
             media_release: true,
             plan: 'training',
-        })
+            signed_agreement: true,
+        }))
     }}>
         <DialogTitle>Beauty!</DialogTitle>
         <DialogBody className="flex flex-col gap-y-4">
@@ -371,11 +368,15 @@ export default function FormContents() {
                 We can&rsquo;t wait to help {(formData.cfname as string).split(' ').reverse().pop()} grow into a better player and person, both on and off the field.
             </p>
 
-            <p><strong>Your total registration fee is ${getRate()}.</strong></p>
+            <p>The training season is currently underway at the moment but we accept players any time of the year</p>
+
+            <p>Our training schedule is as follows:training during the <strong>spring break</strong>, it's Tuesdays to Fridays every week from 5:00PM to 6:00PM</p>
+
+            {/* <p><strong>Your total registration fee is ${getRate()}.</strong></p>
 
             <p style={{
                 backgroundImage: 'url(/interac.png)'
-            }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p>
+            }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p> */}
             
             <p className="text-sm">You&rsquo;ll receive a WhatsApp message with your payment confirmation from (236) 777-1283 shortly after payment is received.</p>
             <p className="text-sm">For any questions or inquiries, feel free to call or text us at the same number.</p>
@@ -396,6 +397,7 @@ export default function FormContents() {
                     country: 'Canada',
                     media_release: true,
                     plan: 'training',
+                    signed_agreement: true,
                 })
                 toggleSuccessDialog(false)
                 

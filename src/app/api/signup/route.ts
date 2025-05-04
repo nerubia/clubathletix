@@ -66,6 +66,9 @@ export async function POST(request: NextRequest) {
         const full_name = [lname, fname].join(', ');
         if (!phone || !email || !cfname || !clname || !lname || !date_of_birth || !signed_agreement || !country) {
             console.log({
+                signed_agreement,
+                date_of_birth,
+                cfname, clname,
                 street_1,
                 street_2, 
                 city_town,
