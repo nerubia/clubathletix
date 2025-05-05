@@ -15,7 +15,7 @@ export default function ParentalExpectationsPage() {
         </div>
         <div className="px-6 lg:contents">
           <div className="mx-auto max-w-2xl pt-16 pb-24 sm:pt-20 sm:pb-32 lg:mr-0 lg:ml-8 lg:w-full lg:max-w-lg lg:flex-none lg:pt-32 xl:w-1/2">
-            <p className="text-base/7 font-semibold text-red-600">Guidelines – the 24 hours rule</p>
+            <p className="text-base/7 font-semibold text-red-600">A guide to a better development experience</p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
                 Parental Expectations
             </h1>
