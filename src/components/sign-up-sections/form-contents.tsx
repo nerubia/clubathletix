@@ -344,7 +344,7 @@ export default function FormContents() {
         }}>
             {loading ? 'Loading...' : 'Sign up'}
         </Button>
-        <p className="text-slate-500 sm:ml-8 mt-8 sm:mt-0 text-xs">Payment instructions will be sent to your phone.</p>
+        <p className="text-slate-500 sm:ml-8 mt-8 sm:mt-0 text-xs">We will contact you via WhatsApp for next steps.</p>
     </div>
 
     <Dialog open={success} onClose={() => {
@@ -375,8 +375,8 @@ export default function FormContents() {
             <p style={{
                 backgroundImage: 'url(/interac.png)'
             }} className="text-sm pr-18 bg-right bg-contain bg-no-repeat">Please e-transfer the amount to register@progressfooty.com to complete your registration.</p> */}
-            
-            <p className="text-sm">For any questions or inquiries, feel free to call or text us at the same number.</p>
+            <p className="text-sm">We will contact you via WhatsApp for next steps within the next 24 hours.</p>
+            <p className="text-sm">In the meantime, for any questions or inquiries, feel free to emai us at registration@progressfooty.com.</p>
 
             <p>⚽ We&rsquo;re excited to have you on board! ⚽</p>
         </DialogBody>
