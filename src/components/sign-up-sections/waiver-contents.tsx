@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Heading, Subheading } from '../heading';
 import { Button } from '../button';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
 
 type WaiverFormData = {
   participantName: string;
@@ -52,10 +53,21 @@ const WaiverAgreementForm: React.FC = () => {
       <Heading force='text-slate-700'>3. Code of Conduct Agreement</Heading>
       <p className='text-sm text-slate-600 text-justify pl-5 mb-6'>
         I agree to ensure my child will:<br />
-        •	Show respect to coaches, teammates, referees, and opponents<br />
-        •	Abide by the rules of the academy and sport<br />
-        •	Demonstrate good sportsmanship and behavior at all times<br /><br />
-
+        <ul className='list-disc ml-4 my-2'>
+            <li>Show respect to coaches, teammates, referees, and opponents</li>
+            <li>
+                Show respect to coaches, teammates, referees, and opponents<br />
+            </li>
+            <li>Abide by the rules of the academy and sport
+            </li>
+            <li>
+            Demonstrate good sportsmanship and behavior at all times
+            </li>
+            <li>
+            Abide to the <a target='_blank' href='/parental-expectations'>parent&rsquo;s code of conduct <ArrowTopRightOnSquareIcon className='w-4 h-4 inline' /></a>
+            </li>
+        </ul>
+        
         I understand that repeated misconduct or failure to follow rules may result in suspension or removal from the program without refund.
       </p>
 
