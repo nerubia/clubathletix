@@ -27,13 +27,13 @@ export default function ParentalExpectationsPage() {
               </p>
               <ul role="list" className="mt-8 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
-                  <ClipboardDocumentCheckIcon aria-hidden="true" className="mt-1 size-5 flex-none text-indigo-600" />
+                  <ClipboardDocumentCheckIcon aria-hidden="true" className="mt-1 size-5 flex-none text-red-600" />
                   <span>
                     <strong className="font-semibold text-gray-900">Let the coaches do their job.</strong> As parents we expect you to cheer and support the team appropriately and in a positive manner. We do not expect or ask you to coach the team. Please be humble and represent your child and our academy in the spirit of the sport.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
-                  <UsersIcon aria-hidden="true" className="mt-1 size-5 flex-none text-indigo-600" />
+                  <UsersIcon aria-hidden="true" className="mt-1 size-5 flex-none text-red-600" />
 
                   <p>
                     <strong className="font-semibold text-gray-900">Intervention policy.</strong> Please encourage your child to take responsibility for his own actions, rather than intervening yourself. 
@@ -42,14 +42,14 @@ export default function ParentalExpectationsPage() {
                   </p>
                 </li>
                 <li className="flex gap-x-3">
-                  <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-indigo-600" />
+                  <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-red-600" />
                   <p>
                     <strong className="font-semibold text-gray-900">24-hour cool down period.</strong> If you feel the need to intervene, please allow <strong className="font-semibold text-red-700">24 hours</strong> after a match before approaching a staff coach to discuss your child’s performance. 
                     The coaches are the most invested people in the matches and this is an emotional time for everyone. We find that 24 hours allows for cooler heads to prevail and promotes a more productive dialog. This applies to tournaments when coaches are inundated with logistical demands of scouting, prepping for next match and dealing with meals and other administrative concerns.
                   </p>
                 </li>
                 <li className="flex gap-x-3">
-                  <UserGroupIcon aria-hidden="true" className="mt-1 size-5 flex-none text-indigo-600" />
+                  <UserGroupIcon aria-hidden="true" className="mt-1 size-5 flex-none text-red-600" />
                   <span>
                     <strong className="font-semibold text-gray-900">Respect the team.</strong> At no time is it appropriate to discuss other players’ performance to other players or parents on the team. Your own expectations and goals may differ from that of your child, please keep this in mind.
                   </span>
