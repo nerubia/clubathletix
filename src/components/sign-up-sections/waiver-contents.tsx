@@ -51,7 +51,7 @@ const WaiverAgreementForm: React.FC = () => {
       </p>
 
       <Heading force='text-slate-700'>3. Code of Conduct Agreement</Heading>
-      <p className='text-sm text-slate-600 text-justify pl-5 mb-6'>
+      <div className='text-sm text-slate-600 text-justify pl-5 mb-6'>
         I agree to ensure my child will:<br />
         <ul className='list-disc ml-4 my-2'>
             <li>Show respect to coaches, teammates, referees, and opponents</li>
@@ -69,7 +69,7 @@ const WaiverAgreementForm: React.FC = () => {
         </ul>
         
         I understand that repeated misconduct or failure to follow rules may result in suspension or removal from the program without refund.
-      </p>
+      </div>
 
       <Heading force='text-slate-700'>4. Refund and Cancellation Policy</Heading>
       <p className='text-sm text-slate-600 text-justify pl-5 mb-6'>

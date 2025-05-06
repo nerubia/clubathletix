@@ -80,7 +80,7 @@ export default function FormContents() {
         }))
     }, [isElite])
 
-    return <div className="mx-auto max-w-xl xl:mr-0 lg:max-w-sm">
+    return <div className="mx-auto max-w-xl lg:max-w-sm">
     <section id="signup-form">
         <div className="border-b border-gray-200 pb-5 mb-5">
             <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>

@@ -7,7 +7,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return <div className="bg-white">
         <Navigation />
         
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto">
             {children}
         </div>
   

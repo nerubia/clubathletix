@@ -25,14 +25,13 @@ export default function AgeGroups({groups}: {
           <div className="mx-auto max-w-2xl lg:max-w-4xl">
             <div className="space-y-20">
               {groups.map((item) => (
-                <article key={item.name} className="relative isolate flex flex-col gap-8 lg:flex-row">
-                  <div className="relative aspect-1/2 sm:aspect-2/1 lg:aspect-square lg:w-64 lg:shrink-0">
+                <article key={item.name} className="relative isolate flex gap-8">
+                  <div className="relative aspect-square w-48 lg:w-32 xl:w-64 lg:aspect-square lg:shrink-0">
                     <img
                       alt=""
                       src={getImage(item.min_age)}
-                      className="absolute inset-0 size-full rounded-2xl bg-gray-50 object-cover"
+                      className="absolute inset-0 xl:size-full rounded-2xl bg-gray-50 object-cover"
                     />
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
                   </div>
                   <div>
                     <div className="flex items-center gap-x-4 text-xs">
