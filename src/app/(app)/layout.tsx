@@ -4,10 +4,12 @@ import Sponsors from "@/components/sponsors";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   
-  return <div>
+  return <div className="bg-white">
         <Navigation />
         
-        {children}
+        <div className="max-w-7xl mx-auto">
+            {children}
+        </div>
   
         <Sponsors />
         <Footer />
