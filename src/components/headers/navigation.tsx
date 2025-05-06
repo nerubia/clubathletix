@@ -39,7 +39,7 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
             {item.name}
           </Link>
         ))}
-        <Link href="#signup" className="text-sm/6 font-semibold text-gray-900">
+        <Link href="/#signup-form" className="text-sm/6 font-semibold text-gray-900">
           Sign up <span aria-hidden="true">&darr;</span>
         </Link>
       </div>
