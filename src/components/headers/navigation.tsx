@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Link from "next/link"
 
 const navigation = [
   { name: 'Parents & Expectations', href: '/parental-expectations' },
@@ -34,13 +35,13 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-x-4">
         {navigation.map((item) => (
-          <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+          <Link key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
             {item.name}
-          </a>
+          </Link>
         ))}
-        <a href="#signup" className="text-sm/6 font-semibold text-gray-900">
+        <Link href="#signup" className="text-sm/6 font-semibold text-gray-900">
           Sign up <span aria-hidden="true">&darr;</span>
-        </a>
+        </Link>
       </div>
     </nav>
     <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">

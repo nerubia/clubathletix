@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function HomePageHeader() {
 
   return (
@@ -55,15 +57,15 @@ export default function HomePageHeader() {
                     Prepare to unleash your potential and elevate your game.
                   </p>
                   <div className="max-w-xs mt-10 flex flex-col gap-y-4 lg:flex-row lg:items-center gap-x-6">
-                    <a
+                    <Link
                       href="/#signup-form"
                       className="max-w-60 text-center rounded-md hover:bg-red-500 bg-red-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Sign up for Summer training
-                    </a>
-                    <a href="/#signup" className="md:text-base/6 md:font-semibold text-gray-900">
+                      Sign up
+                    </Link>
+                    <Link href="/#signup" className="md:text-base/6 md:font-semibold text-gray-900">
                       Learn more <span aria-hidden="true">→</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="mt-14 flex justify-end gap-8 sm:-mt-72 sm:justify-start sm:pl-60 lg:mt-0 lg:pl-0">
