@@ -67,7 +67,7 @@ export default function ParentalExpectationsPage() {
                             <UsersIcon aria-hidden="true" className="mt-1 size-5 flex-none text-red-600" />
 
                             <p>
-                            <strong className="font-semibold text-gray-900">Allow your child to play on their own.</strong> Please encourage your child to take responsibility for his own actions, rather than intervening yourself. 
+                            <strong className="font-semibold text-gray-900">Allow your child to play on their own.</strong> Please encourage your child to take responsibility for their own actions, rather than intervening yourself. 
                             Ask your child to address his/her concerns directly with the coaching staff. 
                             This develops them as individuals, holds them accountable for their own actions, and promotes maturity.
                             </p>
