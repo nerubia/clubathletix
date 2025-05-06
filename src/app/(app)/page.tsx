@@ -21,8 +21,6 @@ export default function Page() {
       <HomePageHeader />
       <Testimonials />
       <SignupSection address={getAddress()} />
-      <Sponsors />
-      <Footer />
     </>
     
   )
