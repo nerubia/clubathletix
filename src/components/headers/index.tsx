@@ -56,12 +56,12 @@ export default function HomePageHeader() {
                   </p>
                   <div className="max-w-xs mt-10 flex flex-col gap-y-4 lg:flex-row lg:items-center gap-x-6">
                     <a
-                      href="#signup"
+                      href="/#signup-form"
                       className="max-w-60 text-center rounded-md hover:bg-red-500 bg-red-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Sign up for Summer training
                     </a>
-                    <a href="#signup" className="md:text-base/6 md:font-semibold text-gray-900">
+                    <a href="/#signup" className="md:text-base/6 md:font-semibold text-gray-900">
                       Learn more <span aria-hidden="true">→</span>
                     </a>
                   </div>

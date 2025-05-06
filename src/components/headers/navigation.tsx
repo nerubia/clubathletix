@@ -14,7 +14,7 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
     <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
       <div className="flex lg:flex-1">
         <a href="/" className="-m-1.5 p-1.5">
-          <span className="sr-only">Your Company</span>
+          <span className="sr-only">PF Academy</span>
           <img
             alt=""
             src="/clubs/pfa/logo.png"
@@ -32,14 +32,12 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
           <Bars3Icon aria-hidden="true" className="size-6" />
         </button>
       </div>
-      <div className="hidden lg:flex lg:gap-x-12">
+      <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-x-4">
         {navigation.map((item) => (
           <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
             {item.name}
           </a>
         ))}
-      </div>
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
         <a href="#signup" className="text-sm/6 font-semibold text-gray-900">
           Sign up <span aria-hidden="true">&darr;</span>
         </a>
@@ -80,11 +78,12 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
               ))}
             </div>
             <div className="py-6">
+                
               <a
-                href="#signup"
+                href="#signup-form"
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
               >
-                Sign Up for Summer
+                Sign Up
               </a>
             </div>
           </div>
