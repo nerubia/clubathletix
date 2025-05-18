@@ -4,10 +4,10 @@ import Sponsors from "@/components/sponsors";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   
-  return <div className="bg-white flex flex-col min-h-screen">
+  return <div className="bg-white flex flex-col min-h-screen overflow-x-hidden">
         <Navigation />
         
-        <div className="mx-auto">
+        <div className="mx-auto overflow-x-hidden">
             {children}
         </div>
         <div className="flex-1" />

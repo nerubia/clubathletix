@@ -94,7 +94,7 @@ export default function HomePageHeader() {
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gray-900/10 ring-inset" />
                     </div>
                   </div>
-                  <div className="w-44 flex-none space-y-8 pt-32 sm:pt-0">
+                  <div className="w-44 flex-none space-y-8 pt-32 sm:pt-0 hidden lg:block">
                     <div className="relative">
                       <img
                         alt=""

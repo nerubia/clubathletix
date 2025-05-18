@@ -1,95 +1,6 @@
-import { getOrganizationTestimonials } from "@/app/api/testimonial/service"
 import { Heading, Subheading } from "../heading"
 import { Testimonial } from "@/app/api/testimonial/types"
 
-const featuredTestimonial = {
-    body: 'Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.',
-    author: {
-      name: 'Brenna Goyette',
-      handle: 'brennagoyette',
-      imageUrl:
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/savvycal-logo-gray-900.svg',
-    },
-  }
-  const testimonials = [
-    [
-      [
-        {
-          body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
-          author: {
-            name: 'Leslie Alexander',
-            handle: 'lesliealexander',
-            imageUrl:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-          },
-        },
-        // More testimonials...
-      ],
-      [
-        {
-          body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
-          author: {
-            name: 'Lindsay Walton',
-            handle: 'lindsaywalton',
-            imageUrl:
-              'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
-          },
-        },
-        // More testimonials...
-      ],
-    ],
-    [
-      [
-        {
-          body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
-          author: {
-            name: 'Tom Cook',
-            handle: 'tomcook',
-            imageUrl:
-              'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-          },
-        },
-        // More testimonials...
-      ],
-      [
-        {
-          body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
-          author: {
-            name: 'Leonard Krasner',
-            handle: 'leonardkrasner',
-            imageUrl:
-              'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-          },
-        },
-        // More testimonials...
-      ],
-    ],
-  ]
-
-  const images = [
-              'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
-              'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-              'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',]
-  
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-  }
-  
-function swapElements(arr: Testimonial[], index1: number, index2: number) {
-    if (
-        Array.isArray(arr) &&
-        index1 >= 0 && index1 < arr.length &&
-        index2 >= 0 && index2 < arr.length &&
-        index1 !== index2
-    ) {
-        const temp = arr[index1];
-        arr[index1] = arr[index2];
-        arr[index2] = temp;
-    }
-
-    return arr
-}
 function groupRecords(records: Testimonial[]) {
     const firstColumn = [];
     const middleColumn = [];
@@ -113,7 +24,7 @@ function groupRecords(records: Testimonial[]) {
     const {firstColumn, middleColumn, lastColumn} = groupRecords(records)
 
     return (
-      <div className="relative isolate bg-gray-900 pt-24 pb-32 sm:pt-32 ">
+      <div className="relative isolate bg-gray-900 pt-24 pb-32 sm:pt-32 w-screen overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
@@ -146,7 +57,7 @@ function groupRecords(records: Testimonial[]) {
             </p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
-            {<div className="xl:col-span-2 xl:col-start-2 grid md:grid-cols-2 gap-8">
+            {<div className="xl:col-span-2 xl:col-start-2 grid md:grid-cols-2 gap-y-8 md:gap-8">
                 {featured && <figure className="rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5 sm:col-span-2 xl:row-span-2">
                         <blockquote className="p-6 text-lg font-semibold tracking-tight text-gray-900 sm:p-12 sm:text-xl/8">
                             <p>{`“${featured.body}”`}</p>
@@ -171,7 +82,7 @@ function groupRecords(records: Testimonial[]) {
                 {
                 middleColumn.map((rec, idx) => <figure
                         key={idx}
-                        className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5 row-span-1"
+                        className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5 row-span-1 col-span-2"
                         >
                         <blockquote className="text-gray-900">
                             <p>{`“${rec.body}”`}</p>
