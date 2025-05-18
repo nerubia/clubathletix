@@ -242,10 +242,12 @@ export default function CalendarView({
                             const toDate = addDays(current,  7 - daysToAdd)
                             const fromDate = deductDays(toDate,  7)
                             return (formatDate(dDate) >= formatDate(fromDate) && formatDate(dDate) <= formatDate(toDate))
-                        }).map(d => <div key={`${d.date}-${d.name}`} className={`relative rounded-xl px-4 pt-2.5 shadow-xl 
+                        }).map(d => { 
+                            const [primary, secondary, ] = d.colours?.split(',')
+                            return <div key={`${d.date}-${d.name}`} className={`relative rounded-xl px-4 pt-2.5 shadow-xl 
                         shadow-black/20 pb-4 text-white mb-4 
                         ${d.crest && 'pl-20'} 
-                        ${d.colours?.split(',')?.[1] || 'bg-slate-600'}`}>
+                        ${d.crest ? (d.isOnce && primary) || secondary || 'bg-slate-700' : 'bg-slate-700'}`}>
                             {d.crest && d.isOnce && <img className='absolute top-2 left-2' src={d.crest} />}
                             {!d.isOnce && <div className='absolute font-light text-3xl top-1/2 -translate-y-1/2 left-2 h-16 w-16 flex flex-col items-center justify-center'>
                                 {d.date.split('-').pop()}
@@ -261,7 +263,7 @@ export default function CalendarView({
                                 {d.location.split(',').map((w, line) => <span key={line} className="w-full">{w}<br /></span>)}
                             </p>
 
-                        </div>)
+                        </div>})
                         }</>}
                 
                 <div className="mt-4 flex flex-col gap-y-1 text-sm/6 text-slate-500">
