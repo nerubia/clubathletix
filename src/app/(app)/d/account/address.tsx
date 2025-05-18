@@ -31,7 +31,7 @@ export function Address({
           aria-label="Street Address"
           name="street_1"
           placeholder="Street Address"
-          defaultValue={address.street_1}
+          value={address.street_1}
           className="col-span-2"
           data-theme={dataTheme}
           onChange={v => {
@@ -45,7 +45,7 @@ export function Address({
           aria-label="No."
           name="street_2"
           placeholder="Unit / Bldg. #"
-          defaultValue={address.street_2}
+          value={address.street_2}
           className="col-span-1"
           data-theme={dataTheme}
           onChange={v => {
@@ -56,7 +56,7 @@ export function Address({
           }}
         />
       </div>
-      <Input aria-label="City" name="city_town" placeholder="City / Town" defaultValue={address.city_town} className="col-span-2 sm:col-span-1" data-theme={dataTheme} 
+      <Input aria-label="City" name="city_town" placeholder="City / Town" value={address.city_town} className="col-span-2 sm:col-span-1" data-theme={dataTheme} 
           onChange={v => {
             setAddress(prev => ({
               ...prev as unknown as Address,
@@ -64,7 +64,7 @@ export function Address({
             }))
           }}/>
           <div className='col-span-2 sm:col-span-1'>
-      <Listbox aria-label="Region" name="region" placeholder="Region" defaultValue={address.state_province || 'British Columbia'} data-theme={dataTheme} onChange={v => {
+      <Listbox aria-label="Region" name="region" placeholder="Region" value={address.state_province || 'British Columbia'} data-theme={dataTheme} onChange={v => {
             setAddress(prev => ({
               ...prev as unknown as Address,
               state_province: v,
@@ -78,7 +78,7 @@ export function Address({
       </Listbox></div>
       <Input
         className='w-1/3'
-         aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" defaultValue={address.postal_zip_code} data-theme={dataTheme} 
+         aria-label="Postal code" name="postal_zip_code" placeholder="Postal Code" value={address.postal_zip_code} data-theme={dataTheme} 
           onChange={v => {
             setAddress(prev => ({
               ...prev as unknown as Address,

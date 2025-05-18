@@ -1,22 +1,19 @@
+getPrograms
+
 import { NextRequest, NextResponse } from 'next/server';
 import { URLSearchParams } from 'url';
-import { getSchedule } from '@/services/schedule';
-import { addDays } from '@/utils/calendar/date-helpers';
-import { formatDate } from '@/utils/calendar/date-formatter';
+import { getPrograms } from '@/services/program';
 
 
 export async function GET(request: NextRequest) {
     const params = Object.fromEntries(new URLSearchParams(request.nextUrl.search))
 
     try {
-        let schedules: any[] | undefined = await getSchedule({
-            ...params,
-            to: params.to || formatDate(addDays(new Date(), 60)),
-        });
+        let { data: schedules, error } = await getPrograms(params.organization_id);
 
         return NextResponse.json((schedules || []).sort((a, b) => {
-            if (a.date < b.date) return -1
-            if (a.date > b.date) return 1
+            if (a.starts_at < b.starts_at) return -1
+            if (a.starts_at > b.starts_at) return 1
             return 0
         }), { status: 200 });
     } catch (err) {

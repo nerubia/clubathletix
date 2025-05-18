@@ -9,6 +9,50 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      athletes: {
+        Row: {
+          created_at: string
+          customer_id: number
+          date_of_birth: string
+          full_name: string
+          gender: string | null
+          id: number
+          media_release: boolean
+          subscription_code: string | null
+          wants_kit: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          customer_id: number
+          date_of_birth: string
+          full_name: string
+          gender?: string | null
+          id?: number
+          media_release?: boolean
+          subscription_code?: string | null
+          wants_kit?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          customer_id?: number
+          date_of_birth?: string
+          full_name?: string
+          gender?: string | null
+          id?: number
+          media_release?: boolean
+          subscription_code?: string | null
+          wants_kit?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athletes_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       credentials: {
         Row: {
           created_at: string
@@ -37,6 +81,7 @@ export type Database = {
           id: number
           phone: string
           postal_zip_code: string
+          state_province: string
           street_1: string
           street_2: string | null
         }
@@ -49,6 +94,7 @@ export type Database = {
           id?: number
           phone: string
           postal_zip_code: string
+          state_province: string
           street_1: string
           street_2?: string | null
         }
@@ -61,10 +107,89 @@ export type Database = {
           id?: number
           phone?: string
           postal_zip_code?: string
+          state_province?: string
           street_1?: string
           street_2?: string | null
         }
         Relationships: []
+      }
+      locations: {
+        Row: {
+          city_town: string
+          country: string
+          created_at: string
+          id: number
+          name: string
+          postal_zip_code: string
+          state_province: string
+          street_1: string
+          street_2: string | null
+        }
+        Insert: {
+          city_town: string
+          country: string
+          created_at?: string
+          id?: number
+          name: string
+          postal_zip_code: string
+          state_province: string
+          street_1: string
+          street_2?: string | null
+        }
+        Update: {
+          city_town?: string
+          country?: string
+          created_at?: string
+          id?: number
+          name?: string
+          postal_zip_code?: string
+          state_province?: string
+          street_1?: string
+          street_2?: string | null
+        }
+        Relationships: []
+      }
+      members: {
+        Row: {
+          created_at: string
+          email: string
+          id: number
+          is_active: boolean
+          organization_id: number
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: number
+          is_active?: boolean
+          organization_id: number
+          role?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: number
+          is_active?: boolean
+          organization_id?: number
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "members_email_fkey"
+            columns: ["email"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["email"]
+          },
+          {
+            foreignKeyName: "members_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       organizations: {
         Row: {
@@ -118,6 +243,209 @@ export type Database = {
             columns: ["administrator_id"]
             isOneToOne: false
             referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      programs: {
+        Row: {
+          coaches: string[] | null
+          created_at: string
+          description: string | null
+          id: number
+          image_url: string | null
+          is_active: boolean
+          max_age: number
+          min_age: number
+          name: string | null
+          schedule_id: number
+        }
+        Insert: {
+          coaches?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean
+          max_age?: number
+          min_age?: number
+          name?: string | null
+          schedule_id: number
+        }
+        Update: {
+          coaches?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean
+          max_age?: number
+          min_age?: number
+          name?: string | null
+          schedule_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programs_schedule_id_fkey"
+            columns: ["schedule_id"]
+            isOneToOne: false
+            referencedRelation: "schedules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedules: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          fridays: string | null
+          id: number
+          is_active: boolean
+          location_id: number
+          mondays: string | null
+          name: string
+          organization_id: number
+          saturdays: string | null
+          starts_at: string
+          sundays: string | null
+          thursdays: string | null
+          tuesdays: string | null
+          wednesdays: string | null
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          fridays?: string | null
+          id?: number
+          is_active?: boolean
+          location_id: number
+          mondays?: string | null
+          name: string
+          organization_id: number
+          saturdays?: string | null
+          starts_at: string
+          sundays?: string | null
+          thursdays?: string | null
+          tuesdays?: string | null
+          wednesdays?: string | null
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          fridays?: string | null
+          id?: number
+          is_active?: boolean
+          location_id?: number
+          mondays?: string | null
+          name?: string
+          organization_id?: number
+          saturdays?: string | null
+          starts_at?: string
+          sundays?: string | null
+          thursdays?: string | null
+          tuesdays?: string | null
+          wednesdays?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedules_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "schedules_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          athlete_id: number
+          code: string
+          created_at: string
+          id: number
+          organization_id: number
+          price: number
+        }
+        Insert: {
+          athlete_id: number
+          code: string
+          created_at?: string
+          id?: number
+          organization_id: number
+          price?: number
+        }
+        Update: {
+          athlete_id?: number
+          code?: string
+          created_at?: string
+          id?: number
+          organization_id?: number
+          price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pricing_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pricing_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      testimonials: {
+        Row: {
+          author_description: string
+          body: string
+          created_at: string
+          customer_id: number
+          feature: boolean
+          id: number
+          organization_id: number
+        }
+        Insert: {
+          author_description: string
+          body: string
+          created_at?: string
+          customer_id: number
+          feature?: boolean
+          id?: number
+          organization_id?: number
+        }
+        Update: {
+          author_description?: string
+          body?: string
+          created_at?: string
+          customer_id?: number
+          feature?: boolean
+          id?: number
+          organization_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testimonials_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "testimonials_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
             referencedColumns: ["id"]
           },
         ]

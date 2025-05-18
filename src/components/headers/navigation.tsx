@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link"
 
 const navigation = [
+  { name: 'Schedule', href: '/schedule' },
   { name: 'Parents & Expectations', href: '/parental-expectations' },
   // { name: 'Management', href: '#' },
 ]

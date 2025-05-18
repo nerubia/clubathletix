@@ -10,12 +10,7 @@ import DialogButton from "../dialog-button";
 import WaiverAgreementForm from "./waiver-contents";
 import { FormEvent, useEffect, useState } from "react";
 import { Dialog, DialogActions, DialogBody, DialogTitle } from "../dialog";
-const stats = [
-    { id: 1, name: 'Creators on the platform', value: '8,000+' },
-    { id: 2, name: 'Flat platform fee', value: '3%' },
-    { id: 3, name: 'Uptime guarantee', value: '99.9%' },
-    { id: 4, name: 'Paid out to creators', value: '$70M' },
-  ]
+
 export default function FormContents() {
     const [success, toggleSuccessDialog] = useState(false)
     const [disabled, setDisabled] = useState(true)
@@ -30,7 +25,8 @@ export default function FormContents() {
         clname: '',
         street_1: '',
         postal_zip_code: '',
-        city_town: 'White Rock',
+        city_town: '',
+        wants_kit: false,
         state_province: 'British Columbia',
         country: 'Canada',
         media_release: true,
@@ -136,7 +132,7 @@ export default function FormContents() {
                 </label>
                 
                 <Birthdate id="child-birthdate" 
-                    defaultValue={`${formData?.date_of_birth || ''}`} onChange={e => {
+                    value={`${formData?.date_of_birth || ''}`} onChange={e => {
                     setFormData(prev => ({
                         ...prev,
                         date_of_birth: e
@@ -255,14 +251,26 @@ export default function FormContents() {
             </section>
         </div>
         <div className="col-span-2 mt-16">
-            {isElite && <PlanSelect
+            {isElite ? <PlanSelect
                 defaultValue={`${formData.plan || ''}`}
                 onChange={p => {
                 setFormData(prev => ({
                     ...prev,
                     plan: p
                 }))
-            }} />}
+            }} /> : 
+            <div className="col-span-2 mt-8">
+                <CheckboxField data-theme="light">          
+                    <Checkbox color="rose" aria-required name="wants_kit" value="yes" defaultChecked={Boolean(formData.wants_kit)} data-theme="light" onChange={yes => {
+                        setFormData(prev => ({
+                            ...prev,
+                            wants_kit: yes
+                        }))
+                    }} />
+                    <Label data-theme="light">I'd like a player kit (CA$80)</Label>
+                    <Description data-theme="light">Our team kit includes a pair of jerseys, shorts, and socks.  This is just optional (although recommended).</Description>
+                </CheckboxField>
+            </div>}
 
             {/* {formData.date_of_birth && <section className="text-slate">
                 <dl className="mt-16 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-2 xl:mt-8 bg-slate-100 py-4 rounded-xl">
@@ -314,7 +322,7 @@ export default function FormContents() {
         </div>
         <div className="col-span-2 mt-8">
             <CheckboxField data-theme="light">          
-                <Checkbox color="rose" aria-required name="signed_agreement" value="yes" data-theme="light" onChange={toggleAgreement} />
+                <Checkbox color="rose" aria-required name="signed_agreement" value="yes" data-theme="light" onChange={toggleAgreement} defaultChecked={Boolean(formData.signed_agreement)} />
                 <Label data-theme="light">Parent&rsquo;s agreement</Label>
                 <Description data-theme="light">By signing up, you agree to our <DialogButton dialog={{
                     title: 'Progress Footy Football Academy Inc. Waiver and Parent\'s Agreement',
@@ -350,13 +358,11 @@ export default function FormContents() {
     <Dialog open={success} onClose={() => {
         setFormData(prev => ({
             ...prev,
-            fname: '',
-            lname: '',
             cfname: '',
             clname: '',
             media_release: true,
             plan: 'training',
-            signed_agreement: true,
+            wants_kit: false,
         }))
     }}>
         <DialogTitle>Beauty!</DialogTitle>
@@ -382,20 +388,13 @@ export default function FormContents() {
         </DialogBody>
         <DialogActions>
             <Button type="button" onClick={() => {
-                setFormData({
-                    fname: '',
-                    lname: '',
+                setFormData(prev => ({
+                    ...prev,
                     cfname: '',
                     clname: '',
-                    street_1: '',
-                    postal_zip_code: '',
-                    city_town: 'White Rock',
-                    state_province: 'British Columbia',
-                    country: 'Canada',
-                    media_release: true,
                     plan: 'training',
-                    signed_agreement: true,
-                })
+                    wants_kit: false,
+                }))
                 toggleSuccessDialog(false)
                 
             }}>Close</Button>

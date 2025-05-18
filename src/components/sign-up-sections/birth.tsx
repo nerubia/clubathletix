@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import { Listbox, ListboxLabel, ListboxOption } from '../listbox'
 
-export default function Birthdate(props: { id: string; defaultValue?: string; onChange(v: string): void }) {
-  let bdate = (props.defaultValue || '').split(' ') || []
+export default function Birthdate(props: { id: string; value?: string; onChange(v: string): void }) {
+  let bdate = (props.value || '').split(' ') || []
   const [ageGroup, setAgeGroup] = useState<string>()
   const [query, setQuery] = useState<{
     month?: string
@@ -74,7 +74,7 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
                 aria-label="Month"
                 name="birth_month"
                 placeholder="Month"
-                defaultValue={months.find(c => c.value === selectedMonth)?.value || ''}
+                value={months.find(c => c.value === selectedMonth)?.value || ''}
                 onChange={setSelectedMonth}
                 className="w-12"
                 data-theme='light'
@@ -91,7 +91,7 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
                 aria-label="Day"
                 name="birth_date"
                 placeholder="Day"
-                defaultValue={days.find(c => c.value === selectedDay)?.value || ''}
+                value={days.find(c => c.value === selectedDay)?.value || ''}
                 onChange={setSelectedDay}
                 data-theme='light'
               >
@@ -109,7 +109,7 @@ export default function Birthdate(props: { id: string; defaultValue?: string; on
               aria-label="Year"
               name="birth_year"
               placeholder="Year"
-              defaultValue={years.find(c => c.value === selectedYear)?.value || ''}
+              value={years.find(c => c.value === selectedYear)?.value || ''}
               onChange={setSelectedYear}
               data-theme='light'
             >
