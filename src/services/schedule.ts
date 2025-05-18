@@ -4,6 +4,7 @@ import { formatDate, getDayOfWeek } from '@/utils/calendar/date-formatter'
 import { createClient } from '@supabase/supabase-js'
 
 type Schedule = Database['public']['Tables']['schedules']['Row'] & {
+    organizations: Database['public']['Tables']['organizations']['Row']
     locations: Database['public']['Tables']['locations']['Row']
     programs: Database['public']['Tables']['programs']['Row']
 }
@@ -14,6 +15,7 @@ export async function getSchedule(params: Record<string, string>) {
     .from('schedules')
     .select(`
         name,
+        organizations (name, logo_url, short_name, colours),
         locations (id, name, street_1, street_2, city_town, postal_zip_code, state_province),
         programs (id, name, description, min_age, max_age, coaches, image_url),
         starts_at, ends_at, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays, is_active`)
@@ -56,6 +58,7 @@ export async function getScheduleForDate(
             .from('schedules')
             .select(`
                 name,
+                organizations (name, logo_url, short_name, colours),
                 locations (id, name, street_1, street_2, city_town, postal_zip_code, state_province),
                 programs (id, name, description, min_age, max_age, coaches, image_url),
                 starts_at, ends_at, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays, is_active`)
@@ -104,10 +107,13 @@ function expandRecurringSchedules(schedules: Schedule[], until: Date): any[] {
                 expanded.push({
                     name: schedule.name,
                     location: `${schedule.locations.name}, ${schedule.locations.street_1}`,
+                    colours: schedule.organizations.colours,
+                    crest: schedule.organizations.logo_url,
                     programs: schedule.programs,
                     date: formatDate(d),
                     day: getDayOfWeek(d),
                     time,
+                    isOnce: schedule.ends_at && formatDate(d) === formatDate(new Date(schedule.ends_at)),
                 })
             }
         }

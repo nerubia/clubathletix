@@ -31,16 +31,18 @@ export default function CalendarView({
     const [dayEntries, setDayEntries] = useState<
         {
             name: string;
+            crest: string;
+            colours: string;
             location: string;
             date: string;
             time: string;
             programs: Program[];
+            isOnce: boolean;
         }[]
     >([]);
 
     const retrieve = useCallback(
         async (d: Date) => {
-            console.log('Retrieve', d, visibleDays);
             if (visibleDays) {
                 const months = Object.keys(visibleDays);
 
@@ -57,10 +59,13 @@ export default function CalendarView({
                 setDayEntries(
                     results.map((entry) => ({
                         name: entry.name,
+                        crest: entry.crest,
+                        colours: entry.colours,
                         date: entry.date,
                         location: entry.location,
                         programs: entry.programs as unknown as Program[],
                         time: entry.time,
+                        isOnce: Boolean(entry.isOnce),
                     }))
                 );
             }
@@ -232,9 +237,10 @@ export default function CalendarView({
                             return formatDate(date) === formatDate(current);
                         })
                         .map((d, idx) => (
-                            <div key={`${d.name} ${idx + 1}`}>
-                                <Heading force='text-black' level={3}>{d.name as string}</Heading>
-                                <Subheading force='text-red-700'>{d.time}</Subheading>
+                            <div key={`${d.name} ${idx + 1}`} className={`${d.isOnce && d.crest && 'pl-20'} ${(d.isOnce ? `relative rounded-xl px-4 pt-2.5 shadow-xl shadow-black/20 pb-4 text-white mb-4 ${d.colours?.split(',')?.[1] || 'bg-slate-600'}` : '')}`}>
+                                {d.crest && d.isOnce && <img className='absolute top-1/2 -translate-y-1/2 left-2' src={d.crest} />}
+                                <Heading force={d.isOnce ? `text-white${d.crest && d.isOnce ? ' text-base!' : ''}` : 'text-black'} level={3}>{d.name as string}</Heading>
+                                <Subheading force={d.isOnce ? 'text-white' : 'text-red-700'}>{d.time}</Subheading>
                                 <p className="text-xs/4 w-40">
                                     {d.location.split(',').map((w, line) => <span key={line} className="w-full">{w}<br /></span>)}
                                 </p>

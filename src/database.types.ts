@@ -195,45 +195,54 @@ export type Database = {
         Row: {
           administrator_id: number
           city_town: string
+          colours: string | null
           country: string
           created_at: string
           email: string
           id: number
           is_active: boolean
+          logo_url: string | null
           name: string
           organization_type: string
           phone: string
           postal_zip_code: string
+          short_name: string | null
           street_1: string
           street_2: string | null
         }
         Insert: {
           administrator_id?: number
           city_town: string
+          colours?: string | null
           country: string
           created_at?: string
           email: string
           id?: number
           is_active?: boolean
+          logo_url?: string | null
           name: string
           organization_type?: string
           phone: string
           postal_zip_code: string
+          short_name?: string | null
           street_1: string
           street_2?: string | null
         }
         Update: {
           administrator_id?: number
           city_town?: string
+          colours?: string | null
           country?: string
           created_at?: string
           email?: string
           id?: number
           is_active?: boolean
+          logo_url?: string | null
           name?: string
           organization_type?: string
           phone?: string
           postal_zip_code?: string
+          short_name?: string | null
           street_1?: string
           street_2?: string | null
         }

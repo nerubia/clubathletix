@@ -15,8 +15,8 @@ export async function GET(request: NextRequest) {
         });
 
         return NextResponse.json((schedules || []).sort((a, b) => {
-            if (a.date < b.date) return -1
-            if (a.date > b.date) return 1
+            if (a.date < b.date || a.isOnce) return -1
+            if (a.date > b.date && !b.isOnce) return 1
             return 0
         }), { status: 200 });
     } catch (err) {

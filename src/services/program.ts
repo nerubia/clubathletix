@@ -22,7 +22,6 @@ export async function getPrograms(organization_id: string) {
         .eq('organization_id', organization_id)
         .is('is_active', true)
 
-        console.log(data)
         if (error) throw error
         return {data}
     } catch (e) {
