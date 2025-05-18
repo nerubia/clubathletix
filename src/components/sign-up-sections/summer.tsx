@@ -3,8 +3,8 @@ import ScheduleTable from './schedule'
 
 export default function SignUpSection({ address = 'Cambridge Soccer Park - 6067 - 150 Street, Surrey BC' }: { address: string }) {
   return (
-    <div className="relative isolate " id="signup">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
+    <div className="relative isolate pr-2.5 sm:pr-0" id="signup">
+      <div className="mx-auto lg:grid max-w-7xl lg:grid-cols-2">
         <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-24">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-xl">
 
