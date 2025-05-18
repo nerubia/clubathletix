@@ -31,9 +31,8 @@ export default function ScheduleTable(p: { 'data-organization': number }) {
     const retrieve = useCallback(async () => {
         const xhr = await fetch(`/api/programs?organization_id=${organization_id}`)
         const results = await xhr.json()
-        console.log(results)
         setSchedules(results);
-    }, [])
+    }, [organization_id])
 
     useEffect(() => {
         retrieve()
