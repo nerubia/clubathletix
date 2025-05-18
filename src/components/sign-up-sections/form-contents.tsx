@@ -267,7 +267,7 @@ export default function FormContents() {
                             wants_kit: yes
                         }))
                     }} />
-                    <Label data-theme="light">I'd like a player kit (CA$80)</Label>
+                    <Label data-theme="light">I&rsquo;d like a player kit (CA$80)</Label>
                     <Description data-theme="light">Our team kit includes a pair of jerseys, shorts, and socks.  This is just optional (although recommended).</Description>
                 </CheckboxField>
             </div>}
