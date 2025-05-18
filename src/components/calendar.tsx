@@ -5,6 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useCallback, useEffect, useState } from 'react';
 import { Program } from './sign-up-sections/age-groups';
 import { stringToUTC } from '@/utils/calendar/date-helpers';
+import { Heading, Subheading } from './heading';
 
 function classNames(...classes: unknown[]) {
     return classes.filter(Boolean).join(' ');
@@ -105,7 +106,7 @@ export default function CalendarView({
     }, [visibleDays]);
 
     return visibleDays && current ? (
-        <div className="h mx-auto rounded-xl md:grid md:grid-cols-3 md:divide-x md:divide-slate-200">
+        <div className="w-full mx-auto rounded-xl md:grid md:grid-cols-3 md:divide-x md:divide-slate-200">
             {Object.keys(visibleDays).map((month, idx) => (
                 <div key={current.getMonth() + idx} className="md:px-8">
                     <div className="flex items-center">
@@ -232,12 +233,10 @@ export default function CalendarView({
                         })
                         .map((d, idx) => (
                             <div key={`${d.name} ${idx + 1}`}>
+                                <Heading force='text-black' level={3}>{d.name as string}</Heading>
+                                <Subheading force='text-red-700'>{d.time}</Subheading>
                                 <p className="text-xs/4 w-40">
-                                    <span className="text-slate-600 text-xs">{d.name as string}</span>
-                                    <br />
-                                    <span className="w-full">{d.location}</span>
-                                    <br />
-                                    <span>{d.time}</span>
+                                    {d.location.split(',').map((w, line) => <span key={line} className="w-full">{w}<br /></span>)}
                                 </p>
                                 <div className="mt-4 flex justify-start gap-6 sm:mt-0">
                                 {d.programs.slice(0, 2).map((program, subIdx) => {
