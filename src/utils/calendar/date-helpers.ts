@@ -8,6 +8,12 @@ export function addDays(date: Date, days: number): Date {
     return result;
 }
 
+export function deductDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() - days);
+    return result;
+}
+
 export function stringToUTC(d: string) {
     return `${d}T${new Date().getUTCHours()}:${`0${new Date().getUTCMinutes()}`.slice(-2)}:00`
 }

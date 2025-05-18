@@ -113,7 +113,7 @@ function expandRecurringSchedules(schedules: Schedule[], until: Date): any[] {
                     date: formatDate(d),
                     day: getDayOfWeek(d),
                     time,
-                    isOnce: schedule.ends_at && formatDate(d) === formatDate(new Date(schedule.ends_at)),
+                    isOnce: schedule.ends_at && formatDate(new Date(schedule.starts_at)) === formatDate(new Date(schedule.ends_at)),
                 })
             }
         }

@@ -14,8 +14,8 @@ export function formatDate(date: Date) {
  * @param date - The Date object to get the day of the week from.
  * @returns The full name of the day (e.g., 'Monday').
  */
-export function getDayOfWeek(date: Date): string {
-    return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
+export function getDayOfWeek(date: Date, weekday: 'long' | 'narrow' | 'short' = 'long'): string {
+    return new Intl.DateTimeFormat('en-US', { weekday }).format(date);
 }
 
 export function getMonthName(date: Date): string {

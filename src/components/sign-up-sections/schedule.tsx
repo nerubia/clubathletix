@@ -38,7 +38,7 @@ export default function ScheduleTable(p: { 'data-organization': number }) {
         retrieve()
     }, [])
     return <div className="grid xl:grid-cols-2 gap-3">{
-        schedules.map((s, idx) => (<section key={s.name}><Heading force='text-red-800'>{s.name}</Heading>
+        schedules.filter(s => s.programs.length).map(s => (<section key={s.name}><Heading force='text-red-800'>{s.name}</Heading>
         <dl className="mt-0 space-y-4 text-sm text-gray-600">
           <div className="flex gap-x-1 items-start ">
             <dt className="flex-none">

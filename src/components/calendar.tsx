@@ -4,7 +4,7 @@ import { formatDate, getDayOfWeek, getMonthName } from '@/utils/calendar/date-fo
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useCallback, useEffect, useState } from 'react';
 import { Program } from './sign-up-sections/age-groups';
-import { stringToUTC } from '@/utils/calendar/date-helpers';
+import { addDays, deductDays, isBefore, stringToUTC } from '@/utils/calendar/date-helpers';
 import { Heading, Subheading } from './heading';
 
 function classNames(...classes: unknown[]) {
@@ -111,9 +111,9 @@ export default function CalendarView({
     }, [visibleDays]);
 
     return visibleDays && current ? (
-        <div className="w-full mx-auto rounded-xl md:grid md:grid-cols-3 md:divide-x md:divide-slate-200">
+        <div className="w-full mx-auto rounded-xl md:grid lg:grid-cols-3 lg:divide-x lg:divide-slate-200">
             {Object.keys(visibleDays).map((month, idx) => (
-                <div key={current.getMonth() + idx} className="md:px-8">
+                <div key={current.getMonth() + idx} className="md:px-8 hidden sm:block">
                     <div className="flex items-center">
                         <h2 className="flex-auto text-sm font-semibold text-slate-600">
                             {new Intl.DateTimeFormat('en-CA', {
@@ -173,7 +173,7 @@ export default function CalendarView({
                         <div>S</div>
                     </div>
                     <div className="mt-2 grid grid-cols-7 text-sm">
-                        {visibleDays[month].map((day, dayIdx) => (
+                        {visibleDays[month].map((day) => (
                             <div key={day.date} className="py-2">
                                 <button
                                     type="button"
@@ -219,8 +219,13 @@ export default function CalendarView({
                     </div>
                 </div>
             ))}
-            <section className="mt-12 md:mt-0 md:pl-14 overflow-x-hidden">
-                <h2 className="text-base font-semibold text-slate-700">
+            <section className="-mx-6 p-6 mt-0 md:mt-0 md:pl-14 overflow-x-hidden">
+
+                    {dayEntries
+                        .filter((d) => {
+                            const date = new Date(stringToUTC(d.date));
+                            return formatDate(date) === formatDate(current);
+                        }).length ? <><h2 className="text-base font-semibold text-slate-700">
                     <time dateTime="2022-01-21">
                         {new Intl.DateTimeFormat('en-CA', {
                             year: 'numeric',
@@ -229,7 +234,36 @@ export default function CalendarView({
                             weekday: 'short',
                         }).format(current)}
                     </time>
-                </h2>
+                </h2></> : <>{
+                            dayEntries
+                        .filter((d) => {
+                            const dDate = new Date(stringToUTC(d.date));
+                            const daysToAdd = current.getDay()
+                            const toDate = addDays(current,  7 - daysToAdd)
+                            const fromDate = deductDays(toDate,  7)
+                            return (formatDate(dDate) >= formatDate(fromDate) && formatDate(dDate) <= formatDate(toDate))
+                        }).map(d => <div key={`${d.date}-${d.name}`} className={`relative rounded-xl px-4 pt-2.5 shadow-xl 
+                        shadow-black/20 pb-4 text-white mb-4 
+                        ${d.crest && 'pl-20'} 
+                        ${d.colours?.split(',')?.[1] || 'bg-slate-600'}`}>
+                            {d.crest && d.isOnce && <img className='absolute top-2 left-2' src={d.crest} />}
+                            {!d.isOnce && <div className='absolute font-light text-3xl top-1/2 -translate-y-1/2 left-2 h-16 w-16 flex flex-col items-center justify-center'>
+                                {d.date.split('-').pop()}
+                                <p className='text-base font-black'>{getDayOfWeek(new Date(stringToUTC(d.date)), 'short')}</p>
+                            </div>}
+                            {d.isOnce && <div className='absolute font-bold text-sm/4 bottom-1 left-2 h-10 w-16 flex flex-col items-center justify-center'>
+                                {d.date.split('-').pop()}
+                                <p className='text-xs/3'>{getDayOfWeek(new Date(stringToUTC(d.date)), 'short')}</p>
+                            </div>}
+                            <Heading force='text-white text-base!' level={3}>{d.name as string}</Heading>
+                            <Subheading force='text-white'>{d.time}</Subheading>
+                            <p className="text-xs/4 w-40">
+                                {d.location.split(',').map((w, line) => <span key={line} className="w-full">{w}<br /></span>)}
+                            </p>
+
+                        </div>)
+                        }</>}
+                
                 <div className="mt-4 flex flex-col gap-y-1 text-sm/6 text-slate-500">
                     {dayEntries
                         .filter((d) => {
@@ -289,6 +323,20 @@ export default function CalendarView({
                         ))}
                 </div>
             </section>
+
+            <div className='flex justify-between items-center sm:hidden text-black'>
+                <ChevronLeftIcon className='size-12 cursor-pointer' role='button' aria-label='Previous day' 
+                onClick={() => {
+                    const dow = current.getDay()
+                    setDate(addDays(current, -7 - dow))
+                }} />
+                <div>{getMonthName(current)} {current.getDate()} - {addDays(current, 6).getDate()}</div>
+                <ChevronRightIcon className='size-12 cursor-pointer' role='button' aria-label='Next day'
+                onClick={() => {
+                    const dow = current.getDay()
+                    setDate(addDays(current, 7 - dow))
+                }} />
+            </div>
         </div>
     ) : (
         'Loading'
