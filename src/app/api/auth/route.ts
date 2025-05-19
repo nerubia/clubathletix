@@ -11,8 +11,15 @@ export async function GET() {
     try {
         const header = await headers()
         if (header.get('Authorization')) {
-            const decoded = verifyJWT(header.get('Authorization') as string)
-            return NextResponse.json(decoded);
+            const token = `${header.get('Authorization')}`.split('JWT').pop()?.trim()
+            if (token) {
+                const decoded = verifyJWT(token)
+                return NextResponse.json(decoded);
+            }
+            return NextResponse.json(
+            { error: 'Not authorized.' },
+            { status: 401 }
+        );
         }
     }  catch (error) {
         console.error('Error during fetching account:', error);

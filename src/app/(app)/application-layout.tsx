@@ -44,7 +44,7 @@ import {
   TicketIcon,
 } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from './d/useAuth'
 
 function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' }) {
@@ -80,7 +80,7 @@ export function ApplicationLayout({
   account: Account
   children: React.ReactNode
 }) {
-const auth = useAuth()
+  const auth = useAuth()
   let pathname = usePathname()
   const callback = useCallback(() => {
     auth.authenticate().then(console.log)
@@ -89,10 +89,9 @@ const auth = useAuth()
     // })
   }, [])
 
-  
-  const account = {}
-
-
+  useEffect(() => {
+    auth.authenticate()
+  }, [])
   return (
     <SidebarLayout
       navbar={
@@ -114,7 +113,7 @@ const auth = useAuth()
             <Dropdown>
               <DropdownButton as={SidebarItem}>
                 <Avatar src="/favicon.png" />
-                <SidebarLabel>ClubAthletix</SidebarLabel>
+                <SidebarLabel>{auth.loading ? 'Loading...' : 'ClubAthletix'}</SidebarLabel>
                 <ChevronDownIcon />
               </DropdownButton>
               <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
@@ -189,9 +188,9 @@ const auth = useAuth()
                 <span className="flex min-w-0 items-center gap-3">
                   <Avatar src="/users/erica.jpg" className="size-10" square alt="" />
                   <span className="min-w-0">
-                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{account.full_name}</span>
+                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{auth.loading ? 'Loading...' : auth.data?.full_name}</span>
                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                      {account.data?.email}
+                      {auth.data?.email}
                     </span>
                   </span>
                 </span>

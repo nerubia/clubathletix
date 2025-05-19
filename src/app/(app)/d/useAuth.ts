@@ -1,14 +1,10 @@
 import Cookies from 'js-cookie'
 import { useState } from 'react';
 
-interface AuthResponse {
-    token?: string;
-    error?: string;
-}
 
 export function useAuth() {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<AuthResponse | null>(null);
+    const [data, setData] = useState<Record<string, string> | null>(null);
 
     const authenticate = async () => {
         setLoading(true);
