@@ -51,11 +51,12 @@ export default function CalendarView({
                 const toDate = new Date(visibleDays[months[1]][14].date);
                 toDate.setMonth(toDate.getMonth() + 1);
                 toDate.setDate(0);
+                
                 const xhr = await fetch(
                     `${url}&from=${from} 00:00:00&to=${formatDate(toDate)} 23:59:59`
                 );
                 const results = (await xhr.json()) as Record<string, string>[];
-                const dow = `${getDayOfWeek(d).toLowerCase()}s`;
+
                 setDayEntries(
                     results.map((entry) => ({
                         name: entry.name,
@@ -224,7 +225,7 @@ export default function CalendarView({
                     {dayEntries
                         .filter((d) => {
                             const date = new Date(stringToUTC(d.date));
-                            return formatDate(date) === formatDate(current);
+                            return current && date && formatDate(date) === formatDate(current);
                         }).length ? <><h2 className="text-base font-semibold text-slate-700">
                     <time dateTime="2022-01-21">
                         {new Intl.DateTimeFormat('en-CA', {

@@ -56,20 +56,31 @@ export type Database = {
       credentials: {
         Row: {
           created_at: string
+          email: string | null
           email_hash: string
           password_hash: string
         }
         Insert: {
           created_at?: string
+          email?: string | null
           email_hash: string
           password_hash: string
         }
         Update: {
           created_at?: string
+          email?: string | null
           email_hash?: string
           password_hash?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "credentials_email_fkey"
+            columns: ["email"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["email"]
+          },
+        ]
       }
       customers: {
         Row: {
@@ -79,6 +90,7 @@ export type Database = {
           email: string
           full_name: string
           id: number
+          otp: number | null
           phone: string
           postal_zip_code: string
           state_province: string
@@ -92,6 +104,7 @@ export type Database = {
           email: string
           full_name: string
           id?: number
+          otp?: number | null
           phone: string
           postal_zip_code: string
           state_province: string
@@ -105,6 +118,7 @@ export type Database = {
           email?: string
           full_name?: string
           id?: number
+          otp?: number | null
           phone?: string
           postal_zip_code?: string
           state_province?: string
@@ -112,6 +126,35 @@ export type Database = {
           street_2?: string | null
         }
         Relationships: []
+      }
+      domains: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+          organization_id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          organization_id: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          organization_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "domains_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       locations: {
         Row: {

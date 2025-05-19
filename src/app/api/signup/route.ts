@@ -1,3 +1,4 @@
+import { updateOrInsertMembership } from '@/services/member'
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { URLSearchParams } from 'url'
@@ -34,27 +35,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function updateOrInsertMembership({
-  email,
-  organization_id,
-  ...data
-}: {
-  email: string
-  organization_id: number
-  role: string
-}) {
-  const { data: records } = await supabase.from('members').select('id, email, role').ilike('email', email)
 
-  if (records?.length) {
-    await supabase.from('members').update(data).eq('id', records[0].id)
-  } else {
-    await supabase.from('members').insert({
-      email,
-      organization_id,
-      ...data,
-    })
-  }
-}
 export async function POST(request: NextRequest) {
   try {
     const {

@@ -1,12 +1,5 @@
-import { Database } from '@/database.types'
-import { addDays, isBefore } from '@/utils/calendar/date-helpers'
-import { formatDate, getDayOfWeek } from '@/utils/calendar/date-formatter'
 import { createClient } from '@supabase/supabase-js'
 
-type Schedule = Database['public']['Tables']['schedules']['Row'] & {
-    locations: Database['public']['Tables']['locations']['Row']
-    programs: Database['public']['Tables']['programs']['Row']
-}
 export async function getPrograms(organization_id: string) {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 

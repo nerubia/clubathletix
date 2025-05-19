@@ -7,19 +7,21 @@ import { createClient } from '@/utils/supabase/server'
 
 import { getRecentMembers } from '@/data'
 import { gotoLoginPage } from './actions'
+import { cookies } from 'next/headers'
+import { verifyJWT } from '@/lib/encryption'
 
 export default async function Home() {
-  let members = await getRecentMembers()
-  const supabase = await createClient()
-  const { data, error } = await supabase.auth.getUser()
-  if (error || !data?.user) {
-    await gotoLoginPage()
-    return <></>
-  }
-
+    const cookie = await cookies()
+    const token = cookie.get('token')
+    let user: Record<string, string> = {}
+    if (token?.value) {
+        const json = verifyJWT(token.value)
+        user = json;
+    }
+    
   return (
     <>
-      <Heading>Good afternoon, {data.user.email}</Heading>
+      <Heading>Good afternoon, {user.full_name.split(', ').pop()}</Heading>
       <div className="mt-8 flex items-end justify-between">
         <Subheading>Overview</Subheading>
         <div>
@@ -49,7 +51,7 @@ export default async function Home() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {members.map((member) => (
+          {/* {members.map((member) => (
             <TableRow key={member.id} href={member.url} title={`Order #${member.id}`}>
               <TableCell>{member.id}</TableCell>
               <TableCell className="text-zinc-500">{member.date}</TableCell>
@@ -62,7 +64,7 @@ export default async function Home() {
               </TableCell>
               <TableCell className="text-right">US{member.amount.usd}</TableCell>
             </TableRow>
-          ))}
+          ))} */}
         </TableBody>
       </Table>
     </>

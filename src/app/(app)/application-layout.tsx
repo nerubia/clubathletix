@@ -44,6 +44,8 @@ import {
   TicketIcon,
 } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation'
+import { useCallback, useState } from 'react'
+import { useAuth } from './d/useAuth'
 
 function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' }) {
   return (
@@ -72,15 +74,25 @@ function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' })
 
 export function ApplicationLayout({
   events,
-  account,
   children,
 }: {
   events: Awaited<ReturnType<typeof getEvents>>
   account: Account
   children: React.ReactNode
 }) {
+const auth = useAuth()
   let pathname = usePathname()
-console.log({account})
+  const callback = useCallback(() => {
+    auth.authenticate().then(console.log)
+    // fetch('/api/auth').then(xhr => {
+    //     if (xhr.ok) xhr.json().then(console.log)
+    // })
+  }, [])
+
+  
+  const account = {}
+
+
   return (
     <SidebarLayout
       navbar={
@@ -179,7 +191,7 @@ console.log({account})
                   <span className="min-w-0">
                     <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{account.full_name}</span>
                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                      {account.email}
+                      {account.data?.email}
                     </span>
                   </span>
                 </span>

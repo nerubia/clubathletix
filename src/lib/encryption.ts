@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import jwt, { SignOptions } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 const jwtSecret = process.env.JWT_SECRET as string;
 

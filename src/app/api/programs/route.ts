@@ -1,5 +1,3 @@
-getPrograms
-
 import { NextRequest, NextResponse } from 'next/server';
 import { URLSearchParams } from 'url';
 import { getPrograms } from '@/services/program';

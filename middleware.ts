@@ -1,10 +1,15 @@
+import { verifyJWT } from '@/lib/encryption';
+import { headers } from 'next/headers';
 import { type NextRequest } from 'next/server'
-import { updateSession } from '@/utils/supabase/middleware'
 export async function middleware(request: NextRequest) {
   // update user's auth session
+  const header = await headers()
+    if (header.get('Authorization')) {
+        return verifyJWT(header.get('Authorization') as string)
+        
+    }
 
-  console.log(request)
-  return await updateSession(request)
+  return {}
 }
 export const config = {
   matcher: [

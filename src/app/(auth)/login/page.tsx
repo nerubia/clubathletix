@@ -5,10 +5,12 @@ import { Field, Label } from '@/components/fieldset'
 import { Heading } from '@/components/heading'
 import { Input } from '@/components/input'
 import { Strong, Text, TextLink } from '@/components/text'
-import { hashData } from '@/lib/encryption'
+import { hashData, verifyJWT } from '@/lib/encryption'
 import type { Metadata } from 'next'
 import { login, signOut } from './actions'
-import { headers } from 'next/headers'
+import { cookies, headers } from 'next/headers'
+import InputHostname from '@/components/input-hostname'
+import Form from '@/components/form'
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -16,17 +18,25 @@ export const metadata: Metadata = {
 
 export default async function Login() {
   const h = await headers()
+  const cookie = await cookies();
+
+  const token = cookie.get('token')?.value
+
+  if (token) {
+      const verified = verifyJWT(token)
+  }
+  
   if (h.get('referer')) {
     const { pathname } = new URL(h.get('referer') as string)
     if (pathname === '/d' || pathname.startsWith('/d/')) {
       await signOut()
     }
   }
+
   return (
-    <form
-      action={login}
-      className="grid w-full max-w-sm grid-cols-1 gap-8"
-    >
+    <Form 
+        action="/api/auth"
+      className="grid w-full max-w-sm grid-cols-1 gap-8">
       <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
       <Heading>Sign in to your account</Heading>
       <Field>
@@ -42,11 +52,11 @@ export default async function Login() {
           <Checkbox name="remember" />
           <Label>Remember me</Label>
         </CheckboxField>
-        <Text>
+        {/* <Text>
           <TextLink href="/forgot-password">
             <Strong>Forgot password?</Strong>
           </TextLink>
-        </Text>
+        </Text> */}
       </div>
       <Button type="submit" className="w-full">
         Login
@@ -57,6 +67,6 @@ export default async function Login() {
           <Strong>Sign up</Strong>
         </TextLink>
       </Text>
-    </form>
+    </Form>
   )
 }

@@ -8,6 +8,7 @@ import { Select } from '@/components/select'
 import { Strong, Text, TextLink } from '@/components/text'
 import type { Metadata } from 'next'
 import { signup } from './actions'
+import Form from '@/components/form'
 
 export const metadata: Metadata = {
   title: 'Register',
@@ -15,21 +16,21 @@ export const metadata: Metadata = {
 
 export default function Login() {
   return (
-    <form action={signup} className="grid w-full max-w-sm grid-cols-1 gap-8">
+    <Form action='/api/signup' className="grid w-full max-w-sm grid-cols-1 gap-8">
       <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
       <Heading>Create your account</Heading>
       <Field>
         <Label>Email</Label>
-        <Input type="email" name="email" />
+        <Input type="email" name="email" autoComplete='email' />
       </Field>
       <div className='flex flex-col sm:flex-row gap-1'>
       <Field>
         <Label>First name</Label>
-        <Input name="fname" />
+        <Input name="fname" autoComplete='first_name' />
       </Field>
       <Field>
         <Label>Last name</Label>
-        <Input name="lname" />
+        <Input name="lname" autoComplete='no' />
       </Field>
       </div>
       <Field>
@@ -57,6 +58,6 @@ export default function Login() {
           <Strong>Sign in</Strong>
         </TextLink>
       </Text>
-    </form>
+    </Form>
   )
 }
