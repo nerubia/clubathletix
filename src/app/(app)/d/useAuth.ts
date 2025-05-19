@@ -10,14 +10,23 @@ export function useAuth() {
         setLoading(true);
         setData(null);
         try {
-            const response = await fetch('/api/auth', {
+            const [org, response] = await Promise.all([fetch('/api/organization', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `JWT ${Cookies.get('token')}`
                 },
-            });
+            }), fetch('/api/auth', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${Cookies.get('token')}`
+                },
+            })]);
             const result = await response.json();
-            setData(result);
+            const { organizations: organization } = await org.json();
+            setData({
+                ...organization,
+                ...result,
+            });
         } catch (error) {
             setData({ error: 'Network error' });
         } finally {

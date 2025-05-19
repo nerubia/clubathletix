@@ -4,6 +4,7 @@ import { Select } from '@/components/select'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/table'
 import { cookies } from 'next/headers'
 import { verifyJWT } from '@/lib/encryption'
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
     const cookie = await cookies()
@@ -12,11 +13,13 @@ export default async function Home() {
     if (token?.value) {
         const json = verifyJWT(token.value)
         user = json as Record<string, string>;
+
+        if (!user?.full_name) redirect('/login')
     }
     
   return (
     <>
-      <Heading>Good afternoon, {user.full_name.split(', ').pop()}</Heading>
+      <Heading>Good afternoon, {user?.full_name?.split(', ').pop()}</Heading>
       <div className="mt-8 flex items-end justify-between">
         <Subheading>Overview</Subheading>
         <div>

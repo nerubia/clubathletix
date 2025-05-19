@@ -7,14 +7,14 @@ interface TokenPayload {
   [key: string]: any;
 }
 
-export function verifyJWT(token: string): TokenPayload | null {
+export function verifyJWT(token: string): TokenPayload | undefined {
   try {
     const decoded = jwt.verify(token, jwtSecret) as TokenPayload;
     return decoded;
   } catch (error) {
-    console.error('JWT verification failed:', error);
-    return null;
+    console.log('JWT verification failed:', error);
   }
+  return {}
 }
 export function hashData(data: string): string {
   return crypto.createHash('sha256').update(data).digest('hex');

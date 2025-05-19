@@ -92,6 +92,7 @@ export function ApplicationLayout({
   useEffect(() => {
     auth.authenticate()
   }, [])
+
   return (
     <SidebarLayout
       navbar={
@@ -112,8 +113,8 @@ export function ApplicationLayout({
           <SidebarHeader>
             <Dropdown>
               <DropdownButton as={SidebarItem}>
-                <Avatar src="/favicon.png" />
-                <SidebarLabel>{auth.loading ? 'Loading...' : 'ClubAthletix'}</SidebarLabel>
+                <Avatar src={auth.data?.logo_url || "/favicon.png"} />
+                <SidebarLabel>{auth.loading ? 'Loading...' : auth.data?.name || 'ClubAthletix'}</SidebarLabel>
                 <ChevronDownIcon />
               </DropdownButton>
               <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">

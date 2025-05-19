@@ -13,7 +13,7 @@ const navigation = [
 
 export default function Navigation({ backgroundColour }: { backgroundColour?: string; }) {
     const path = usePathname()
-    console.log(path)
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
     <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
