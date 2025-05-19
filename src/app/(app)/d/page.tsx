@@ -1,12 +1,7 @@
 import { Stat } from '@/app/stat'
-import { Avatar } from '@/components/avatar'
 import { Heading, Subheading } from '@/components/heading'
 import { Select } from '@/components/select'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/table'
-import { createClient } from '@/utils/supabase/server'
-
-import { getRecentMembers } from '@/data'
-import { gotoLoginPage } from './actions'
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/table'
 import { cookies } from 'next/headers'
 import { verifyJWT } from '@/lib/encryption'
 
@@ -16,7 +11,7 @@ export default async function Home() {
     let user: Record<string, string> = {}
     if (token?.value) {
         const json = verifyJWT(token.value)
-        user = json;
+        user = json as Record<string, string>;
     }
     
   return (
