@@ -15,5 +15,5 @@ export function deductDays(date: Date, days: number): Date {
 }
 
 export function stringToUTC(d: string) {
-    return `${d}T${new Date().getUTCHours()}:${`0${new Date().getUTCMinutes()}`.slice(-2)}:00`
+    return `${d}T${`0${new Date().getUTCHours()}`.slice(-2)}:${`0${new Date().getUTCMinutes()}`.slice(-2)}:00`
 }
