@@ -24,12 +24,16 @@ export default async function Icon() {
           height: '100%',
           display: 'flex',
           alignItems: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
           justifyContent: 'center',
           color: 'white',
+          ...(o.logo_url ? {
+            backgroundImage: `url(${o.logo_url.split('/').reverse().slice(1).reverse().join('/') + '/favicon.png'})`
+          }: {})
         }}
-      >
-        <img src={o.logo_url} />
-      </div>
+      />
+        
     ),
     // ImageResponse options
     {

@@ -246,10 +246,9 @@ export default function CalendarView({
                         }).map(d => { 
                             const [primary, secondary, ] = d.colours?.split(',')
                             return <div key={`${d.date}-${d.name}`} className={`relative rounded-xl px-4 pt-2.5 shadow-xl 
-                        shadow-black/20 pb-4 text-white mb-4 
+                        shadow-black/20 pb-4 text-white mb-4 bg-no-repeat bg-size-[auto_56px] bg-position-[left_0.8rem_top_0.6rem] 
                         ${d.crest && 'pl-20'} 
-                        ${d.crest ? (d.isOnce && primary) || secondary || 'bg-slate-700' : 'bg-slate-700'}`}>
-                            {d.crest && d.isOnce && <img className='absolute top-2 left-2' src={d.crest} />}
+                        ${d.crest ? (d.isOnce && primary) || secondary || 'bg-slate-700' : 'bg-slate-700'}`} style={d.crest && d.isOnce ? {backgroundImage: `url(${d.crest})`} : {}}>
                             {!d.isOnce && <div className='absolute font-light text-3xl top-1/2 -translate-y-1/2 left-2 h-16 w-16 flex flex-col items-center justify-center'>
                                 {d.date.split('-').pop()}
                                 <p className='text-base font-black'>{getDayOfWeek(new Date(stringToUTC(d.date)), 'short')}</p>
