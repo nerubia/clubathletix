@@ -21,7 +21,7 @@ export default async function Page() {
   const testimonials = await getOrganizationTestimonials('1')
   return (
     <>
-      <HomePageHeader />
+      <HomePageHeader media={(organization as unknown as { media?: { hero?: string[] } })?.media?.hero || []}/>
       <TestimonialGrid items={testimonials || []} />
       <SignupSection address={getAddress()} />
     </>

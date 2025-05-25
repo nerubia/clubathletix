@@ -192,6 +192,41 @@ export type Database = {
         }
         Relationships: []
       }
+      media_components: {
+        Row: {
+          created_at: string
+          id: number
+          organization_id: number
+          segment_index: number
+          segment_name: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          organization_id: number
+          segment_index?: number
+          segment_name?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          organization_id?: number
+          segment_index?: number
+          segment_name?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_components_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       members: {
         Row: {
           created_at: string
