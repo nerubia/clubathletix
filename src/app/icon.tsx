@@ -26,7 +26,7 @@ export default async function Icon() {
           alignItems: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundSize: 'contain',
+          backgroundSize: `${size.height}px ${size.width}px`,
           justifyContent: 'center',
           color: 'white',
           ...(o.logo_url ? {
