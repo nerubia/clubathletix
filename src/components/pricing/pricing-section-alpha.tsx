@@ -129,7 +129,7 @@ export default function PricingSection() {
               <div className="flex flex-col items-start gap-x-8 gap-y-6 sm:gap-y-10 lg:col-span-2 lg:flex-row lg:items-center">
                 <div className="lg:min-w-0 lg:flex-1">
                   <Heading force='text-rose-400'>How it works</Heading>
-                  <ol className='list-decimal ml-4'>
+                  <ol className='list-decimal ml-4 text-white'>
 
                     <li className="mt-1 text-sm/7">
                         <strong>Book a Match</strong><br/>
