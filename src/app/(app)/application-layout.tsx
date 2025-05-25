@@ -84,8 +84,6 @@ export function ApplicationLayout({
   let pathname = usePathname()
   const callback = useCallback(() => {
     auth.authenticate().then(console.log)
-    // fetch('/api/auth').then(xhr => {
-    //     if (xhr.ok) xhr.json().then(console.log)
     // })
   }, [])
 

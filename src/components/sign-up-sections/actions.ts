@@ -33,5 +33,4 @@ export async function signUp(formData: FormData) {
     
     const customer = await postApiRequest(url, Object.fromEntries(formData.entries()))
 
-    console.log(customer)
 }

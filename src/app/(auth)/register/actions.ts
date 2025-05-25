@@ -25,12 +25,6 @@ export async function signup(formData: FormData) {
     media_release: formData.get('media_release') as string,
     signed_agreement: formData.get('signed_agreement') as string,
   }
-  console.log(JSON.stringify(data, null, 2))
-  // const { error } = await supabase.auth.signUp(data)
-  // console.log(JSON.stringify({ data, error }, null, 2))
-  // if (error) {
-  //   // redirect('/register?error=' + error.code)
-  // }
   revalidatePath('/', 'layout')
   // redirect('/dashboard')
 }

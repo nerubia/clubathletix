@@ -107,8 +107,6 @@ export async function POST(request: NextRequest) {
         role: 'parent',
       })
 
-      console.log(JSON.stringify({ membershipResults }, null, 2))
-
       const full_name = [clname, cfname].join(', ')
       let { data: existing } = await supabase
         .from('athletes')

@@ -32,12 +32,6 @@ export async function login(formData: FormData) {
                 .eq('email', email)
             if (customers?.length) {
                 const customer = customers.pop();
-                // const membershipResults = await updateOrInsertMembership({
-                //         email,
-                //         organization_id,
-                //         role: 'parent',
-                //       })
-                console.log(customer);
                 
             }
         } else {

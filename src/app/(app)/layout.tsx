@@ -8,7 +8,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     const hdr = await headers()
     const host = hdr.get('host') || 'localhost'
     const organization = await getOrganizationByDomain(host)
-  console.log('->>>', {host,organization})
   return <div className="bg-white flex flex-col min-h-screen overflow-x-hidden">
         <Navigation data-org={organization as unknown as { [k: string]: number | string } || {}} />
         

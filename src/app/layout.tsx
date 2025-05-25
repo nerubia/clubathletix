@@ -8,7 +8,6 @@ import { headers } from 'next/headers'
 export async function generateMetadata(): Promise<Metadata> {
     const hdr = await headers()
     const host = hdr.get('host') || 'localhost'
-    console.log(host)
     const organization = await getOrganizationByDomain(host)
     
   return {
