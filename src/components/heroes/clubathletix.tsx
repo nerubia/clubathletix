@@ -78,13 +78,17 @@ export default function HomeHeroSection(p: {
             </a>
           </div>
         </div>
-        <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
+        <div className="hidden sm:flex mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
             <AppScreenshot>
                 <video height="100%" autoPlay loop playsInline muted className="overflow-hidden h-full w-auto relative">
                     <source src="https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/videos/potm.mp4" type="video/mp4" />Your browser does not support the video tag.
                 </video>
             </AppScreenshot>
         </div>
+
+        <video height="100%" autoPlay loop playsInline muted className="overflow-hidden h-full w-auto relative sm:hidden mt-8 rounded-2xl">
+            <source src="https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/videos/potm.mp4" type="video/mp4" />Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   )
