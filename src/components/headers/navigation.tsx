@@ -12,18 +12,17 @@ const navigation = [
   // { name: 'Management', href: '#' },
 ]
 
-export default function Navigation({ backgroundColour }: { backgroundColour?: string; }) {
-    const [organization, setOrganization] = useState<Record<string, string>>()
+export default function Navigation({
+    backgroundColour,
+    'data-org': organization
+}: {
+    backgroundColour?: string;
+    'data-org': {
+        [k: string]: string | number
+    }
+}) {
     const path = usePathname()
-    
-    const getOrg = useCallback(async () => {
-        const xhr = await fetch('/api/organization')
-        if (xhr.ok) xhr.json().then(setOrganization)
-    }, [])
-
-    useEffect(() => {
-        getOrg()
-    }, [])
+    console.log(organization)
     
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
@@ -33,7 +32,7 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
           <span className="sr-only">PF Academy</span>
           {organization?.logo_url && <img
             alt=""
-            src={organization?.logo_url || "/clubs/pfa/logo.png"}
+            src={`${organization?.logo_url}` || "/clubs/pfa/logo.png"}
             className="h-12 w-auto"
           />}
         </Link>
