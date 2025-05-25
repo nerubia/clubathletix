@@ -67,13 +67,7 @@ export default function HomeHeroSection(p: {
             We combine professional match recordings with a powerful cloud-based performance tracking system, giving players, coaches, and parents a complete picture of player development over the season.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
-            <a
-              href="#"
-              className="rounded-md bg-rose-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-rose-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-400"
-            >
-              Get started
-            </a>
-            <a href="#" className="text-sm/6 font-semibold text-white">
+            <a href="#pricing-section" className="text-sm/6 font-semibold text-white">
               Learn more <span aria-hidden="true">→</span>
             </a>
           </div>

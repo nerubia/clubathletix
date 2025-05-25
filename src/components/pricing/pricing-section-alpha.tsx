@@ -45,7 +45,7 @@ const tiers = [
 
 export default function PricingSection() {
   return (
-    <div className="isolate overflow-hidden bg-gray-900">
+    <div className="isolate overflow-hidden bg-gray-900" id="pricing-section">
         <div className="absolute left-1/2 hidden md:block"><svg
             viewBox="0 0 1208 1024"
             className="absolute left-1/2 -z-10 h-256 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)] xl:top-0"
