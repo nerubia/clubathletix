@@ -4,10 +4,14 @@ import TestimonialGrid from '@/components/testimonials/grid'
 import { getOrganizationTestimonials } from '../api/testimonial/service'
 import { headers } from 'next/headers'
 import VideosPage from './videos/page'
+import { getOrganizationByDomain } from '@/services/organization'
 
 export default async function Page() {
     const hdr = await headers()
-    if(hdr.get('host') === 'clubathletix.com') return <VideosPage />
+    const host = hdr.get('host') || 'localhost'
+    const organization = await getOrganizationByDomain(host)
+    
+    if((organization as unknown as { id: number} )?.id === 3) return <VideosPage />
   function getAddress() {
     let address = 'Cambridge Soccer Park - 6067 - 150 Street, Surrey BC'
     if (new Date().getMonth() < 7) address = 'Goldstone Park'

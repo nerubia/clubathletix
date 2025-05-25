@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link"
@@ -13,19 +13,29 @@ const navigation = [
 ]
 
 export default function Navigation({ backgroundColour }: { backgroundColour?: string; }) {
+    const [organization, setOrganization] = useState<Record<string, string>>()
     const path = usePathname()
+    
+    const getOrg = useCallback(async () => {
+        const xhr = await fetch('/api/organization')
+        if (xhr.ok) xhr.json().then(setOrganization)
+    }, [])
 
+    useEffect(() => {
+        getOrg()
+    }, [])
+    
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
     <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
       <div className="flex lg:flex-1">
         <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">PF Academy</span>
-          <img
+          {organization?.logo_url && <img
             alt=""
-            src="/clubs/pfa/logo.png"
+            src={organization?.logo_url || "/clubs/pfa/logo.png"}
             className="h-12 w-auto"
-          />
+          />}
         </Link>
       </div>
       <div className="flex lg:hidden">

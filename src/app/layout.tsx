@@ -1,15 +1,25 @@
+import { getOrganizationByDomain } from '@/services/organization'
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s - PF Football Academy',
-    default: 'PF Football Academy',
-  },
-  description: '',
+
+
+export async function generateMetadata(): Promise<Metadata> {
+    const hdr = await headers()
+    const host = hdr.get('host') || 'localhost'
+    const organization = await getOrganizationByDomain(host)
+    const { name } = organization as unknown as { id?: number; name?: string }
+  return {
+    title: name || 'ClubAthletix',
+  }
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const hdr = await headers()
+    const host = hdr.get('host') || 'localhost'
+    const organization = await getOrganizationByDomain(host)
+    const { logo } = organization as unknown as { id?: number; logo?: string }
   return (
     <html
       lang="en"
@@ -18,8 +28,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link rel="icon" href="/clubs/pfa/logo.png" />
-        <link rel="apple-touch-icon" href="/clubs/pfa/logo.png" />
+        <link rel="icon" href={logo || '/clubs/pfa/logo.png'} />
+        <link rel="apple-touch-icon" href={logo || '/clubs/pfa/logo.png'} />
       </head>
       <body>{children}</body>
     </html>

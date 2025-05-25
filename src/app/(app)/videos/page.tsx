@@ -19,7 +19,7 @@ const tiers = [
     description: 'Perfect for college recruitment or personal keepsakes, we create highlight compilations of 5 of your best matches.',
     features: [
       'Player Match Highlights of 5 matches',
-      'With our ClubAthletix AI software suite, stich everything up to create a 45-second video.',
+      'With our ClubAthletix AI software suite, stitch everything up to create a 45-second video.',
       'Downloadable video, plus',
       'Featured in ClubAthletix Instagram page for easy sharing with scouts and coaches',
     ],
@@ -30,7 +30,7 @@ const tiers = [
     href: 'whatsapp:+12367771283',
     price: 'CA$39',
     unit: '/match',
-    description: 'Get those studio grade shots and get a REEL highlight for the ages!',
+    description: 'Get those those close up shots and get a REEL highlight for the ages!',
     features: [
       'Player Match Highlights, plus',
       'We get additional close up / angled shots of your player in high definition.',
