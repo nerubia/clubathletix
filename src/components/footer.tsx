@@ -13,7 +13,11 @@ const navigation = [
   },
 ]
 
-export default function Footer() {
+export default function Footer({'data-org': organization}: {
+    'data-org': {
+        [k: string]: string | number
+    }}) {
+    
   return (
     <footer className="bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
@@ -28,7 +32,7 @@ export default function Footer() {
           Powered by ClubAthletix</p>
         </div>
         <p className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">
-          &copy; {new Date().getFullYear()} Progress Footy Football Academy, Inc. All rights reserved.
+          &copy; {new Date().getFullYear()} {organization.name}. All rights reserved.
         </p>
       </div>
     </footer>
