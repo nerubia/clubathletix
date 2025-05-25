@@ -4,7 +4,7 @@ const tiers = [
   {
     name: 'Player Match Highlight',
     id: 'highlight',
-    href: 'whatsapp:+12367771283',
+    href: 'https://wa.me/12367771283',
     price: 'CA$19',
     unit: '/match',
     description: 'HD-quality footage using professional AI-assisted cameras for your player (based on position).',
@@ -13,7 +13,7 @@ const tiers = [
   {
     name: 'Player Evo Season Highlights',
     id: 'seasonplus',
-    href: 'whatsapp:+12367771283',
+    href: 'https://wa.me/12367771283',
     price: 'CA$99',
     unit: '/5 matches',
     description: 'Perfect for college recruitment or personal keepsakes, we create highlight compilations of 5 of your best matches.',
@@ -27,7 +27,7 @@ const tiers = [
   {
     name: 'Player Evo Highlight',
     id: 'evohighlight',
-    href: 'whatsapp:+12367771283',
+    href: 'https://wa.me/12367771283',
     price: 'CA$39',
     unit: '/match',
     description: 'Get those those close up shots and get a REEL highlight for the ages!',
@@ -153,7 +153,7 @@ export default function VideosPage() {
                     </video>
                     <div className='mt-2 w-full text-right'>
                         <a
-                            href="whatsapp:+12367771283"
+                            href="https://wa.me/12367771283"
                             className="rounded-md px-3.5 py-2 text-sm/6 font-semibold text-red-600 ring-1 ring-red-200 ring-inset hover:ring-red-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                         >
                             Contact us to book <span aria-hidden="true">&rarr;</span>
