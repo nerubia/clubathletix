@@ -4,6 +4,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Heading } from "../heading"
 
 const navigation = [
   { name: 'Schedule', href: '/schedule' },
@@ -26,15 +27,15 @@ export default function Navigation({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
     <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-      <div className="flex lg:flex-1">
+      <div className="flex lg:flex-1 items-center">
         <Link href="/" className="-m-1.5 p-1.5">
-          <span className="sr-only">PF Academy</span>
           {organization?.logo_url && <img
             alt=""
             src={`${organization?.logo_url}` || "/logo.png"}
-            className="h-12 w-auto"
+            className="h-6 w-auto"
           />}
         </Link>
+        <Heading force="uppercase font-bold ml-1 tracking-widest text-sm! text-white">{`${organization.name || ''}`.split('-').at(0)}</Heading>
       </div>
       <div className="flex lg:hidden">
         <button
