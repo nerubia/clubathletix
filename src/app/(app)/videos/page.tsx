@@ -11,8 +11,8 @@ const tiers = [
     features: ['Goalie moments (saves / assists)' , 'Defensive moments (successful tackles)' , 'Midfielders moments (crosses, passes, successful plays)', 'Attackers moments (goals, assists, crosses)', 'View your video 4 - 12 hours after the match.*'],
   },
   {
-    name: 'Player Evo Season Highlights',
-    id: 'seasonplus',
+    name: 'Player Season Highlights',
+    id: 'season',
     href: 'https://wa.me/12367771283',
     price: 'CA$99',
     unit: '/5 matches',
