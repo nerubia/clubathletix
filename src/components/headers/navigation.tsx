@@ -66,7 +66,7 @@ export default function Navigation({
       <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div className="flex items-center justify-between">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">`${organization?.name}` || "ClubAthletix"</span>
+            <span className="sr-only">{`${organization?.name}` || "ClubAthletix"}</span>
             <img
             alt=""
             src={`${organization?.logo_url}` || "/logo.png"}
