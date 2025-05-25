@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation"
 const navigation = [
   { name: 'Schedule', href: '/schedule' },
   { name: 'Parents & Expectations', href: '/parental-expectations' },
+  { name: 'Match Video & Analysis', href: '/videos' },
   // { name: 'Management', href: '#' },
 ]
 
@@ -39,15 +40,15 @@ export default function Navigation({ backgroundColour }: { backgroundColour?: st
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-x-4">
         {navigation.map((item) => (
-          <Link key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+          <Link key={item.name} href={item.href} className={`text-sm/6 font-semibold ${path.startsWith('/videos') ? 'text-gray-white' : 'text-gray-900'}`}>
             {item.name}
           </Link>
         ))}
-        <Link href="/#signup-form" className="text-sm/6 font-semibold text-gray-900">
+        <Link href="/#signup-form" className={`text-sm/6 font-semibold ${path.startsWith('/videos') ? 'text-gray-white' : 'text-gray-900'}`}>
           Sign up <span aria-hidden="true">&darr;</span>
         </Link>
 
-        <Link href="/login" className="text-sm/6 font-semibold text-gray-900">
+        <Link href="/login" className={`text-sm/6 font-semibold ${path.startsWith('/videos') ? 'text-gray-white' : 'text-gray-900'}`}>
           Log in <span aria-hidden="true">&rarr;</span>
         </Link>
       </div>
