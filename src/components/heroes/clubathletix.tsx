@@ -47,7 +47,7 @@ export default function HomeHeroSection(p: {
           className="aspect-1108/632 w-277 bg-linear-to-r from-[#80caff] to-[#4f46e5] opacity-20"
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
           {/* <div className="mt-24 sm:mt-32 lg:mt-16">
             <a href="#" className="inline-flex space-x-6">
@@ -80,7 +80,7 @@ export default function HomeHeroSection(p: {
             </AppScreenshot>
         </div>
 
-        <video height="100%" autoPlay loop playsInline muted className="overflow-hidden h-full w-auto relative sm:hidden mt-8 rounded-2xl">
+        <video height="100%" autoPlay loop playsInline muted className="overflow-hidden h-full w-auto relative sm:hidden my-0 rounded-2xl">
             <source src="https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/videos/potm.mp4" type="video/mp4" />Your browser does not support the video tag.
         </video>
       </div>
