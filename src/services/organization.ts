@@ -1,6 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
 
-export async function getOrganizationByDomain(domain: string) {
+export async function getOrganizationByDomain(domain: string): Promise<{
+            id?: number;
+            name?: string;
+            short_name?: string;
+            logo_url?: string;
+            media?: Record<string, string[]>
+            error?: string
+        }> {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
     const [hostname] = domain.split(':')
     
@@ -9,7 +16,11 @@ export async function getOrganizationByDomain(domain: string) {
     const data = records?.pop()?.organizations
     
     if (data) {
-        const o = data as unknown as Record<string, string>
+        const o = data as unknown as {
+            [k: string]: string
+        } & {
+            media: string[]
+        }
         const { data: components } = await supabase.from('media_components').select('*').eq('organization_id', o.id)
         let media: Record<string, string[]> = {}
         ;(components || []).sort((a, b) => {
