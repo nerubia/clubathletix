@@ -22,7 +22,6 @@ export default function Navigation({
     }
 }) {
     const path = usePathname()
-    console.log(organization)
     
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
@@ -32,7 +31,7 @@ export default function Navigation({
           <span className="sr-only">PF Academy</span>
           {organization?.logo_url && <img
             alt=""
-            src={`${organization?.logo_url}` || "/clubs/pfa/logo.png"}
+            src={`${organization?.logo_url}` || "/logo.png"}
             className="h-12 w-auto"
           />}
         </Link>
@@ -67,10 +66,10 @@ export default function Navigation({
       <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div className="flex items-center justify-between">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Progress Footy Football Academy Inc.</span>
+            <span className="sr-only">`${organization?.name}` || "ClubAthletix"</span>
             <img
             alt=""
-            src="/clubs/pfa/logo.png"
+            src={`${organization?.logo_url}` || "/logo.png"}
             className="h-12 w-auto"
           />
           </Link>

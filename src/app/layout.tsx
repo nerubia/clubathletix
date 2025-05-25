@@ -28,8 +28,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link rel="icon" href={organization?.logo || '/clubs/pfa/logo.png'} />
-        <link rel="apple-touch-icon" href={organization?.logo || '/clubs/pfa/logo.png'} />
+        <link rel="icon" href={`${organization?.logo_url}` || "/logo.png"} />
+        <link rel="apple-touch-icon" href={`${organization?.logo_url}` || "/logo.png"} />
       </head>
       <body>{children}</body>
     </html>

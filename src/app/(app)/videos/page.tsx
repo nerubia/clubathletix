@@ -137,7 +137,7 @@ export default function VideosPage() {
                     </li>
                     <li className="mt-1 text-base/7 text-gray-600">
                         <strong>We Show Up & Record</strong><br/>
-                        Our crew arrives early, sets up, and captures the entire match.
+                        Our crew arrives early, sets up, and captures videos of your player(s).
                     </li>
                     <li className="mt-1 text-base/7 text-gray-600">
                         <strong>You Receive Edited Video</strong><br/>
