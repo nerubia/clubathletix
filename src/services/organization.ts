@@ -1,5 +1,40 @@
 import { createClient } from '@supabase/supabase-js'
 
+/**
+ * Retrieves organization details by domain name.
+ *
+ * This function queries the `domains` table for the provided domain (hostname),
+ * then fetches the associated organization's details and its media components.
+ * The result includes organization metadata and a mapping of media segment names to their URLs.
+ *
+ * @param domain - The domain string to look up (may include port, which will be stripped).
+ * @returns A promise resolving to an object containing organization details and media,
+ *          or an error message if the lookup fails.
+ *
+ * @remarks
+ * - Uses Supabase client with service role key for database access.
+ * - The `media` property is a record mapping segment names to arrays of URLs.
+ * - If no organization is found, returns an object with an `error` property.
+ *
+ * @example
+ * ```typescript
+ * const org = await getOrganizationByDomain('example.com');
+ * if (org.error) {
+ *   // handle error
+ * } else {
+ *   // use org data
+ * }
+ * ```
+ */
+// Split the domain to extract the hostname (ignore port if present)
+// Query the 'domains' table for the hostname and select related organization fields
+// Extract the organization data from the query result
+// If organization data exists:
+//   - Query 'media_components' for media related to the organization
+//   - Sort components by segment_name in descending order
+//   - Build a media record mapping segment names to arrays of URLs
+//   - Return the organization data along with the media mapping
+// If no organization is found, return an error object
 export async function getOrganizationByDomain(domain: string): Promise<{
             id?: number;
             name?: string;

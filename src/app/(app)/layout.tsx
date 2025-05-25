@@ -15,7 +15,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {children}
         </div>
         <div className="flex-1" />
-        {organization?.name.startsWith('PF') && <Sponsors />}
+        {organization?.name?.startsWith('PF') && <Sponsors />}
         <Footer data-org={organization as unknown as { [k: string]: number | string } || {}} />
   </div>
 }
