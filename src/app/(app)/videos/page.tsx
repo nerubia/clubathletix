@@ -47,7 +47,7 @@ export default function VideosPage() {
     <div className="isolate overflow-hidden bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 pt-24 pb-96 text-center sm:pt-32 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-base/7 font-semibold text-red-400">Record Your Matches</h2>
+          <h2 className="text-base/7 font-semibold text-red-400">ClubAthletix</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl">
             Capture Every Moment. Elevate Every Player.
           </p>
