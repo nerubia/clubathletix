@@ -8,7 +8,7 @@ const tiers = [
     href: 'https://wa.me/12367771283',
     price: 'CA$19',
     unit: '/match',
-    description: 'HD-quality footage using professional AI-assisted cameras for your player (based on position).',
+    description: 'Footage using professional AI-assisted cameras for your player.',
     features: ['Goalie moments (saves / assists)' , 'Defensive moments (successful tackles)' , 'Midfielders moments (crosses, passes, successful plays)', 'Attackers moments (goals, assists, crosses)', 'View your video 4 - 12 hours after the match.*'],
   },
   {
@@ -34,7 +34,7 @@ const tiers = [
     description: 'Get those those close up shots and get a REEL highlight for the ages!',
     features: [
       'Player Match Highlights, plus',
-      'We get additional close up / angled shots of your player in high definition.',
+      'Parents can provide additional videos taken on the match',
       'We process and curate everything up to create a 45-second reel (portrait).',
       'Featured in ClubAthletix Instagram page for easy sharing with scouts and coaches',
     ],
