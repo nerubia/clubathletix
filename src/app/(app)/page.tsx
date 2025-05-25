@@ -3,15 +3,19 @@ import SignupSection from '@/components/sign-up-sections/summer'
 import TestimonialGrid from '@/components/testimonials/grid'
 import { getOrganizationTestimonials } from '../api/testimonial/service'
 import { headers } from 'next/headers'
-import VideosPage from './videos/page'
+import HomeHeroSection from '@/components/heroes/clubathletix'
 import { getOrganizationByDomain } from '@/services/organization'
+import PricingSection from '@/components/pricing/pricing-section-alpha'
 
 export default async function Page() {
     const hdr = await headers()
     const host = hdr.get('host') || 'localhost'
     const organization = await getOrganizationByDomain(host)
     
-    if((organization as unknown as { id: number} )?.id === 3) return <VideosPage />
+    if((organization as unknown as { id: number} )?.id === 3) return <>
+        <HomeHeroSection {...organization} />
+        <PricingSection />
+    </>
   function getAddress() {
     let address = 'Cambridge Soccer Park - 6067 - 150 Street, Surrey BC'
     if (new Date().getMonth() < 7) address = 'Goldstone Park'
