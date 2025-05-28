@@ -71,7 +71,7 @@ function groupRecords(records: Testimonial[]) {
                             <div className="flex-auto">
                             <div className="font-semibold">{featured.customer.full_name}</div>
                             <div className="text-gray-600">
-                                {`@${featured.customer.full_name.split(', ').reverse().join('').toLowerCase()}`}
+                                {`@${featured.customer.full_name.split(', ').reverse().map(w => w[0]).join('').toLowerCase()}`}
                             </div>
                             </div>
                             <Subheading force="text-indigo-700" className="h-10 w-auto flex-none">
@@ -94,10 +94,9 @@ function groupRecords(records: Testimonial[]) {
                             className="size-10 rounded-full bg-gray-50"
                             /> */}
                             <div>
-                            <div className="font-semibold">{rec.customer.full_name}</div>
-                            <div className="text-gray-600">
-                                {`@${rec.customer.full_name.split(', ').reverse().join('').toLowerCase()}`}
-                            </div>
+                                <div className="text-gray-600">
+                                    {`@${rec.customer.full_name.split(', ').reverse().map(w => w[0]).join('').toLowerCase()}`}
+                                </div>
                             </div>
                         </figcaption>
                     </figure>
@@ -115,8 +114,7 @@ function groupRecords(records: Testimonial[]) {
                         <figcaption className="mt-6 flex items-center gap-x-4">
                           {/* <img alt="" src={images[rec.id % 2]} className="size-10 rounded-full bg-gray-50" /> */}
                           <div>
-                            <div className="font-semibold">{rec.customer.full_name}</div>
-                            <div className="text-gray-600">{`@${rec.customer.full_name.split(', ').reverse().join('').toLowerCase()}`}</div>
+                            <div className="text-gray-600">{`@${rec.customer.full_name.split(', ').reverse().map(w => w[0]).join('').toLowerCase()}`}</div>
                           </div>
                         </figcaption>
                       </figure>)}</div>
@@ -131,8 +129,7 @@ function groupRecords(records: Testimonial[]) {
                         <figcaption className="mt-6 flex items-center gap-x-4">
                           {/* <img alt="" src={images[1 - (rec.id % 2)]} className="size-10 rounded-full bg-gray-50" /> */}
                           <div>
-                            <div className="font-semibold">{rec.customer.full_name}</div>
-                            <div className="text-gray-600">{`@${rec.customer.full_name.split(', ').reverse().join('').toLowerCase()}`}</div>
+                            <div className="text-gray-600">{`@${rec.customer.full_name.split(', ').reverse().map(w => w[0]).join('').toLowerCase()}`}</div>
                           </div>
                         </figcaption>
                       </figure>)}</div>
