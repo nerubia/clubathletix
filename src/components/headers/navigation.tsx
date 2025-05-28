@@ -8,7 +8,7 @@ import { Heading } from "../heading"
 
 const navigation = [
   { name: 'Schedule', href: '/schedule' },
-  { name: 'Parents & Expectations', href: '/parental-expectations' },
+  { name: 'Parents', href: '/parental-expectations' },
   { name: 'Match Video & Analysis', href: '/videos' },
   // { name: 'Management', href: '#' },
 ]
