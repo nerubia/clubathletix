@@ -91,10 +91,10 @@ export default function PricingSectionSimple() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative z-10">
             <h2 className="mx-auto max-w-4xl text-center text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl">
-              Summer 2025
+              Summer 2025 ⛱️
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-              Our programmes are tailored to most families&rsquo; usual summer break scheduling.  With a week break between the months of July &amp; August, families can still get both of both worlds (training and vacation).
+              Kick off your summer with the perfect balance! Our training programs are built around your family’s summer plans — with a fun-filled break between July and August, your child gets to level up their soccer skills and still enjoy that family getaway. Win-win!
             </p>
             <div className="mt-16 flex justify-center">
               <fieldset aria-label="Payment frequency">
