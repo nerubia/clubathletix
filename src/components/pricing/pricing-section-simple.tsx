@@ -6,7 +6,7 @@ import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
 
 const frequencies = [
   { value: 'weekly', label: 'Weekly' },
-  { value: 'season', label: 'Season' },
+  { value: 'monthly', label: 'Monthly' },
 ]
 const tiers = [
   {
@@ -15,7 +15,7 @@ const tiers = [
     href: '#signup-form',
     featured: false,
     description: 'Training and small games',
-    price: { weekly: '$50', season: '$350' },
+    price: { weekly: '$50', monthly: '$175' } as { [k: string]: string },
     highlights: ['Training Tuesdays & Thursdays', 'Coach Kartick and Alisha', 'Optional training jersey (one time $35)'],
   },
   {
@@ -24,7 +24,7 @@ const tiers = [
     href: '#signup-form',
     featured: true,
     description: 'Train and showcase your progress with a showcase matches.',
-    price: { weekly: '$55', season: '$400' },
+    price: { weekly: '$55', monthly: '$200' } as { [k: string]: string },
     highlights: [
       'Training Tuesdays & Thursdays',
       'Coach Rohan, Joseph, and Alana',
@@ -39,7 +39,7 @@ const tiers = [
     href: '#signup-form',
     featured: false,
     description: 'Train and showcase your progress with a showcase matches.',
-    price: { weekly: '$60', season: '$425' },
+    price: { weekly: '$60', monthly: '$200' } as { [k: string]: string },
     highlights: [
       'Training Wednesdays & Fridays',
       'Coach Shaan, Alisha and Alana',
@@ -178,7 +178,7 @@ export default function PricingSectionSimple() {
                         'rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2',
                       )}
                     >
-                      Sign me up
+                      Sign Up to Reserve Spot
                     </a>
                   </div>
                   <div className="mt-8 flow-root sm:mt-10">
