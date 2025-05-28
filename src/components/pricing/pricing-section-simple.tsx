@@ -28,7 +28,6 @@ const tiers = [
     highlights: [
       'Training Tuesdays & Thursdays',
       'Coach Rohan, Joseph, and Alana',
-      'Official match kit',
       'Bi-monthly matches',
       'Recorded matches & progress feedback at the end of the week',
     ],
@@ -43,7 +42,6 @@ const tiers = [
     highlights: [
       'Training Wednesdays & Fridays',
       'Coach Shaan, Alisha and Alana',
-      'Official match kit',
       'Bi-monthly matches (recorded)',
     ],
   },
