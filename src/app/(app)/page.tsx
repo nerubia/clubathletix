@@ -6,6 +6,8 @@ import { headers } from 'next/headers'
 import HomeHeroSection from '@/components/heroes/clubathletix'
 import { getOrganizationByDomain } from '@/services/organization'
 import PricingSection from '@/components/pricing/pricing-section-alpha'
+import CenteredContentSection from '@/components/content-sections/centered'
+import PricingSectionSimple from '@/components/pricing/pricing-section-simple'
 
 export default async function Page() {
     const hdr = await headers()
@@ -15,6 +17,7 @@ export default async function Page() {
     if((organization as unknown as { id: number} )?.id === 3) return <>
         <HomeHeroSection {...organization} />
         <PricingSection />
+        <CenteredContentSection />
     </>
   function getAddress() {
     let address = 'Cambridge Soccer Park - 6067 - 150 Street, Surrey BC'
@@ -27,6 +30,7 @@ export default async function Page() {
     <>
       <HomePageHeader media={(organization as unknown as { media?: { hero?: string[] } })?.media?.hero || []}/>
       <TestimonialGrid items={testimonials || []} />
+      <PricingSectionSimple />
       <SignupSection address={getAddress()} />
     </>
     

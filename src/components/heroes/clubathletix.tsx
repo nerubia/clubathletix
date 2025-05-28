@@ -64,6 +64,10 @@ export default function HomeHeroSection(p: {
             Player Evolution Platform
           </h1>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
+            The modern athlete deserves more than just a highlight reel.
+            We deliver a season-long story of growth, hustle, and progress (player evolution).
+          </p>
+          <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
             We combine professional match recordings with a powerful cloud-based performance tracking system, giving players, coaches, and parents a complete picture of player development over the season.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
