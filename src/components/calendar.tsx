@@ -273,8 +273,7 @@ export default function CalendarView({
                             return formatDate(date) === formatDate(current);
                         })
                         .map((d, idx) => (
-                            <div key={`${d.name} ${idx + 1}`} className={`${d.isOnce && d.crest && 'pl-20'} ${(d.isOnce ? `relative rounded-xl px-4 pt-2.5 shadow-xl shadow-black/20 pb-4 text-white mb-4 ${d.colours?.split(',')?.[1] || 'bg-slate-600'}` : '')}`}>
-                                {d.crest && d.isOnce && <img className='absolute top-1/2 -translate-y-1/2 left-2' src={d.crest} />}
+                            <div key={`${d.name} ${idx + 1}`} className={`${d.isOnce && d.crest && 'pl-20'} ${(d.isOnce ? `relative bg-no-repeat bg-size-[auto_56px] bg-position-[left_0.8rem_top_0.6rem] rounded-xl px-4 pt-2.5 shadow-xl shadow-black/20 pb-4 text-white mb-4 ${d.colours?.split(',')?.[1] || 'bg-slate-600'}` : '')}`} style={d.crest && d.isOnce ? {backgroundImage: `url(${d.crest})`} : {}}>
                                 <Heading force={d.isOnce ? `text-white${d.crest && d.isOnce ? ' text-base!' : ''}` : 'text-black'} level={3}>{d.name as string}</Heading>
                                 <Subheading force={d.isOnce ? 'text-white' : 'text-red-700'}>{d.time}</Subheading>
                                 <p className="text-xs/4 w-40">
