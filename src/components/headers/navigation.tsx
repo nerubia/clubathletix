@@ -23,7 +23,8 @@ export default function Navigation({
     }
 }) {
     const path = usePathname()
-    
+    const textColours = (organization.textColours || []) as string[]
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
     <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
@@ -35,7 +36,7 @@ export default function Navigation({
             className="h-6 w-auto"
           />}
         </Link>
-        <Heading force="uppercase font-bold ml-1 tracking-widest text-sm! text-white">{`${organization.name || ''}`.split('-').at(0)}</Heading>
+        <Heading force={`uppercase font-bold ml-1 tracking-widest text-sm! ${textColours?.length ? textColours[0] : 'text-white'}`}>{`${organization.name || ''}`.split('-').at(0)}</Heading>
       </div>
       <div className="flex lg:hidden">
         <button
