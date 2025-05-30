@@ -66,8 +66,13 @@ export default function CalendarView({
                         location: entry.location,
                         programs: entry.programs as unknown as Program[],
                         time: entry.time,
+                        index: entry.index,
                         isOnce: Boolean(entry.isOnce),
-                    }))
+                    })).sort((a, b) => {
+                        if (a.index > b.index) return -1
+                        if (b.index > a.index) return 1
+                        return 0
+                    })
                 );
             }
             // setSchedules(results);
