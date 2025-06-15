@@ -225,6 +225,8 @@ export type Database = {
           last_name: string | null
           media_release: boolean
           photo: string | null
+          profile_slug: string | null
+          profile_url: string | null
           subscription_code: string | null
           updated_at: string | null
           updated_by: number | null
@@ -244,6 +246,8 @@ export type Database = {
           last_name?: string | null
           media_release?: boolean
           photo?: string | null
+          profile_slug?: string | null
+          profile_url?: string | null
           subscription_code?: string | null
           updated_at?: string | null
           updated_by?: number | null
@@ -263,6 +267,8 @@ export type Database = {
           last_name?: string | null
           media_release?: boolean
           photo?: string | null
+          profile_slug?: string | null
+          profile_url?: string | null
           subscription_code?: string | null
           updated_at?: string | null
           updated_by?: number | null
@@ -895,6 +901,7 @@ export type Database = {
           country: string
           created_at: string
           created_by: number | null
+          currency_code: string | null
           deleted_at: string | null
           email: string
           id: number
@@ -920,6 +927,7 @@ export type Database = {
           country: string
           created_at?: string
           created_by?: number | null
+          currency_code?: string | null
           deleted_at?: string | null
           email: string
           id?: number
@@ -945,6 +953,7 @@ export type Database = {
           country?: string
           created_at?: string
           created_by?: number | null
+          currency_code?: string | null
           deleted_at?: string | null
           email?: string
           id?: number
@@ -977,6 +986,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organizations_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["currency_code"]
           },
           {
             foreignKeyName: "organizations_updated_by_fkey"
@@ -1074,6 +1090,35 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          athlete_id: number
+          created_at: string
+          id: string
+          url: string
+        }
+        Insert: {
+          athlete_id: number
+          created_at?: string
+          id: string
+          url: string
+        }
+        Update: {
+          athlete_id?: number
+          created_at?: string
+          id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
             referencedColumns: ["id"]
           },
         ]
@@ -1264,13 +1309,13 @@ export type Database = {
           id: number
           image_url: string | null
           is_active: boolean
-          max_age: number
-          min_age: number
+          max_age: number | null
+          min_age: number | null
           name: string | null
           organization_id: number | null
           registration_end_date: string | null
           registration_start_date: string | null
-          schedule_id: number
+          schedule_id: number | null
           season_id: number | null
           slug: string | null
           updated_at: string | null
@@ -1287,13 +1332,13 @@ export type Database = {
           id?: number
           image_url?: string | null
           is_active?: boolean
-          max_age?: number
-          min_age?: number
+          max_age?: number | null
+          min_age?: number | null
           name?: string | null
           organization_id?: number | null
           registration_end_date?: string | null
           registration_start_date?: string | null
-          schedule_id: number
+          schedule_id?: number | null
           season_id?: number | null
           slug?: string | null
           updated_at?: string | null
@@ -1310,13 +1355,13 @@ export type Database = {
           id?: number
           image_url?: string | null
           is_active?: boolean
-          max_age?: number
-          min_age?: number
+          max_age?: number | null
+          min_age?: number | null
           name?: string | null
           organization_id?: number | null
           registration_end_date?: string | null
           registration_start_date?: string | null
-          schedule_id?: number
+          schedule_id?: number | null
           season_id?: number | null
           slug?: string | null
           updated_at?: string | null
@@ -1603,6 +1648,7 @@ export type Database = {
           last_name: string | null
           login_attempt: number | null
           password_hash: string | null
+          password_reset_expiry: string | null
           password_reset_token: string | null
           phone: string | null
           postal_zip_code: string | null
@@ -1611,6 +1657,7 @@ export type Database = {
           state_province: string | null
           street_1: string | null
           street_2: string | null
+          stripe_customer_id: string | null
           updated_at: string | null
           updated_by: number | null
         }
@@ -1630,6 +1677,7 @@ export type Database = {
           last_name?: string | null
           login_attempt?: number | null
           password_hash?: string | null
+          password_reset_expiry?: string | null
           password_reset_token?: string | null
           phone?: string | null
           postal_zip_code?: string | null
@@ -1638,6 +1686,7 @@ export type Database = {
           state_province?: string | null
           street_1?: string | null
           street_2?: string | null
+          stripe_customer_id?: string | null
           updated_at?: string | null
           updated_by?: number | null
         }
@@ -1657,6 +1706,7 @@ export type Database = {
           last_name?: string | null
           login_attempt?: number | null
           password_hash?: string | null
+          password_reset_expiry?: string | null
           password_reset_token?: string | null
           phone?: string | null
           postal_zip_code?: string | null
@@ -1665,6 +1715,7 @@ export type Database = {
           state_province?: string | null
           street_1?: string | null
           street_2?: string | null
+          stripe_customer_id?: string | null
           updated_at?: string | null
           updated_by?: number | null
         }
