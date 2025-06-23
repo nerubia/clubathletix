@@ -13,7 +13,7 @@ export default function ProfilePage() {
                 xhr.json().then(json => {
                     if (json.url)
                     location.href = json.url;
-                else notFound();
+                    else notFound();
                 })
             }
         })

@@ -1,14 +1,17 @@
 import { getAthleteUrl } from "@/services/athletes";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
-  if (!id) {
-    return new Response('ID is required', { status: 400 });
-  }
+export async function GET(req: NextRequest) {
+  const params = req.nextUrl.pathname;
+  const id = params.split('/').pop() || '';
+  
+  
 
   const data = await getAthleteUrl(id);
 
-  return new Response(JSON.stringify(data), {
+  return NextResponse.json(data, {
     headers: { 'Content-Type': 'application/json' },
   });
 }
+
+
