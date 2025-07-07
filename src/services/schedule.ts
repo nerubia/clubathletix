@@ -18,7 +18,7 @@ export async function getSchedule(params: Record<string, string>) {
         organizations (name, logo_url, short_name, colours),
         locations (id, name, street_1, street_2, city_town, postal_zip_code, state_province),
         programs (id, name, description, min_age, max_age, coaches, image_url),
-        starts_at, ends_at, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays, is_active`)
+        starts_at, ends_at, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays, is_active, video_url`)
     .eq('organization_id', params.organization_id)
     .or(`starts_at.gte.${params.from},starts_at.lte.${params.to}`, )
     try {

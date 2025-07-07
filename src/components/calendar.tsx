@@ -4,7 +4,7 @@ import { formatDate, getDayOfWeek, getMonthName } from '@/utils/calendar/date-fo
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useCallback, useEffect, useState } from 'react';
 import { Program } from './sign-up-sections/age-groups';
-import { addDays, deductDays, isBefore, stringToUTC } from '@/utils/calendar/date-helpers';
+import { addDays, deductDays, stringToUTC } from '@/utils/calendar/date-helpers';
 import { Heading, Subheading } from './heading';
 
 function classNames(...classes: unknown[]) {
@@ -38,6 +38,7 @@ export default function CalendarView({
             time: string;
             programs: Program[];
             isOnce: boolean;
+            video_url?: string;
         }[]
     >([]);
 
@@ -68,6 +69,7 @@ export default function CalendarView({
                         time: entry.time,
                         index: entry.index,
                         isOnce: Boolean(entry.isOnce),
+                        video_url: entry.video_url,
                     })).sort((a, b) => {
                         if (a.index > b.index) return -1
                         if (b.index > a.index) return 1
@@ -75,7 +77,6 @@ export default function CalendarView({
                     })
                 );
             }
-            // setSchedules(results);
         },
         [current, visibleDays]
     );
@@ -283,6 +284,7 @@ export default function CalendarView({
                                 <Subheading force={d.isOnce ? 'text-white' : 'text-red-700'}>{d.time}</Subheading>
                                 <p className="text-xs/4 w-40">
                                     {d.location.split(',').map((w, line) => <span key={line} className="w-full">{w}<br /></span>)}
+                                    {d.video_url}
                                 </p>
                                 <div className="mt-4 flex justify-start gap-6 sm:mt-0">
                                 {d.programs.slice(0, 2).map((program, subIdx) => {

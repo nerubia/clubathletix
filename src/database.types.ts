@@ -7,6 +7,11 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instanciate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "12.2.3 (519615d)"
+  }
   public: {
     Tables: {
       athlete_payments: {
@@ -19,7 +24,7 @@ export type Database = {
           description: string | null
           id: number
           installment_no: number | null
-          organization_id: number
+          organization_id: number | null
           payment_amount: number | null
           payment_date: string | null
           payment_due: number | null
@@ -40,7 +45,7 @@ export type Database = {
           description?: string | null
           id?: number
           installment_no?: number | null
-          organization_id: number
+          organization_id?: number | null
           payment_amount?: number | null
           payment_date?: string | null
           payment_due?: number | null
@@ -61,7 +66,7 @@ export type Database = {
           description?: string | null
           id?: number
           installment_no?: number | null
-          organization_id?: number
+          organization_id?: number | null
           payment_amount?: number | null
           payment_date?: string | null
           payment_due?: number | null
@@ -133,6 +138,7 @@ export type Database = {
           payment_status: string | null
           program_id: number
           registration_date: string | null
+          registration_status: string | null
           total_amount_due: number | null
           updated_at: string | null
           updated_by: number | null
@@ -151,6 +157,7 @@ export type Database = {
           payment_status?: string | null
           program_id: number
           registration_date?: string | null
+          registration_status?: string | null
           total_amount_due?: number | null
           updated_at?: string | null
           updated_by?: number | null
@@ -169,6 +176,7 @@ export type Database = {
           payment_status?: string | null
           program_id?: number
           registration_date?: string | null
+          registration_status?: string | null
           total_amount_due?: number | null
           updated_at?: string | null
           updated_by?: number | null
@@ -204,6 +212,168 @@ export type Database = {
           },
           {
             foreignKeyName: "athlete_registrations_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_stats: {
+        Row: {
+          birth_date: string
+          dominant_foot: string
+          dribbling: number
+          free_kick: number
+          full_name: string
+          gender: string
+          goalkeeper_agility: number
+          goalkeeper_diving: number
+          goalkeeper_positioning: number
+          heading: number
+          id: number
+          pace: number
+          passing: number
+          shot_accuracy: number
+          shot_power: number
+          tackling: number
+        }
+        Insert: {
+          birth_date: string
+          dominant_foot?: string
+          dribbling?: number
+          free_kick?: number
+          full_name: string
+          gender?: string
+          goalkeeper_agility?: number
+          goalkeeper_diving?: number
+          goalkeeper_positioning?: number
+          heading?: number
+          id?: number
+          pace?: number
+          passing?: number
+          shot_accuracy?: number
+          shot_power?: number
+          tackling?: number
+        }
+        Update: {
+          birth_date?: string
+          dominant_foot?: string
+          dribbling?: number
+          free_kick?: number
+          full_name?: string
+          gender?: string
+          goalkeeper_agility?: number
+          goalkeeper_diving?: number
+          goalkeeper_positioning?: number
+          heading?: number
+          id?: number
+          pace?: number
+          passing?: number
+          shot_accuracy?: number
+          shot_power?: number
+          tackling?: number
+        }
+        Relationships: []
+      }
+      athlete_waivers: {
+        Row: {
+          athlete_id: number | null
+          athlete_registration_id: number | null
+          created_at: string | null
+          created_by: number | null
+          deleted_at: string | null
+          id: number
+          organization_id: number | null
+          program_id: number | null
+          program_waiver_id: number | null
+          signed_at: string | null
+          signed_by: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_id?: number | null
+          athlete_registration_id?: number | null
+          created_at?: string | null
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          organization_id?: number | null
+          program_id?: number | null
+          program_waiver_id?: number | null
+          signed_at?: string | null
+          signed_by?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_id?: number | null
+          athlete_registration_id?: number | null
+          created_at?: string | null
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          organization_id?: number | null
+          program_id?: number | null
+          program_waiver_id?: number | null
+          signed_at?: string | null
+          signed_by?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_waivers_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_athlete_registration_id_fkey"
+            columns: ["athlete_registration_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_registrations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_program_waiver_id_fkey"
+            columns: ["program_waiver_id"]
+            isOneToOne: false
+            referencedRelation: "program_waivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_signed_by_fkey"
+            columns: ["signed_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_waivers_updated_by_fkey"
             columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
@@ -647,7 +817,7 @@ export type Database = {
           {
             foreignKeyName: "household_users_household_id_fkey"
             columns: ["household_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "households"
             referencedColumns: ["id"]
           },
@@ -828,6 +998,70 @@ export type Database = {
           },
         ]
       }
+      organization_email_recipients: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          email_address: string
+          email_category: string | null
+          id: number
+          is_active: boolean | null
+          organization_id: number
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          email_address: string
+          email_category?: string | null
+          id?: number
+          is_active?: boolean | null
+          organization_id: number
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          email_address?: string
+          email_category?: string | null
+          id?: number
+          is_active?: boolean | null
+          organization_id?: number
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_email_recipients_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_email_recipients_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_email_recipients_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_users: {
         Row: {
           created_at: string
@@ -893,28 +1127,92 @@ export type Database = {
           },
         ]
       }
+      organization_waivers: {
+        Row: {
+          content: string | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          is_default: boolean | null
+          name: string | null
+          organization_id: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          content?: string | null
+          created_at: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_default?: boolean | null
+          name?: string | null
+          organization_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_default?: boolean | null
+          name?: string | null
+          organization_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_waivers_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_waivers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_waivers_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           administrator_id: number
-          city_town: string
+          city_town: string | null
           colours: string | null
-          country: string
+          country: string | null
           created_at: string
           created_by: number | null
           currency_code: string | null
           deleted_at: string | null
-          email: string
+          email: string | null
           id: number
           is_active: boolean
           logo_url: string | null
           name: string
           organization_type: string
-          phone: string
-          postal_zip_code: string
+          phone: string | null
+          postal_zip_code: string | null
           short_name: string | null
           slug: string | null
           state_province: string | null
-          street_1: string
+          street_1: string | null
           street_2: string | null
           subdomain: string | null
           updated_at: string | null
@@ -922,25 +1220,25 @@ export type Database = {
         }
         Insert: {
           administrator_id?: number
-          city_town: string
+          city_town?: string | null
           colours?: string | null
-          country: string
+          country?: string | null
           created_at?: string
           created_by?: number | null
           currency_code?: string | null
           deleted_at?: string | null
-          email: string
+          email?: string | null
           id?: number
           is_active?: boolean
           logo_url?: string | null
           name: string
           organization_type?: string
-          phone: string
-          postal_zip_code: string
+          phone?: string | null
+          postal_zip_code?: string | null
           short_name?: string | null
           slug?: string | null
           state_province?: string | null
-          street_1: string
+          street_1?: string | null
           street_2?: string | null
           subdomain?: string | null
           updated_at?: string | null
@@ -948,25 +1246,25 @@ export type Database = {
         }
         Update: {
           administrator_id?: number
-          city_town?: string
+          city_town?: string | null
           colours?: string | null
-          country?: string
+          country?: string | null
           created_at?: string
           created_by?: number | null
           currency_code?: string | null
           deleted_at?: string | null
-          email?: string
+          email?: string | null
           id?: number
           is_active?: boolean
           logo_url?: string | null
           name?: string
           organization_type?: string
-          phone?: string
-          postal_zip_code?: string
+          phone?: string | null
+          postal_zip_code?: string | null
           short_name?: string | null
           slug?: string | null
           state_province?: string | null
-          street_1?: string
+          street_1?: string | null
           street_2?: string | null
           subdomain?: string | null
           updated_at?: string | null
@@ -1297,6 +1595,84 @@ export type Database = {
           },
         ]
       }
+      program_waivers: {
+        Row: {
+          created_at: string | null
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          organization_id: number | null
+          organization_waiver_id: number | null
+          program_id: number | null
+          sequence_no: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          organization_id?: number | null
+          organization_waiver_id?: number | null
+          program_id?: number | null
+          sequence_no?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          organization_id?: number | null
+          organization_waiver_id?: number | null
+          program_id?: number | null
+          sequence_no?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "program_waivers_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "program_waivers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "program_waivers_organization_waiver_id_fkey"
+            columns: ["organization_waiver_id"]
+            isOneToOne: false
+            referencedRelation: "organization_waivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "program_waivers_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "program_waivers_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       programs: {
         Row: {
           birth_year_from: string | null
@@ -1422,6 +1798,7 @@ export type Database = {
           sundays: string | null
           thursdays: string | null
           tuesdays: string | null
+          video_url: string | null
           wednesdays: string | null
         }
         Insert: {
@@ -1440,6 +1817,7 @@ export type Database = {
           sundays?: string | null
           thursdays?: string | null
           tuesdays?: string | null
+          video_url?: string | null
           wednesdays?: string | null
         }
         Update: {
@@ -1458,6 +1836,7 @@ export type Database = {
           sundays?: string | null
           thursdays?: string | null
           tuesdays?: string | null
+          video_url?: string | null
           wednesdays?: string | null
         }
         Relationships: [
@@ -1759,21 +2138,25 @@ export type Database = {
   }
 }
 
-type DefaultSchema = Database[Extract<keyof Database, "public">]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
     ? R
@@ -1791,14 +2174,16 @@ export type Tables<
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
@@ -1814,14 +2199,16 @@ export type TablesInsert<
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
@@ -1837,14 +2224,16 @@ export type TablesUpdate<
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
     : never
@@ -1852,14 +2241,16 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
-> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
