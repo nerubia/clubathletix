@@ -35,10 +35,8 @@ export async function getAthleteViaSlack(username: string): Promise<ExtendedSlac
 
         const { data, error } =  await supabase
             .from('slack_users')
-            .select(`
-                username,
-                athletes (full_name, id, date_of_birth)`)
-            .eq('username', username).single()
+            .select(`athlete_id`)
+            .eq('username', username)
 
         if (error) throw error
         
