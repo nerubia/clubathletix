@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
-    console.log(body);
+    
+    console.log(req.body);
     return NextResponse.json({
         message: "Slack integration is not available yet.",
     })
