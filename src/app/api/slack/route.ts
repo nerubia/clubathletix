@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
     const {
         user,
         actions,
+        ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
         user: {
             id: string;
@@ -18,6 +19,7 @@ export async function POST(req: NextRequest) {
             action_ts: number;
         }[]
     }
+    console.log(rest)
     const action = actions.pop();
     if (action) {
         const answer = action.value;
