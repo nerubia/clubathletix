@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const {
         user,
         actions,
-    } = payload as unknown as {
+    } = JSON.parse(payload as unknown as string) as unknown as {
         user: {
             id: string;
             username: string;
