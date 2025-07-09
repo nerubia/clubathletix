@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: `Thanks for your answer, @${user.name}!`,
+                text: `Thanks for your answer, @${user.username}!`,
                 response_type: 'in_channel',
                 thread_ts, 
             }),
