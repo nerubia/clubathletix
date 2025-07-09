@@ -35,7 +35,7 @@ export async function getAthleteViaSlack(username: string): Promise<Database['pu
             .from('slack_users')
             .select(`
                 username,
-                athletes (full_name, id)`)
+                athletes (full_name, id, date_of_birth)`)
             .eq('username', username).single()
 
         if (error) throw error

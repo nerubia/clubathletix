@@ -1940,7 +1940,7 @@ export type Database = {
           {
             foreignKeyName: "slack_users_athlete_id_fkey"
             columns: ["athlete_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "athletes"
             referencedColumns: ["id"]
           },
