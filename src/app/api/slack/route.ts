@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${user.username}*`,
+                text: `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${user.name}*`,
                 response_type: 'in_channel',
                 replace_original: false,
                 thread_ts, 
