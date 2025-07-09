@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         const answer = action.value;
         const names = user.name.split('_').join(' / ');
         const slack_user = await getAthleteViaSlack(user.id);
-
+        console.log('User ID:', user.id);
         await fetch(response_url, {
             method: 'POST',
             headers: {
