@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
         user,
         actions,
         response_url,
+        message,
         ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
         response_url: string;
@@ -19,9 +20,12 @@ export async function POST(req: NextRequest) {
             action_id: string;
             value: string;
             action_ts: number;
-        }[]
+        }[],
+        message: {
+            ts: number;
+        }
     }
-    console.log(rest)
+    const thread_ts = message.ts;
     const action = actions.pop();
     if (action) {
         const answer = action.value;
@@ -34,7 +38,7 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify({
                 text: `Thanks for your answer, @${user.name}!`,
                 response_type: 'in_channel',
-                replace_original: true
+                thread_ts, 
             }),
         });
         console.log(JSON.stringify({
