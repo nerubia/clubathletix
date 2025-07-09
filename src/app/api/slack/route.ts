@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
     const thread_ts = message.ts;
     const action = actions.pop();
     if (action) {
+        console.log(JSON.stringify(user, null, 2));
         const answer = action.value;
         await fetch(response_url, {
             method: 'POST',
