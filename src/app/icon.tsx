@@ -30,7 +30,7 @@ export default async function Icon() {
           justifyContent: 'center',
           color: 'white',
           ...(o.logo_url ? {
-            backgroundImage: `url(${o.logo_url.split('/').reverse().slice(1).reverse().join('/') + '/favicon.png'})`
+            backgroundImage: `url(${o.logo_url})`
           }: {})
         }}
       />
