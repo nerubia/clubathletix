@@ -30,14 +30,13 @@ export async function POST(req: NextRequest) {
     const action = actions.pop();
     if (action) {
         const answer = action.value;
-        const timestamp = new Date(action.action_ts * 1000);
         await fetch(response_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: `:heart: *${user.username}*: ${answer}`,
+                text: `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${user.username}*`,
                 response_type: 'in_channel',
                 replace_original: false,
                 thread_ts, 
@@ -45,12 +44,6 @@ export async function POST(req: NextRequest) {
                 name: "heart"
             }),
         });
-        console.log(JSON.stringify({
-            user: user.name,
-            user_id: user.id,
-            answer,
-            timestamp,
-        }, null, 2));
     }
 
     return NextResponse.json({
