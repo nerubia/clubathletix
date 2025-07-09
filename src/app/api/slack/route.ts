@@ -6,8 +6,10 @@ export async function POST(req: NextRequest) {
     const {
         user,
         actions,
+        response_url,
         ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
+        response_url: string;
         user: {
             id: string;
             username: string;
@@ -24,8 +26,19 @@ export async function POST(req: NextRequest) {
     if (action) {
         const answer = action.value;
         const timestamp = new Date(action.action_ts * 1000);
+        await fetch(response_url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: `Thanks for your answer, @${user.name}!`,
+                response_type: 'in_channel',
+            }),
+        });
         console.log(JSON.stringify({
             user: user.name,
+            user_id: user.id,
             answer,
             timestamp,
         }, null, 2));
