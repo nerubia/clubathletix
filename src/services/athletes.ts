@@ -25,8 +25,10 @@ export async function getAthleteUrl(id: string): Promise<Database['public']['Tab
         console.error(e)
     }
 }
-
-export async function getAthleteViaSlack(username: string): Promise<Database['public']['Tables']['slack_users']['Row'] | undefined> {
+type ExtendedSlackUser = Database['public']['Tables']['slack_users']['Row'] & {
+    athletes: Database['public']['Tables']['athletes']['Row']
+}
+export async function getAthleteViaSlack(username: string): Promise<ExtendedSlackUser | undefined> {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
     try {
@@ -41,7 +43,7 @@ export async function getAthleteViaSlack(username: string): Promise<Database['pu
         if (error) throw error
         
         if (data) {
-            return data as unknown as Database['public']['Tables']['slack_users']['Row']
+            return data as unknown as ExtendedSlackUser
         } else {
             console.warn(`No Slack record found for ID: ${username}`)
             return undefined
