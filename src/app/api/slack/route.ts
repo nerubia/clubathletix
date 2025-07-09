@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     }
     console.log(JSON.stringify({
         user: user.name,
-        answer: actions.pop()?.text?.value || "No answer provided",
+        answer: actions.pop(),
     }, null, 2));
 
     return NextResponse.json({
