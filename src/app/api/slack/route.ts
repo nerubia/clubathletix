@@ -1,3 +1,4 @@
+import { getAthleteViaSlack } from "@/services/athletes";
 import { tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify(user, null, 2));
         const answer = action.value;
         const names = user.name.split('_').join(' / ');
+        const slack_user = await getAthleteViaSlack(user.id);
+
         await fetch(response_url, {
             method: 'POST',
             headers: {
@@ -46,6 +49,8 @@ export async function POST(req: NextRequest) {
                 name: "heart"
             }),
         });
+
+        return NextResponse.json({slack_user})
     }
 
     return NextResponse.json({

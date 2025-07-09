@@ -8,12 +8,15 @@ interface TokenPayload {
 }
 
 export function verifyJWT(token: string): TokenPayload | undefined {
-  try {
-    const decoded = jwt.verify(token, jwtSecret) as TokenPayload;
-    return decoded;
-  } catch (error) {
-    console.log('JWT verification failed:', error);
-  }
+    if (!token || !jwtSecret) console.error('JWT verification failed: Missing token or secret');
+    else {
+        try {
+          const decoded = jwt.verify(token, jwtSecret) as TokenPayload;
+          return decoded;
+        } catch (error) {
+          console.log('JWT verification failed:', error);
+        }
+    }
   return {}
 }
 export function hashData(data: string): string {
