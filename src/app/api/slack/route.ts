@@ -31,13 +31,14 @@ export async function POST(req: NextRequest) {
     if (action) {
         console.log(JSON.stringify(user, null, 2));
         const answer = action.value;
+        const names = user.name.split('_').join(' / ');
         await fetch(response_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${user.name}*`,
+                text: `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${names}*`,
                 response_type: 'in_channel',
                 replace_original: false,
                 thread_ts, 
