@@ -1,3 +1,4 @@
+import { tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -36,10 +37,12 @@ export async function POST(req: NextRequest) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: `Thanks for your answer, @${user.username}!`,
+                text: `:heart: *${user.username}*: ${answer}`,
                 response_type: 'in_channel',
                 replace_original: false,
                 thread_ts, 
+                mrkdwn: true,
+                name: "heart"
             }),
         });
         console.log(JSON.stringify({
