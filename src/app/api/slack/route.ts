@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify({
                 text: `Thanks for your answer, @${user.name}!`,
                 response_type: 'in_channel',
+                replace_original: true
             }),
         });
         console.log(JSON.stringify({
