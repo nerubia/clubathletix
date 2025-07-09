@@ -54,9 +54,9 @@ export async function POST(req: NextRequest) {
                 name: "heart"
             }),
         });
-        console.log(JSON.stringify(slack_user, null, 2));
+        console.log(JSON.stringify(rest, null, 2));
 
-        return NextResponse.json({slack_user})
+        return NextResponse.json({rest})
     }
 
     return NextResponse.json({
