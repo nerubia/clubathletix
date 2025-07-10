@@ -12,7 +12,6 @@
  * ```
  */
 export async function submitSlackRequest(api: 'reactions.add' | 'chat.postMessage', payload?: Record<string, string | number | boolean>) {
-    console.log(JSON.stringify(payload))
     const response = await fetch(`https://slack.com/api/${api}`, {
         method: 'POST',
         headers: {
@@ -23,8 +22,9 @@ export async function submitSlackRequest(api: 'reactions.add' | 'chat.postMessag
     });
 
     if (!response.ok) {
+        console.log(`Failed to submit Slack request: ${response.statusText}`)
         throw new Error(`Failed to submit Slack request: ${response.statusText}`);
     }
 
-    return response.json(); 
+    return await response.json(); 
 }
