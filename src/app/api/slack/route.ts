@@ -74,7 +74,8 @@ export async function POST(req: NextRequest) {
                         replace_original: false,
                         thread_ts, 
                         mrkdwn: true,
-                        name: "heart"
+                        name: "heart",
+                        reply_broadcast: true,
                     }),
                 });
                 return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
