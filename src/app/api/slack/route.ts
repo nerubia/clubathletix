@@ -91,7 +91,10 @@ export async function POST(req: NextRequest) {
                 //     status: xhr.status,
                 //     statusText: xhr.statusText,
                 // });
-                return NextResponse.json({ message: "Completed." });
+                return NextResponse.json({
+                    message: "Completed.",
+                    results,
+                });
             }
             
         }
