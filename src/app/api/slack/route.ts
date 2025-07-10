@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
             }
 
             if (applicablePlayers && applicablePlayers.length) {
-                await submitSlackRequest('reactions.add', {
+                const xhr = await submitSlackRequest('reactions.add', {
                     channel: replyInChannel.id,
                     name: answer === 'yes' ? 'completed' : 'no_entry',
                     timestamp: thread_ts,
@@ -82,8 +82,13 @@ export async function POST(req: NextRequest) {
                 //         name: "heart"
                 //     }),
                 // });
+                return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
+                    headers: { 'Content-Type': 'application/json' },
+                    status: xhr.status,
+                    statusText: xhr.statusText,
+                });
             }
-            return NextResponse.json({slackUser})
+            
         }
         return NextResponse.json({ message: "No email found in Slack user profile." });
     }
