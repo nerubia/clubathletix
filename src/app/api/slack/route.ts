@@ -82,6 +82,11 @@ export async function POST(req: NextRequest) {
                 //         name: "heart"
                 //     }),
                 // });
+                console.log({
+                    headers: { 'Content-Type': 'application/json' },
+                    status: xhr.status,
+                    statusText: xhr.statusText,
+                })
                 return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
                     headers: { 'Content-Type': 'application/json' },
                     status: xhr.status,
