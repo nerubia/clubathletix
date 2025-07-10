@@ -46,13 +46,11 @@ export async function getOrganizationByDomain(domain: string): Promise<{
             error?: string
         }> {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const [host, port] = (domain || '').split(':')
+    const { data, error } = await supabase.from('domains').select('id, name, organizations (id, name, short_name, logo_url, colours)').eq('name', host).single()
     
-    const { data: records, error } = await supabase.from('domains').select('id, name, organizations (id, name, short_name, logo_url, colours)').eq('name', domain)
-    
-    const data = records?.pop()?.organizations
-    
-    if (data) {
-        const o = data as unknown as {
+    if (data?.organizations) {
+        const o = data.organizations as unknown as {
             [k: string]: string
         } & {
             media: string[]
