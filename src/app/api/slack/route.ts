@@ -1,4 +1,5 @@
 import { getAthleteViaSlack } from "@/services/athletes";
+import { getSlackChannels } from "@/services/schedule";
 import { tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,6 +12,9 @@ export async function POST(req: NextRequest) {
         response_url,
         message,
         channel,
+        container: {
+            channel_id
+        },
         ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
         response_url: string;
@@ -31,9 +35,14 @@ export async function POST(req: NextRequest) {
             id: string;
             name: string;
         },
+        container: {
+            channel_id: string;
+        },
     }
     const thread_ts = message.ts;
     const action = actions.pop();
+    const channels = await getSlackChannels();
+
     if (action) {
         const answer = action.value;
         const names = user.name.split('_').join(' / ');
@@ -46,11 +55,12 @@ export async function POST(req: NextRequest) {
         });
  
         console.log(JSON.stringify({
-            channel,
+            channel_id,
             from,
             to,
             user,
             applicablePlayers,
+            channels,
             rest
         }, null, 2));
         await fetch(response_url, {
