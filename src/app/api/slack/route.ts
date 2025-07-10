@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
         actions,
         response_url,
         message,
+        channel,
         ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
         response_url: string;
@@ -25,7 +26,11 @@ export async function POST(req: NextRequest) {
         }[],
         message: {
             ts: number;
-        }
+        },
+        channel: {
+            id: string;
+            name: string;
+        },
     }
     const thread_ts = message.ts;
     const action = actions.pop();
@@ -33,12 +38,13 @@ export async function POST(req: NextRequest) {
         const answer = action.value;
         const names = user.name.split('_').join(' / ');
         const athletes = await getAthleteViaSlack(user.id);
+        const [from, to] = channel.name.split('-').map(s => Number(s.trim())).filter(Boolean);
 
-        for (const athlete of athletes || []) {
+        const applicablePlayers = athletes?.filter(athlete => {
             const [year] = athlete.date_of_birth.split('-').map(Number);
-            console.log(year)
-        }
-        console.log(rest)
+            return year >= from && year <= to;
+        });
+        console.log(JSON.stringify({applicablePlayers}, null, 2));
  
         await fetch(response_url, {
             method: 'POST',
