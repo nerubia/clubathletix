@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
         });
         console.log(JSON.stringify(rest, null, 2));
 
-        return NextResponse.json({rest})
+        return NextResponse.json(applicablePlayers);
     }
 
     return NextResponse.json({
