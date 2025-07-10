@@ -44,7 +44,12 @@ export async function POST(req: NextRequest) {
             const [year] = athlete.date_of_birth.split('-').map(Number);
             return year >= from && year <= to;
         });
-        console.log(JSON.stringify({applicablePlayers}, null, 2));
+        console.log(JSON.stringify({
+            from,
+            to,
+            user,
+            applicablePlayers,
+        }, null, 2));
  
         await fetch(response_url, {
             method: 'POST',
