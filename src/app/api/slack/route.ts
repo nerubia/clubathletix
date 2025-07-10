@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
 
             if (applicablePlayers && applicablePlayers.length) {
                 const results = await submitSlackRequest('chat.postMessage', {
+                    channel: replyInChannel.id,
                     text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
                     thread_ts,
                     mrkdwn: true,
