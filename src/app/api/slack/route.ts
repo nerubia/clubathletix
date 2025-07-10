@@ -76,6 +76,7 @@ export async function POST(req: NextRequest) {
                         mrkdwn: true,
                         name: "heart",
                         reply_broadcast: true,
+                        username: applicablePlayers.join(' • '),
                     }),
                 });
                 return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
