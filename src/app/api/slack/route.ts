@@ -1,5 +1,5 @@
 import { getAthleteViaSlack } from "@/services/athletes";
-import { getSlackChannels } from "@/services/schedule";
+import { getSlackChannels, getSlackUserProfile } from "@/services/schedule";
 import { tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -45,6 +45,8 @@ export async function POST(req: NextRequest) {
 
     if (action) {
         const answer = action.value;
+        const slackUser = await getSlackUserProfile(user.id);
+        console.log(JSON.stringify({slackUser}, null, 2))
         const names = user.name.split('_').join(' / ');
         const athletes = await getAthleteViaSlack(user.id);
         const [from, to] = channel.name.split('-').map(s => Number(s.trim())).filter(Boolean);
