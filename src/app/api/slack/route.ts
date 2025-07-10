@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
             if (applicablePlayers && applicablePlayers.length) {
                 const xhr = await submitSlackRequest('reactions.add', {
                     channel: replyInChannel.id,
-                    name: answer === 'yes' ? 'completed' : 'no_entry',
+                    name: answer === 'yes' ? 'white_check_mark' : 'no_entry',
                     timestamp: thread_ts,
                 })
                 // await fetch(response_url, {
