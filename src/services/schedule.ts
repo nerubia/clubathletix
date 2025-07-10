@@ -121,3 +121,38 @@ function expandRecurringSchedules(schedules: Schedule[], until: Date): any[] {
 
     return expanded
 }
+
+
+/**
+ * Creates a schedule entry object from the provided arguments.
+ *
+ * @param time - The time of the schedule entry.
+ * @param title - The title of the schedule entry.
+ * @param location - The location of the schedule entry.
+ * @returns An object representing the schedule entry.
+ */
+export async function createScheduleEntry({ time, title, location }: { time: string; title: string; location: string }): Promise<{ time: string; title: string; location: string }> {
+    // const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const xhr = await fetch('https://slack.com/shortcuts/Ft095PRDAGHE/25d2ef5893fa012d82dbf4e6d389b0c3', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            time,
+            title,
+            location
+        })
+    })
+
+    return xhr.ok ? {
+        time,
+        title: `OK: ${title}`,
+        location
+    } : {
+        
+        time,
+        title: `Fail: ${title}`,
+        location
+    }
+}

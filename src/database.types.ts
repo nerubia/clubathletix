@@ -14,10 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
+      athlete_highlight_tags: {
+        Row: {
+          athlete_highlight_id: number | null
+          athlete_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          id: number
+          sequence_no: number | null
+          tag_id: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_highlight_id?: number | null
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          sequence_no?: number | null
+          tag_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_highlight_id?: number | null
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          sequence_no?: number | null
+          tag_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_highlights_athlete_highlight_id_fkey"
+            columns: ["athlete_highlight_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_highlights"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_highlights: {
+        Row: {
+          athlete_id: number | null
+          athlete_profile_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          is_active: boolean | null
+          media_file_id: number | null
+          sequence_no: number | null
+          title: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_id?: number | null
+          athlete_profile_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          media_file_id?: number | null
+          sequence_no?: number | null
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_id?: number | null
+          athlete_profile_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          media_file_id?: number | null
+          sequence_no?: number | null
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_highlights_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_athlete_profile_id_fkey"
+            columns: ["athlete_profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_media_file_id_fkey"
+            columns: ["media_file_id"]
+            isOneToOne: false
+            referencedRelation: "media_files"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_highlights_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       athlete_payments: {
         Row: {
           athlete_id: number
           athlete_registration_id: number | null
+          athlete_subscription_id: number | null
           created_at: string
           created_by: number | null
           deleted_at: string | null
@@ -26,6 +186,7 @@ export type Database = {
           installment_no: number | null
           organization_id: number | null
           payment_amount: number | null
+          payment_category: string | null
           payment_date: string | null
           payment_due: number | null
           payment_due_date: string | null
@@ -39,6 +200,7 @@ export type Database = {
         Insert: {
           athlete_id: number
           athlete_registration_id?: number | null
+          athlete_subscription_id?: number | null
           created_at?: string
           created_by?: number | null
           deleted_at?: string | null
@@ -47,6 +209,7 @@ export type Database = {
           installment_no?: number | null
           organization_id?: number | null
           payment_amount?: number | null
+          payment_category?: string | null
           payment_date?: string | null
           payment_due?: number | null
           payment_due_date?: string | null
@@ -60,6 +223,7 @@ export type Database = {
         Update: {
           athlete_id?: number
           athlete_registration_id?: number | null
+          athlete_subscription_id?: number | null
           created_at?: string
           created_by?: number | null
           deleted_at?: string | null
@@ -68,6 +232,7 @@ export type Database = {
           installment_no?: number | null
           organization_id?: number | null
           payment_amount?: number | null
+          payment_category?: string | null
           payment_date?: string | null
           payment_due?: number | null
           payment_due_date?: string | null
@@ -94,6 +259,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "athlete_payments_athlete_subscription_id_fkey"
+            columns: ["athlete_subscription_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_subscriptions"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "athlete_payments_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
@@ -116,6 +288,169 @@ export type Database = {
           },
           {
             foreignKeyName: "athlete_payments_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_positions: {
+        Row: {
+          athlete_id: number | null
+          athlete_profile_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          position_id: number | null
+          sequence_no: number | null
+          skill_level: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_id?: number | null
+          athlete_profile_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          position_id?: number | null
+          sequence_no?: number | null
+          skill_level?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_id?: number | null
+          athlete_profile_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          position_id?: number | null
+          sequence_no?: number | null
+          skill_level?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_positions_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_positions_athlete_profile_id_fkey"
+            columns: ["athlete_profile_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_positions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_positions_position_id_fkey"
+            columns: ["position_id"]
+            isOneToOne: false
+            referencedRelation: "positions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_positions_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_profiles: {
+        Row: {
+          about: string | null
+          athlete_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          gpa: string | null
+          graduation_year: number | null
+          height: string | null
+          id: number
+          play_style: string | null
+          slug: string | null
+          sport: string | null
+          strong_foot: string | null
+          updated_at: string | null
+          updated_by: number | null
+          weight: string | null
+        }
+        Insert: {
+          about?: string | null
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          gpa?: string | null
+          graduation_year?: number | null
+          height?: string | null
+          id?: number
+          play_style?: string | null
+          slug?: string | null
+          sport?: string | null
+          strong_foot?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+          weight?: string | null
+        }
+        Update: {
+          about?: string | null
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          gpa?: string | null
+          graduation_year?: number | null
+          height?: string | null
+          id?: number
+          play_style?: string | null
+          slug?: string | null
+          sport?: string | null
+          strong_foot?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+          weight?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_profiles_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profiles_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_profiles_updated_by_fkey"
             columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
@@ -275,6 +610,96 @@ export type Database = {
           tackling?: number
         }
         Relationships: []
+      }
+      athlete_subscriptions: {
+        Row: {
+          athlete_id: number
+          cancelled_at: string | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          end_date: string | null
+          id: number
+          product_id: number | null
+          product_plan_id: number | null
+          slug: string | null
+          start_date: string | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_id: number
+          cancelled_at?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: number
+          product_id?: number | null
+          product_plan_id?: number | null
+          slug?: string | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_id?: number
+          cancelled_at?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: number
+          product_id?: number | null
+          product_plan_id?: number | null
+          slug?: string | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_subscriptions_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_subscriptions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_subscriptions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_subscriptions_product_plan_id_fkey"
+            columns: ["product_plan_id"]
+            isOneToOne: false
+            referencedRelation: "product_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "athlete_subscriptions_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       athlete_waivers: {
         Row: {
@@ -470,6 +895,194 @@ export type Database = {
           {
             foreignKeyName: "athletes_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competition_teams: {
+        Row: {
+          competition_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          division_id: number | null
+          division_tier_id: number | null
+          draws: number | null
+          games_played: number | null
+          goal_diff: number | null
+          goals_against: number | null
+          goals_for: number | null
+          id: number
+          losses: number | null
+          points: number | null
+          points_per_game: number | null
+          status: string | null
+          team_id: number | null
+          updated_at: string | null
+          updated_by: number | null
+          wins: number | null
+        }
+        Insert: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          division_tier_id?: number | null
+          draws?: number | null
+          games_played?: number | null
+          goal_diff?: number | null
+          goals_against?: number | null
+          goals_for?: number | null
+          id?: number
+          losses?: number | null
+          points?: number | null
+          points_per_game?: number | null
+          status?: string | null
+          team_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+          wins?: number | null
+        }
+        Update: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          division_tier_id?: number | null
+          draws?: number | null
+          games_played?: number | null
+          goal_diff?: number | null
+          goals_against?: number | null
+          goals_for?: number | null
+          id?: number
+          losses?: number | null
+          points?: number | null
+          points_per_game?: number | null
+          status?: string | null
+          team_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+          wins?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_teams_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_teams_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_teams_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "divisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_teams_division_tier_id_fkey"
+            columns: ["division_tier_id"]
+            isOneToOne: false
+            referencedRelation: "division_tiers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_teams_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_teams_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competitions: {
+        Row: {
+          competition_type: string | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          end_date: string | null
+          id: number
+          name: string | null
+          organization_id: number | null
+          slug: string | null
+          start_date: string | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          competition_type?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          slug?: string | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          competition_type?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          slug?: string | null
+          start_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competitions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitions_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -743,6 +1356,179 @@ export type Database = {
           },
         ]
       }
+      division_tiers: {
+        Row: {
+          competion_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          division_id: number | null
+          id: number
+          name: string | null
+          organization_id: number | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          competion_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          competion_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "division_tiers_competion_id_fkey"
+            columns: ["competion_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "division_tiers_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "division_tiers_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "divisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "division_tiers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "division_tiers_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      divisions: {
+        Row: {
+          competion_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          game_format: string | null
+          game_length: number | null
+          gender: string | null
+          half_time_break: number | null
+          half_time_length: number | null
+          has_tier: boolean | null
+          id: number
+          name: string | null
+          organization_id: number | null
+          sequence_no: number | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          competion_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          game_format?: string | null
+          game_length?: number | null
+          gender?: string | null
+          half_time_break?: number | null
+          half_time_length?: number | null
+          has_tier?: boolean | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          sequence_no?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          competion_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          game_format?: string | null
+          game_length?: number | null
+          gender?: string | null
+          half_time_break?: number | null
+          half_time_length?: number | null
+          has_tier?: boolean | null
+          id?: number
+          name?: string | null
+          organization_id?: number | null
+          sequence_no?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "divisions_competion_id_fkey"
+            columns: ["competion_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "divisions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "divisions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "divisions_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       domains: {
         Row: {
           created_at: string
@@ -768,6 +1554,170 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      field_schedules: {
+        Row: {
+          competition_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          end_time: string | null
+          field_id: number | null
+          id: number
+          organization_id: number | null
+          schedule_date: string | null
+          start_time: string | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_time?: string | null
+          field_id?: number | null
+          id?: number
+          organization_id?: number | null
+          schedule_date?: string | null
+          start_time?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          end_time?: string | null
+          field_id?: number | null
+          id?: number
+          organization_id?: number | null
+          schedule_date?: string | null
+          start_time?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "field_schedules_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "field_schedules_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "field_schedules_field_id_fkey"
+            columns: ["field_id"]
+            isOneToOne: false
+            referencedRelation: "fields"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "field_schedules_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "field_schedules_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fields: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          field_size: string | null
+          field_type: string | null
+          id: number
+          location_id: number | null
+          name: string | null
+          parent_field_id: number | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          field_size?: string | null
+          field_type?: string | null
+          id?: number
+          location_id?: number | null
+          name?: string | null
+          parent_field_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          field_size?: string | null
+          field_type?: string | null
+          id?: number
+          location_id?: number | null
+          name?: string | null
+          parent_field_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fields_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fields_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fields_parent_field_id_fkey"
+            columns: ["parent_field_id"]
+            isOneToOne: false
+            referencedRelation: "fields"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fields_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -921,6 +1871,232 @@ export type Database = {
         }
         Relationships: []
       }
+      match_teams: {
+        Row: {
+          competition_team_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          goals_against: number | null
+          goals_for: number | null
+          id: number
+          match_id: number | null
+          match_result: string | null
+          match_side: string | null
+          team_id: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          competition_team_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          goals_against?: number | null
+          goals_for?: number | null
+          id?: number
+          match_id?: number | null
+          match_result?: string | null
+          match_side?: string | null
+          team_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          competition_team_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          goals_against?: number | null
+          goals_for?: number | null
+          id?: number
+          match_id?: number | null
+          match_result?: string | null
+          match_side?: string | null
+          team_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_teams_competition_team_id_fkey"
+            columns: ["competition_team_id"]
+            isOneToOne: false
+            referencedRelation: "competition_teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_teams_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_teams_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_teams_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_teams_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      matches: {
+        Row: {
+          away_score: number | null
+          away_team_id: number | null
+          away_team_name: string | null
+          competition_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          division_id: number | null
+          division_tier_id: number | null
+          field_schedule_id: number | null
+          home_score: number | null
+          home_team_id: number | null
+          home_team_name: string | null
+          id: number
+          match_video: string | null
+          notes: string | null
+          organization_id: number | null
+          stage: string | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          away_score?: number | null
+          away_team_id?: number | null
+          away_team_name?: string | null
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          division_tier_id?: number | null
+          field_schedule_id?: number | null
+          home_score?: number | null
+          home_team_id?: number | null
+          home_team_name?: string | null
+          id?: number
+          match_video?: string | null
+          notes?: string | null
+          organization_id?: number | null
+          stage?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          away_score?: number | null
+          away_team_id?: number | null
+          away_team_name?: string | null
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          division_tier_id?: number | null
+          field_schedule_id?: number | null
+          home_score?: number | null
+          home_team_id?: number | null
+          home_team_name?: string | null
+          id?: number
+          match_video?: string | null
+          notes?: string | null
+          organization_id?: number | null
+          stage?: string | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_away_team_id_fkey"
+            columns: ["away_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "divisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_division_tier_id_fkey"
+            columns: ["division_tier_id"]
+            isOneToOne: false
+            referencedRelation: "division_tiers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_field_schedule_id_fkey"
+            columns: ["field_schedule_id"]
+            isOneToOne: false
+            referencedRelation: "field_schedules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_home_team_id_fkey"
+            columns: ["home_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media_components: {
         Row: {
           created_at: string
@@ -952,6 +2128,88 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      media_files: {
+        Row: {
+          athlete_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          duration_seconds: number | null
+          file_format: string | null
+          file_size: number | null
+          file_url: string | null
+          id: number
+          is_active: boolean | null
+          media_type: string | null
+          s3_key: string | null
+          thumbnail_url: string | null
+          title: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          duration_seconds?: number | null
+          file_format?: string | null
+          file_size?: number | null
+          file_url?: string | null
+          id?: number
+          is_active?: boolean | null
+          media_type?: string | null
+          s3_key?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          athlete_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          duration_seconds?: number | null
+          file_format?: string | null
+          file_size?: number | null
+          file_url?: string | null
+          id?: number
+          is_active?: boolean | null
+          media_type?: string | null
+          s3_key?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_files_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "media_files_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "media_files_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -1386,6 +2644,180 @@ export type Database = {
           {
             foreignKeyName: "parents_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      positions: {
+        Row: {
+          abbreviation: string | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          name: string | null
+          sport: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          abbreviation?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+          sport?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          abbreviation?: string | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+          sport?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "positions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "positions_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_plans: {
+        Row: {
+          billing_cycle: string | null
+          created_at: string
+          created_by: number | null
+          currency_code: string | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          is_active: boolean | null
+          name: string | null
+          price: number | null
+          product_id: number | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          billing_cycle?: string | null
+          created_at?: string
+          created_by?: number | null
+          currency_code?: string | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          name?: string | null
+          price?: number | null
+          product_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          billing_cycle?: string | null
+          created_at?: string
+          created_by?: number | null
+          currency_code?: string | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          name?: string | null
+          price?: number | null
+          product_id?: number | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_plans_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["currency_code"]
+          },
+          {
+            foreignKeyName: "product_plans_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          id: number
+          image_url: string | null
+          is_active: boolean | null
+          name: string | null
+          slug: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string | null
+          slug?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          id?: number
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string | null
+          slug?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -1923,17 +3355,38 @@ export type Database = {
           },
         ]
       }
+      slack_channels: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       slack_users: {
         Row: {
           athlete_id: number
+          channel_id: string | null
           username: string
         }
         Insert: {
           athlete_id: number
+          channel_id?: string | null
           username: string
         }
         Update: {
           athlete_id?: number
+          channel_id?: string | null
           username?: string
         }
         Relationships: [
@@ -1984,6 +3437,121 @@ export type Database = {
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tags: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          id: number
+          name: string | null
+          sport: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          name?: string | null
+          sport?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          id?: number
+          name?: string | null
+          sport?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "positions_duplicate_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "positions_duplicate_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          gender: string | null
+          id: number
+          logo_url: string | null
+          name: string | null
+          organization_id: number | null
+          status: string | null
+          updated_at: string | null
+          updated_by: number | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          gender?: string | null
+          id?: number
+          logo_url?: string | null
+          name?: string | null
+          organization_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          gender?: string | null
+          id?: number
+          logo_url?: string | null
+          name?: string | null
+          organization_id?: number | null
+          status?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teams_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teams_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teams_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

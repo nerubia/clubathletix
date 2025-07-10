@@ -9,7 +9,7 @@ const AGE_GROUPS_HOOKS: {
     '2016-2017': 'B095GF06VR7/eiRxfh5LUVFCZ6X4WvNKxoK5',
     '2018-2020': 'B09523JSKGV/QbW1Nb5HeuPCz4TgsLrD85ia',
     matches: 'B0955AGR1PW/ibJVmzv7XmJVUXUDRJwHQqvS',
-    coaching: 'B094PBCS7PH/KQgGdUb6tSAb1HVnuLQFClRg'
+    coaching: 'B0954MLGKAS/R6LnuRw1V4Y332dIsjh1Nzl5'
 }
 
 export function getSlackEventNotification({
@@ -18,20 +18,17 @@ export function getSlackEventNotification({
     location = 'Cambridge Elementary Park\n6115 150 St, Surrey, BC V3S 3H7',
     coaches,
     opponent,
-    age_range,
 }: {
     event_type: 'training' | 'game';
     time: string;
     location: string;
     coaches?: string;
-    age_range: string;
     opponent?: {
         name: string;
         logo_url?: string;
     },
 }) {
     return {
-        url: `https://hooks.slack.com/services/T094WFETMCL/${AGE_GROUPS_HOOKS[age_range]}`,
         payload: {
             blocks: [
                 {
