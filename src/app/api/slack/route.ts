@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify({slackUser}, null, 2))
         const names = user.name.split('_').join(' / ');
         const athletes = await getAthleteViaSlack(user.id);
+        console.log(JSON.stringify({athletes}, null, 2))
         const [from, to] = channel.name.split('-').map(s => Number(s.trim())).filter(Boolean);
 
         const applicablePlayers = athletes?.filter(athlete => {
