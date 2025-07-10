@@ -63,28 +63,20 @@ export async function POST(req: NextRequest) {
             }
 
             if (applicablePlayers && applicablePlayers.length) {
-                const xhr = await submitSlackRequest('reactions.add', {
-                    channel: replyInChannel.id,
-                    name: answer === 'yes' ? 'white_check_mark' : 'no_entry',
-                    timestamp: thread_ts,
-                })
-                // await fetch(response_url, {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({
-                //         text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
-                //         response_type: 'in_channel',
-                //         replace_original: false,
-                //         thread_ts, 
-                //         mrkdwn: true,
-                //         name: "heart"
-                //     }),
-                // });
-                console.log({
-                    xhr
-                })
+                const xhr = await fetch(response_url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
+                        response_type: 'in_channel',
+                        replace_original: false,
+                        thread_ts, 
+                        mrkdwn: true,
+                        name: "heart"
+                    }),
+                });
                 return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
                     headers: { 'Content-Type': 'application/json' },
                     status: xhr.status,
