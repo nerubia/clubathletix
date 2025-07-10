@@ -5,11 +5,10 @@ import { Field, Label } from '@/components/fieldset'
 import { Heading } from '@/components/heading'
 import { Input } from '@/components/input'
 import { Strong, Text, TextLink } from '@/components/text'
-import { hashData, verifyJWT } from '@/lib/encryption'
+import { verifyJWT } from '@/lib/encryption'
 import type { Metadata } from 'next'
-import { login, signOut } from './actions'
+import { signOut } from './actions'
 import { cookies, headers } from 'next/headers'
-import InputHostname from '@/components/input-hostname'
 import Form from '@/components/form'
 
 export const metadata: Metadata = {
@@ -36,7 +35,8 @@ export default async function Login() {
   return (
     <Form 
         action="/api/auth"
-      className="grid w-full max-w-sm grid-cols-1 gap-8">
+        className="grid w-full max-w-sm grid-cols-1 gap-8"
+    >
       <Logo className="h-6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]" />
       <Heading>Sign in to your account</Heading>
       <Field>
@@ -62,6 +62,9 @@ export default async function Login() {
         Login
       </Button>
       <Text>
+        <TextLink href="/forgot-password">
+          <Strong>Forgot password?</Strong>
+        </TextLink>{' '}
         Don’t have an account?{' '}
         <TextLink href="/register">
           <Strong>Sign up</Strong>

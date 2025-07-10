@@ -11,7 +11,7 @@ import WaiverAgreementForm from "./waiver-contents";
 import { FormEvent, useEffect, useState } from "react";
 import { Dialog, DialogActions, DialogBody, DialogTitle } from "../dialog";
 
-export default function FormContents() {
+export default function RegistrationForm() {
     const [success, toggleSuccessDialog] = useState(false)
     const [disabled, setDisabled] = useState(true)
     const [loading, toggleLoader] = useState(false)
@@ -64,12 +64,12 @@ export default function FormContents() {
 
     return <div className="mx-auto max-w-xl lg:max-w-sm">
     <section id="signup-form">
-        <div className="border-b border-gray-200 pb-5 mb-5">
-            <Heading className="text-base text-zinc-600 font-semibold" force="text-gray-900">Child information</Heading>
+        <div className="border-b pb-5 mb-5">
+            <Heading className="text-base font-semibold">Child information</Heading>
         </div>
         <div className="flex gap-y-6 flex-wrap">
             <div className="w-1/2 pr-1">
-                <label htmlFor="child-first-name" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="child-first-name" className="block text-sm/6 font-semibold">
                 First name
                 </label>
                 <div className="mt-2.5">
@@ -78,7 +78,7 @@ export default function FormContents() {
                     name="cfname"
                     type="text"
                     autoComplete="given-name"
-                    data-theme="light"
+                   
                     required
                     value={`${formData?.cfname || ''}`}
                     onChange={e => {
@@ -91,7 +91,7 @@ export default function FormContents() {
                 </div>
             </div>
             <div className="w-1/2 pl-1">
-                <label htmlFor="child-last-name" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="child-last-name" className="block text-sm/6 font-semibold">
                 Last name
                 </label>
                 <div className="mt-2.5">
@@ -100,7 +100,6 @@ export default function FormContents() {
                     name="clname"
                     type="text"
                     autoComplete="family-name"
-                    data-theme='light'
                     required
                     value={`${formData?.clname || ''}`}
                     onChange={e => {
@@ -113,7 +112,7 @@ export default function FormContents() {
                 </div>
             </div>
             <div className="w-full">
-                <label htmlFor="child-birthdate" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="child-birthdate" className="block text-sm/6 font-semibold">
                 Child&rsquo;s date of birth
                 </label>
                 
@@ -129,12 +128,12 @@ export default function FormContents() {
         </div>
 
 
-        <div className="border-b border-gray-200 pt-15 pb-5 mb-5">
+        <div className="border-b pt-15 pb-5 mb-5">
             <Heading className="text-base font-semibold" force="text-gray-900">Parent / guardian information</Heading>
         </div>
         <div className="flex gap-y-6 flex-wrap">
             <div className="w-1/2 pr-1">
-                <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="first-name" className="block text-sm/6 font-semibold">
                     First name
                 </label>
                 <div className="mt-2.5">
@@ -143,7 +142,7 @@ export default function FormContents() {
                         name="fname"
                         type="text"
                         autoComplete="first-name"
-                        data-theme="light"
+                       
                         required
                         value={`${formData?.fname || ''}`}
                         onChange={e => {
@@ -156,7 +155,7 @@ export default function FormContents() {
                 </div>
             </div>
             <div className="w-1/2 pl-1">
-                <label htmlFor="last-name" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="last-name" className="block text-sm/6 font-semibold">
                     Last name
                 </label>
                 <div className="mt-2.5">
@@ -165,7 +164,7 @@ export default function FormContents() {
                         name="lname"
                         type="text"
                         autoComplete="last-name"
-                        data-theme="light"
+                       
                         required
                         value={`${formData?.lname || ''}`}
                         onChange={e => {
@@ -178,10 +177,10 @@ export default function FormContents() {
                 </div>
             </div>
             <div className="col-span-2 pb-4">
-                <label htmlFor="street_1" className="block text-sm/6 font-semibold text-gray-900 mb-4">
+                <label htmlFor="street_1" className="block text-sm/6 font-semibold mb-4">
                     Address
                 </label>
-                <Address {...formData as any} data-theme="light" onChange={address => {
+                <Address {...formData as any} onChange={address => {
                     setFormData(prev => ({
                         ...prev,
                         ...address,
@@ -191,7 +190,7 @@ export default function FormContents() {
 
             <section className="flex flex-col sm:flex-row gap-2">
             <div>
-                <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="email" className="block text-sm/6 font-semibold">
                     Email
                 </label>
                 <div className="mt-2.5">
@@ -200,7 +199,7 @@ export default function FormContents() {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        data-theme="light"
+                       
                         required
                         value={`${formData?.email || ''}`}
                         onChange={e => {
@@ -213,7 +212,7 @@ export default function FormContents() {
                 </div>
             </div>
             <div>
-                <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-gray-900">
+                <label htmlFor="phone-number" className="block text-sm/6 font-semibold">
                     Phone number
                 </label>
                 <div className="mt-2.5">
@@ -222,7 +221,6 @@ export default function FormContents() {
                         name="phone"
                         type="tel"
                         autoComplete="tel"
-                        data-theme="light"
                         required
                         value={`${formData?.phone || ''}`}
                         onChange={e => {
@@ -246,40 +244,40 @@ export default function FormContents() {
                 }))
             }} /> : 
             <div className="col-span-2 mt-8">
-                <CheckboxField data-theme="light">          
-                    <Checkbox color="rose" aria-required name="wants_kit" value="yes" defaultChecked={Boolean(formData.wants_kit)} data-theme="light" onChange={yes => {
+                <CheckboxField> 
+                    <Checkbox color="rose" aria-required name="wants_kit" value="yes" defaultChecked={Boolean(formData.wants_kit)} onChange={yes => {
                         setFormData(prev => ({
                             ...prev,
                             wants_kit: yes
                         }))
                     }} />
-                    <Label data-theme="light">I&rsquo;d like a player kit (CA$80)</Label>
-                    <Description data-theme="light">Our team kit includes a pair of jerseys, shorts, and socks.  This is just optional (although recommended).</Description>
+                    <Label>I&rsquo;d like a player kit (CA$80)</Label>
+                    <Description>Our team kit includes a pair of jerseys, shorts, and socks.  This is just optional (although recommended).</Description>
                 </CheckboxField>
             </div>}
         </div>
 
 
-        <div className="border-b border-gray-200 pb-5 mb-0 mt-8">
+        <div className="border-b pb-5 mb-0 mt-8">
             <Heading className="text-base font-semibold" force="text-zinc-900">Terms & Waiver Agreement</Heading>
         </div>
         <div className="col-span-2 mt-8">
-            <CheckboxField data-theme="light">          
-                <Checkbox color="rose" aria-required name="media_release" value="yes" defaultChecked data-theme="light" onChange={yes => {
+            <CheckboxField>          
+                <Checkbox color="rose" aria-required name="media_release" value="yes" defaultChecked onChange={yes => {
                     setFormData(prev => ({
                         ...prev,
                         media_release: yes
                     }))
                 }} />
-                <Label data-theme="light">Media release</Label>
-                <Description data-theme="light">I grant permission to Progress Footy Academy Inc. to use photos, videos, or recordings of my child for marketing, social media, or promotional purposes.</Description>
+                <Label>Media release</Label>
+                <Description>I grant permission to Progress Footy Academy Inc. to use photos, videos, or recordings of my child for marketing, social media, or promotional purposes.</Description>
             </CheckboxField>
         </div>
         <div className="col-span-2 mt-8">
-            <CheckboxField data-theme="light">          
-                <Checkbox color="rose" aria-required name="signed_agreement" value="yes" data-theme="light" onChange={toggleAgreement} defaultChecked={Boolean(formData.signed_agreement)} />
-                <Label data-theme="light">Parent&rsquo;s agreement</Label>
-                <Description data-theme="light">By signing up, you agree to our <DialogButton dialog={{
+            <CheckboxField>          
+                <Checkbox color="rose" aria-required name="signed_agreement" value="yes" onChange={toggleAgreement} defaultChecked={Boolean(formData.signed_agreement)} />
+                <Label>Parent&rsquo;s agreement</Label>
+                <Description>By signing up, you agree to our <DialogButton dialog={{
                     title: 'Progress Footy Football Academy Inc. Waiver and Parent\'s Agreement',
                     action: 'Yes, I agree',
                     body: <WaiverAgreementForm />,

@@ -25,6 +25,11 @@ export default function Form({
             if (xhr.ok) xhr.json().then(json => {
                 console.log(json)
             })
+            else {
+                if (xhr.status === 401) 
+                    Cookies.remove('token')
+                console.warn('Error submitting form:', xhr.status)
+            }
         })
     }
     return <form {...rest} onSubmit={e => {

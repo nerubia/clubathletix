@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Listbox, ListboxLabel, ListboxOption } from '../listbox'
 
-export default function Birthdate(props: { id: string; value?: string; onChange(v: string): void }) {
+export default function Birthdate(props: { id: string; value?: string; onChange(v: string): void; 'data-theme'?: 'light' | 'dark' }) {
   let bdate = (props.value || '').split(' ') || []
   const [ageGroup, setAgeGroup] = useState<string>()
   const [query, setQuery] = useState<{
@@ -77,7 +77,7 @@ export default function Birthdate(props: { id: string; value?: string; onChange(
                 value={months.find(c => c.value === selectedMonth)?.value || ''}
                 onChange={setSelectedMonth}
                 className="w-12"
-                data-theme='light'
+                data-theme={props['data-theme']}
               >
                 {(filteredMonths.length ? filteredMonths : months).map((month) => (
                   <ListboxOption key={month.label} value={month.value} data-theme='light'>
@@ -93,10 +93,10 @@ export default function Birthdate(props: { id: string; value?: string; onChange(
                 placeholder="Day"
                 value={days.find(c => c.value === selectedDay)?.value || ''}
                 onChange={setSelectedDay}
-                data-theme='light'
+                data-theme={props['data-theme']}
               >
                 {days.map((d) => (
-                  <ListboxOption key={d.label} value={d.value} data-theme='light'>
+                  <ListboxOption key={d.label} value={d.value} data-theme={props['data-theme']}>
                     <ListboxLabel className='text-center w-6'>{d.label}</ListboxLabel>
                   </ListboxOption>
                 ))}
@@ -111,10 +111,10 @@ export default function Birthdate(props: { id: string; value?: string; onChange(
               placeholder="Year"
               value={years.find(c => c.value === selectedYear)?.value || ''}
               onChange={setSelectedYear}
-              data-theme='light'
+              data-theme={props['data-theme']}
             >
               {years.map((d) => (
-                <ListboxOption key={d.label} value={d.value} data-theme='light'>
+                <ListboxOption key={d.label} value={d.value} data-theme={props['data-theme']}>
                   <ListboxLabel>{d.label}</ListboxLabel>
                 </ListboxOption>
               ))}

@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     const {id, fname, lname, street_1, street_2, city_town, state_province, postal_zip_code, email } = await request.json()
     const full_name = [lname, fname].join(', ');
-    let { data: customers, error } = await supabase
+    let { data: customers } = await supabase
     .from('customers')
     .update({
         street_1,
@@ -43,21 +43,7 @@ export async function POST(request: NextRequest) {
         full_name,
         email,
     }).eq('id', id)
-    // .upsert({
-    //     email,
-    // }, {
-    //     ignoreDuplicates: false,
-    //     /*
-    //     * @param options.onConflict - Comma-separated UNIQUE column(s) to specify how
-    //     * duplicate rows are determined. Two rows are duplicates if all the
-    //     * `onConflict` columns are equal.
-    //     */
-    //     onConflict: 'email',
-    // })
-    // .select('id, full_name, street_1, street_2, city_town, postal_zip_code, country, state_province')
-    // .eq('id', id)
     try {
-
         return NextResponse.json({id, 
             street_1, street_2, city_town, state_province, postal_zip_code,
             full_name , customers}, { status: 200 });

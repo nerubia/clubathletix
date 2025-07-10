@@ -30,7 +30,6 @@ export async function getAccount(): Promise<{
 export async function signUp(formData: FormData) {
     const h = await headers();
     const url = `${h.get('origin')}/api/customer`
-    
     const customer = await postApiRequest(url, Object.fromEntries(formData.entries()))
 
 }
