@@ -75,20 +75,13 @@ export async function POST(request: NextRequest) {
     const {
         payload,
     } = getSlackEventNotification(params)
-    // const xhr = await fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(payload),
-    // })
 
     const applicableChannels: {
         id: string;
         name: string;
     }[] = []
     for (const channel of channels as { name: string; id: string }[]) {
-        if (channel.name === 'id-camps') {
+        if (channel.name === 'nothing-here') {
             applicableChannels.push({
                 id: channel.id,
                 name: channel.name,
@@ -96,11 +89,11 @@ export async function POST(request: NextRequest) {
             continue;
         }
         for (const y of channel.name.split('-').map(s => Number(s.trim())).filter(Boolean)) {
-            if (params.years.includes(y)) {
-                // applicableChannels.push({
-                //     id: channel.id,
-                //     name: channel.name,
-                // })
+            if (params.years.includes(y) && applicableChannels.filter(a => a.name === channel.name).length === 0) {
+                applicableChannels.push({
+                    id: channel.id,
+                    name: channel.name,
+                })
             }
         }
     }

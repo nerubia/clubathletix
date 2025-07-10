@@ -1,5 +1,6 @@
 import { getAthleteViaEmail, getAthleteViaSlack } from "@/services/athletes";
 import { getCustomerByEmail } from "@/services/customer";
+import { submitSlackRequest } from "@/services/http";
 import { getSlackChannels, getSlackUserProfile } from "@/services/schedule";
 import { a, tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
@@ -17,7 +18,6 @@ export async function POST(req: NextRequest) {
         container: {
             channel_id
         },
-        ...rest
     } = JSON.parse(payload as unknown as string) as unknown as {
         response_url: string;
         user: {
@@ -63,20 +63,37 @@ export async function POST(req: NextRequest) {
             }
 
             if (applicablePlayers && applicablePlayers.length) {
-                await fetch(response_url, {
+                await fetch('https://slack.com/api/reactions.add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
                     },
                     body: JSON.stringify({
-                        text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
-                        response_type: 'in_channel',
-                        replace_original: false,
-                        thread_ts, 
-                        mrkdwn: true,
-                        name: "heart"
+                        channel: replyInChannel.id,
+                        name: answer === 'yes' ? 'white_check_mark' : 'x',
+                        timestamp: thread_ts,
                     }),
-                });
+                })
+                await submitSlackRequest('reactions.add', {
+                    channel: replyInChannel.id,
+                    name: answer === 'yes' ? 'completed' : 'no_entry',
+                    timestamp: thread_ts,
+                })
+                // await fetch(response_url, {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
+                //         response_type: 'in_channel',
+                //         replace_original: false,
+                //         thread_ts, 
+                //         mrkdwn: true,
+                //         name: "heart"
+                //     }),
+                // });
             }
             return NextResponse.json({slackUser})
         }
