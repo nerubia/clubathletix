@@ -6,7 +6,6 @@ export async function getCustomerByEmail(email: string): Promise<Database['publi
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
     try {
-
         const { data, error } =  await supabase
             .from('credentials')
             .select(`
@@ -22,11 +21,13 @@ export async function getCustomerByEmail(email: string): Promise<Database['publi
             return {
                 ...record,
                 ...customers,
+                email_hash: undefined,
+                password_hash: undefined,
             } as unknown as Database['public']['Tables']['credentials']['Row']
         } else {
             const { data, error } = await supabase
                 .from('customers')
-                .select('id, full_name')
+                .select('id, full_name, phone, email')
                 .eq('email', email)
             if (error) throw error
             const customer = data?.pop();

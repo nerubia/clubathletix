@@ -62,3 +62,23 @@ export async function getAthleteViaSlack(username: string): Promise<Database['pu
         console.error(e)
     }
 }
+
+export async function getAthleteViaEmail(email: string): Promise<Database['public']['Tables']['customers']['Row'] & {
+    athletes: Database['public']['Tables']['athletes']['Row'][]
+} | undefined> {
+    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+
+    try {
+
+        const { data, error } =  await supabase
+            .from('customers')
+            .select('*, athletes (*)')
+            .eq('email', email).single()
+
+        if (!error) return data
+
+        console.error(error)
+    } catch (e) {
+        console.error(e)
+    }
+}
