@@ -5,9 +5,20 @@ import { a, tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    // const data = await req.formData()
-    // const { payload } = Object.fromEntries(data);
-    // console.log(payload);
+    // const {
+    //     user,
+    //     actions,
+    //     response_url,
+    //     message,
+    //     channel,
+    //     container: {
+    //         channel_id
+    //     },
+    //     ...rest
+    // } = await req.json()
+    const data = await req.formData()
+    const { payload } = Object.fromEntries(data);
+    
     
     const {
         user,
@@ -19,9 +30,7 @@ export async function POST(req: NextRequest) {
             channel_id
         },
         ...rest
-    } = await req.json()
-    /**
-     * JSON.parse(payload as unknown as string) as unknown as {
+    } = JSON.parse(payload as unknown as string) as unknown as {
         response_url: string;
         user: {
             id: string;
@@ -44,7 +53,7 @@ export async function POST(req: NextRequest) {
             channel_id: string;
         },
     }
-     */
+    
     const thread_ts = message.ts;
     const action = actions.pop();
     const channels = await getSlackChannels();
