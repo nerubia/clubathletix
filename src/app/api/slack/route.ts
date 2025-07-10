@@ -63,27 +63,35 @@ export async function POST(req: NextRequest) {
             }
 
             if (applicablePlayers && applicablePlayers.length) {
-                const xhr = await fetch(response_url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
-                        response_type: 'in_channel',
-                        replace_original: false,
-                        thread_ts, 
-                        mrkdwn: true,
-                        name: "heart",
-                        reply_broadcast: true,
-                        username: applicablePlayers.join(' • '),
-                    }),
-                });
-                return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
-                    headers: { 'Content-Type': 'application/json' },
-                    status: xhr.status,
-                    statusText: xhr.statusText,
-                });
+                const results = await submitSlackRequest('chat.postMessage', {
+                    text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
+                    thread_ts,
+                    mrkdwn: true,
+                    reply_broadcast: true,
+                    username: applicablePlayers.join(' • '),
+                })
+
+                // const xhr = await fetch(response_url, {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         text: applicablePlayers.map(name => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`).join('\n'),
+                //         response_type: 'in_channel',
+                //         replace_original: false,
+                //         thread_ts, 
+                //         mrkdwn: true,
+                //         name: "heart",
+                //         username: applicablePlayers.join(' • '),
+                //     }),
+                // });
+                // return NextResponse.json({status: xhr.status, statusText: xhr.statusText}, {
+                //     headers: { 'Content-Type': 'application/json' },
+                //     status: xhr.status,
+                //     statusText: xhr.statusText,
+                // });
+                return NextResponse.json({ message: "Completed." });
             }
             
         }
