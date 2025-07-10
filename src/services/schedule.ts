@@ -156,3 +156,40 @@ export async function createScheduleEntry({ time, title, location }: { time: str
         location
     }
 }
+
+export async function getSlackChannels(): Promise<{
+    id: string;
+    name: string;
+}[]> {
+        const slackChannels = await fetch('https://slack.com/api/conversations.list', {
+            headers: {
+                authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+            }
+        })
+        if (!slackChannels.ok) {
+            return []
+        }
+    
+        const {channels} = await slackChannels.json();
+        return channels.map((channel: { id: string; name: string }) => ({
+            id: channel.id,
+            name: channel.name,
+        }))
+}
+
+export async function getSlackUserProfile(user: string) {
+    const conf = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+        },
+        body: JSON.stringify({
+            user
+        }, null, 2),
+    }
+    const xhr = await fetch('https://slack.com/api/users.profile.get', conf);
+    if (xhr.ok) {
+        return await xhr.json();
+    }
+}
