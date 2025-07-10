@@ -63,18 +63,6 @@ export async function POST(req: NextRequest) {
             }
 
             if (applicablePlayers && applicablePlayers.length) {
-                await fetch('https://slack.com/api/reactions.add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-                    },
-                    body: JSON.stringify({
-                        channel: replyInChannel.id,
-                        name: answer === 'yes' ? 'white_check_mark' : 'x',
-                        timestamp: thread_ts,
-                    }),
-                })
                 await submitSlackRequest('reactions.add', {
                     channel: replyInChannel.id,
                     name: answer === 'yes' ? 'completed' : 'no_entry',
