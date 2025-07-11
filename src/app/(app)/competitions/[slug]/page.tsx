@@ -67,11 +67,9 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                                     <h2 className="text-4xl font-semibold tracking-tight text-center text-pretty text-white sm:text-5xl">{competition.name}</h2>
 
                                                     <p className="mt-2 text-center text-lg/8 text-pretty text-gray-400">
-                                                        {competition.description}<br />
-                                                        <small>
-                                                            📆 {competition.start_date && new Date(competition.start_date).toDateString()} - {competition.end_date && new Date(competition.end_date).toDateString()}
-                                                        </small>
+                                                        {competition.description}
                                                     </p>
+                                                    <Heading force="text-white text-center">📆 {competition.start_date && new Date(competition.start_date).toDateString()} - {competition.end_date && new Date(competition.end_date).toDateString()}</Heading>
                                                     {search.team ? <>
                                                         <h2 className="text-2xl font-semibold tracking-tight text-center text-pretty text-white sm:text-3xl my-4">🎉 Thanks for signing {stringFromBase64URL(search.team) || ''} up 🎉</h2>
                                                         <p className="mt-2 text-center text-lg/8 text-pretty text-gray-400">
