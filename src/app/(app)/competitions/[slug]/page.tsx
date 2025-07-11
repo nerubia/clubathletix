@@ -81,7 +81,6 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                                     </> : <div className='mt-6 text-center'>
                                                         <Heading force="text-white text-center">Each team plays each other once</Heading>
                                                         <Heading force="text-white text-center">Top 2 teams advance to the finals</Heading>
-                                                        <Text data-theme="dark">4 games if there are 5 teams</Text>
                                                     </div>
                                                     }
                                                 </div>
