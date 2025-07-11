@@ -1,6 +1,9 @@
 import { getCompetitionBySlug } from '@/services/competition';
 import { notFound } from 'next/navigation';
 import CTA from './cta';
+import { stringFromBase64URL } from '@supabase/ssr';
+import { Heading, Subheading } from '@/components/heading';
+import { Text } from '@/components/text';
 
 function Backdrop() {
 	return (
@@ -32,8 +35,9 @@ function Backdrop() {
 		</div>
 	);
 }
-export default async function CompetitionPage(props: { params: Promise<{ slug: string }> }) {
+export default async function CompetitionPage(props: { params: Promise<{ slug: string }>, searchParams: Promise<{ team?: string }> }) {
 	const params = await props.params;
+	const search = await props.searchParams;
 
     try {
         const images = [
@@ -60,12 +64,25 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                                 />}
                                                 <div className="w-full flex-auto">
                                                     <h2 className="text-4xl font-semibold tracking-tight text-center text-pretty text-white sm:text-5xl">{competition.name}</h2>
+
                                                     <p className="mt-2 text-center text-lg/8 text-pretty text-gray-400">
                                                         {competition.description}<br />
                                                         <small>
                                                             📆 {competition.start_date && new Date(competition.start_date).toDateString()} - {competition.end_date && new Date(competition.end_date).toDateString()}
                                                         </small>
                                                     </p>
+                                                    {search.team ? <>
+                                                        <h2 className="text-2xl font-semibold tracking-tight text-center text-pretty text-white sm:text-3xl my-4">🎉 Thanks for signing {stringFromBase64URL(search.team) || ''} up 🎉</h2>
+                                                        <p className="mt-2 text-center text-lg/8 text-pretty text-gray-400">
+                                                            We&rsquo;ve sent you a confirmation email with the details to your registration. <br />Please check your inbox and spam folder for the confirmation email.<br />
+                                                            We&rsquo;ll be in touch with more details after receiving your registration fee!
+                                                        </p>
+                                                    </> : <div className='mt-6 text-center'>
+                                                        <Heading force="text-white text-center">Each team plays each other once</Heading>
+                                                        <Heading force="text-white text-center">Top 2 teams advance to the finals</Heading>
+                                                        <Text data-theme="dark">4 games if there are 5 teams</Text>
+                                                    </div>
+                                                    }
                                                 </div>
                                             </div>
                                             </div>
