@@ -183,7 +183,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 				</div>
 				<section className="mt-8">
 					<div id="waiver" className="mb-8 rounded-lg bg-slate-900 p-6">
-						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty text-white">
+						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty" force='text-white'>
 							Competition Waiver
 						</Heading>
 						<Text data-theme="dark" className="text-justify mb-4">
@@ -199,7 +199,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 						</Text>
 
 
-                        <Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty text-white">
+                        <Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty" force='text-white'>
                             Photography/Video Usage Policy
                         </Subheading>
 						<Text data-theme="dark" className="text-justify">

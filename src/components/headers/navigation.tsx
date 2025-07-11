@@ -24,6 +24,9 @@ export default function Navigation({
 }) {
     const path = usePathname()
     const textColours = (organization.textColours || []) as string[]
+    if (organization.id === 1 && navigation.filter(n => n.name === 'Summer League').length === 0) {
+        navigation.unshift({ name: 'Summer League', href: '/competitions/pfsummer' })
+    }
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>

@@ -8,6 +8,7 @@ import { getOrganizationByDomain } from '@/services/organization'
 import PricingSection from '@/components/pricing/pricing-section-alpha'
 import CenteredContentSection from '@/components/content-sections/centered'
 import PricingSectionSimple from '@/components/pricing/pricing-section-simple'
+import { XMarkIcon } from '@heroicons/react/16/solid'
 
 export default async function Page() {
     const hdr = await headers()
@@ -28,10 +29,10 @@ export default async function Page() {
   const testimonials = await getOrganizationTestimonials('1')
   return (
     <>
-      <HomePageHeader media={(organization as unknown as { media?: { hero?: string[] } })?.media?.hero || []}/>
-      <TestimonialGrid items={testimonials || []} />
-      <PricingSectionSimple />
-      <SignupSection address={getAddress()} />
+        <HomePageHeader media={(organization as unknown as { media?: { hero?: string[] } })?.media?.hero || []}/>
+        <TestimonialGrid items={testimonials || []} />
+        <PricingSectionSimple />
+        <SignupSection address={getAddress()} />
     </>
     
   )

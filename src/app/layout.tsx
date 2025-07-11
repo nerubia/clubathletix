@@ -3,8 +3,6 @@ import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 
-
-
 export async function generateMetadata(): Promise<Metadata> {
     const hdr = await headers()
     const host = hdr.get('host') || 'localhost'
@@ -30,7 +28,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" href={`${organization?.logo_url}` || "/logo.png"} />
         <link rel="apple-touch-icon" href={`${organization?.logo_url}` || "/logo.png"} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   )
 }
