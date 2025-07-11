@@ -79,7 +79,7 @@ export default function DivisionsCTA({items, data}: {items: Record<string, any>,
               <h3 className="mt-3 text-lg/6 font-semibold text-white">
                 <a href={`${data.slug}/${item.id}/register`} className="flex items-center justify-between">
                   <span className="absolute inset-0" />
-                    <span>{item.name} <sup>{item.game_format}</sup></span>
+                    <span>{item.name} Division</span>
                     <small>Register &rarr;</small>
                 </a>
               </h3>
