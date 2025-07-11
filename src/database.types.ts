@@ -916,6 +916,7 @@ export type Database = {
           first_name: string | null
           id: number
           last_name: string | null
+          logo_url: string | null
           organization_name: string | null
           payment_status: string | null
           phone_number: string | null
@@ -936,6 +937,7 @@ export type Database = {
           first_name?: string | null
           id?: number
           last_name?: string | null
+          logo_url?: string | null
           organization_name?: string | null
           payment_status?: string | null
           phone_number?: string | null
@@ -956,6 +958,7 @@ export type Database = {
           first_name?: string | null
           id?: number
           last_name?: string | null
+          logo_url?: string | null
           organization_name?: string | null
           payment_status?: string | null
           phone_number?: string | null
