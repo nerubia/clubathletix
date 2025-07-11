@@ -183,10 +183,10 @@ export default function FormContainer({ competition }: { competition: Competitio
 				</div>
 				<section className="mt-8">
 					<div id="waiver" className="mb-8 rounded-lg bg-slate-900 p-6">
-						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty" force='text-white'>
+						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty" force="text-white">
 							Competition Waiver
 						</Heading>
-						<Text data-theme="dark" className="text-justify mb-4">
+						<Text data-theme="dark" className="mb-4 text-justify">
 							I, the undersigned coach, acknowledge that I am registering a team to participate in the{' '}
 							{competition?.name || 'competition'}, organized by {competition?.organizations.name || 'academy'}. I
 							understand that participation in this competition involves physical activity that carries an inherent risk
@@ -198,10 +198,9 @@ export default function FormContainer({ competition }: { competition: Competitio
 							not complete until payment has been received and confirmed.
 						</Text>
 
-
-                        <Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty" force='text-white'>
-                            Photography/Video Usage Policy
-                        </Subheading>
+						<Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty" force="text-white">
+							Photography/Video Usage Policy
+						</Subheading>
 						<Text data-theme="dark" className="text-justify">
 							By registering for this event, you are consenting to the use of any photographs and/or video recordings,
 							of any team player(s) or staff member(s), taken by {competition?.organizations.name || 'academy'} for use
