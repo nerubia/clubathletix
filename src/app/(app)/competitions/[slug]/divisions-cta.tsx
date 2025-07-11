@@ -53,7 +53,7 @@ export default function DivisionsCTA({items, data}: {items: Record<string, any>,
   return (
     <div className="mx-auto max-w-7xl w-full sm:mb-10">
         <div className="mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 sm:gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {items.map((item: Record<string, string>) => (
+          {items.sort((a: { sequence_no: number }, b: { sequence_no: number }) => b.sequence_no - a.sequence_no).map((item: Record<string, string>) => (
             <article
               key={item.id}
               className="relative isolate flex flex-col justify-end overflow-hidden sm:rounded-2xl bg-gray-900 px-8 pt-80 pb-8 sm:pt-48 lg:pt-80"
