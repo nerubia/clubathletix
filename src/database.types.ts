@@ -818,6 +818,7 @@ export type Database = {
           gender: string | null
           id: number
           last_name: string | null
+          level: Database["public"]["Enums"]["level"]
           media_release: boolean
           photo: string | null
           profile_slug: string | null
@@ -839,6 +840,7 @@ export type Database = {
           gender?: string | null
           id?: number
           last_name?: string | null
+          level?: Database["public"]["Enums"]["level"]
           media_release?: boolean
           photo?: string | null
           profile_slug?: string | null
@@ -860,6 +862,7 @@ export type Database = {
           gender?: string | null
           id?: number
           last_name?: string | null
+          level?: Database["public"]["Enums"]["level"]
           media_release?: boolean
           photo?: string | null
           profile_slug?: string | null
@@ -895,6 +898,98 @@ export type Database = {
           {
             foreignKeyName: "athletes_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competition_registrations: {
+        Row: {
+          competition_id: number | null
+          created_at: string
+          created_by: number | null
+          deleted_at: string | null
+          description: string | null
+          division_id: number | null
+          email_address: string | null
+          first_name: string | null
+          id: number
+          last_name: string | null
+          organization_name: string | null
+          payment_status: string | null
+          phone_number: string | null
+          registration_status: string | null
+          team_name: string | null
+          updated_at: string | null
+          updated_by: number | null
+          waiver_signed_at: string | null
+        }
+        Insert: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          email_address?: string | null
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          organization_name?: string | null
+          payment_status?: string | null
+          phone_number?: string | null
+          registration_status?: string | null
+          team_name?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+          waiver_signed_at?: string | null
+        }
+        Update: {
+          competition_id?: number | null
+          created_at?: string
+          created_by?: number | null
+          deleted_at?: string | null
+          description?: string | null
+          division_id?: number | null
+          email_address?: string | null
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          organization_name?: string | null
+          payment_status?: string | null
+          phone_number?: string | null
+          registration_status?: string | null
+          team_name?: string | null
+          updated_at?: string | null
+          updated_by?: number | null
+          waiver_signed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_registrations_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_registrations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_registrations_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "divisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_registrations_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -1442,8 +1537,10 @@ export type Database = {
           competion_id: number | null
           created_at: string
           created_by: number | null
+          currency_code: string | null
           deleted_at: string | null
           description: string | null
+          fee: number | null
           game_format: string | null
           game_length: number | null
           gender: string | null
@@ -1462,8 +1559,10 @@ export type Database = {
           competion_id?: number | null
           created_at?: string
           created_by?: number | null
+          currency_code?: string | null
           deleted_at?: string | null
           description?: string | null
+          fee?: number | null
           game_format?: string | null
           game_length?: number | null
           gender?: string | null
@@ -1482,8 +1581,10 @@ export type Database = {
           competion_id?: number | null
           created_at?: string
           created_by?: number | null
+          currency_code?: string | null
           deleted_at?: string | null
           description?: string | null
+          fee?: number | null
           game_format?: string | null
           game_length?: number | null
           gender?: string | null
@@ -1512,6 +1613,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "divisions_currency_code_fkey"
+            columns: ["currency_code"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["currency_code"]
           },
           {
             foreignKeyName: "divisions_organization_id_fkey"
@@ -3721,6 +3829,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      level: "Premier" | "A" | "B" | "C" | "Grassroots"
       user_role: "Super Admin" | "Org Admin" | "User"
     }
     CompositeTypes: {
@@ -3849,6 +3958,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      level: ["Premier", "A", "B", "C", "Grassroots"],
       user_role: ["Super Admin", "Org Admin", "User"],
     },
   },
