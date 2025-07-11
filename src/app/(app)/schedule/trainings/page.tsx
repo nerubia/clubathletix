@@ -1,6 +1,5 @@
 import { FixtureCard } from "@/components/cards/fixture";
 import { stringToBase64URL } from "@supabase/ssr";
-import { redirect } from "next/dist/server/api-utils";
 
 export default async function SchedulePage() {
     const Authorization = await stringToBase64URL(`${process.env.CALENDLY_CLIENT_ID || ''}:${process.env.CALENDLY_CLIENT_SECRET || ''}`);

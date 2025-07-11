@@ -11,7 +11,7 @@
  * await submitSlackRequest('reactions.add', { channel: 'C123', name: 'thumbsup', timestamp: '1234567890.123456' });
  * ```
  */
-export async function submitSlackRequest(api: 'reactions.add' | 'chat.postMessage', payload?: Record<string, string | number | boolean>) {
+export async function submitSlackRequest(api: string, payload?: Record<string, any>) {
     const response = await fetch(`https://slack.com/api/${api}`, {
         method: 'POST',
         headers: {

@@ -8,7 +8,7 @@
     "start": "next start",
     "test": "jest",
     "lint": "next lint",
-    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
+    "prettier-watch": "onchange \"**/*.tsx?\" -- prettier --write --ignore-unknown {{changed}}",
     "signin": "npx supabase login",
     "gen-types": "npx supabase gen types typescript --project-id $PROJECT_REF --schema public > ./src/database.types.ts"
   },
