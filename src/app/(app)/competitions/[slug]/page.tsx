@@ -4,6 +4,7 @@ import CTA from './cta';
 import { stringFromBase64URL } from '@supabase/ssr';
 import { Heading, Subheading } from '@/components/heading';
 import { Text } from '@/components/text';
+import DivisionsCTA from './divisions-cta';
 
 function Backdrop() {
 	return (
@@ -104,15 +105,10 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                         </div>
 
                         <section className='flex flex-col gap-6 mb-6'>
-                            {
-                                competition.divisions.sort((a, b) => a.sequence_no && b.sequence_no ? b.sequence_no - a.sequence_no : 0).map((division: any, idx) => (
-                                    <CTA key={division.id} title={`${division.name} Division`} data-register={{
-                                        href: `/competitions/${competition.slug}/${division.id}/register`,
-                                        text: 'Register Now',
-                                        image_url: division.image_url,
-                                    }} description={`🎫 ${division.currency_code}${division.fee} team entry fee\n⚖️ ${division.game_format}\n⏲️ ${division.game_length} minutes • ${division.half_time_length} min-halves`} image_url={images[idx] || 'https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/pfa/uploads/competitions/u8.jpg'} />
-                                ))
-                            }
+                            <DivisionsCTA items={competition.divisions} data={{
+                                ...competition,
+                                divisions: undefined,
+                            } as Record<string, any>} />
                         </section>
                     </div>
                 );
