@@ -2,10 +2,10 @@
 import { Button } from '@/components/button';
 import { Checkbox, CheckboxField } from '@/components/checkbox';
 import { Field, Label } from '@/components/fieldset';
-import { Heading, Subheading } from '@/components/heading';
+import { Heading } from '@/components/heading';
 import { Input } from '@/components/input';
-import { Text } from '@/components/text';
 import { useState } from 'react';
+import WaiverContainer from './waiver-container';
 
 export type CompetitionFormContainerData = {
 	name: string;
@@ -84,9 +84,10 @@ export default function FormContainer({ competition }: { competition: Competitio
 						/>
 					</Field>
 
-
-					<Field data-theme="light" className='col-span-2'>
-						<Label data-theme="light">Crest URL<sup className='text-zinc-600 italic'>(Optional. PNG or SVG are recommended.)</sup></Label>
+					<Field data-theme="light" className="col-span-2">
+						<Label data-theme="light">
+							Crest URL<sup className="text-zinc-600 italic">(Optional. PNG or SVG are recommended.)</sup>
+						</Label>
 						<Input
 							name="logo_url"
 							data-theme="light"
@@ -201,31 +202,8 @@ export default function FormContainer({ competition }: { competition: Competitio
 					</div>
 				</div>
 				<section className="mt-8">
-					<div id="waiver" className="mb-8 rounded-lg bg-slate-900 p-6">
-						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty" force="text-white">
-							Competition Waiver
-						</Heading>
-						<Text data-theme="dark" className="mb-4 text-justify">
-							I, the undersigned coach, acknowledge that I am registering a team to participate in the{' '}
-							{competition?.name || 'competition'}, organized by {competition?.organizations.name || 'academy'}. I
-							understand that participation in this competition involves physical activity that carries an inherent risk
-							of injury. I confirm that all players, coaches, and team officials under my care have agreed to comply
-							with the rules, codes of conduct, and safety policies outlined by the competition organizers. I hereby
-							release {competition?.organizations.name || 'academy'}, its officers, volunteers, and affiliates from any
-							liability arising from injuries, accidents, or losses incurred during participation in the competition. I
-							agree to ensure that all players are covered by appropriate insurance and understand that registration is
-							not complete until payment has been received and confirmed.
-						</Text>
+					<WaiverContainer competition_name={competition.name} organizer_name={competition.organizations.name} />
 
-						<Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty" force="text-white">
-							Photography/Video Usage Policy
-						</Subheading>
-						<Text data-theme="dark" className="text-justify">
-							By registering for this event, you are consenting to the use of any photographs and/or video recordings,
-							of any team player(s) or staff member(s), taken by {competition?.organizations.name || 'academy'} for use
-							on our website, social media sites, and/or in any marketing materials. 
-						</Text>
-					</div>
 					<CheckboxField data-theme="light">
 						<Checkbox
 							color="rose"

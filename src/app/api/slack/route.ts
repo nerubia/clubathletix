@@ -1,8 +1,6 @@
-import { getAthleteViaEmail, getAthleteViaSlack } from "@/services/athletes";
-import { getCustomerByEmail } from "@/services/customer";
+import { getAthleteViaEmail } from "@/services/athletes";
 import { submitSlackRequest } from "@/services/http";
 import { getSlackChannels, getSlackUserProfile } from "@/services/schedule";
-import { a, tr } from "framer-motion/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -12,7 +10,6 @@ export async function POST(req: NextRequest) {
     const {
         user,
         actions,
-        response_url,
         message,
         channel,
         container: {
@@ -54,6 +51,7 @@ export async function POST(req: NextRequest) {
             const customer = await getAthleteViaEmail(profile.email)
             const { athletes, email, phone, full_name, ...record } = customer || { athletes: [] };
             const [from, to] = replyInChannel.name.split('-').map(s => Number(s.trim())).filter(Boolean);
+            
             let applicablePlayers: string[] = (!from ? athletes.map(athlete => athlete.full_name.split(',').pop()?.trim() || '') : []).filter(Boolean);
             if (from && to) {
                 applicablePlayers = athletes.filter(athlete => {
