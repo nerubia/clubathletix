@@ -51,8 +51,7 @@ const posts = [
 export default function DivisionsCTA({items, data}: {items: Record<string, any>, data: Record<string, any>}) {
     console.log(data)
   return (
-    <div>
-      <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-7xl sm:mb-10">
         <div className="mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {items.map((item: Record<string, string>) => (
             <article
@@ -86,7 +85,6 @@ export default function DivisionsCTA({items, data}: {items: Record<string, any>,
             </article>
           ))}
         </div>
-      </div>
     </div>
   )
 }
