@@ -30,7 +30,7 @@ export default function Navigation({
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return path.startsWith('/d/') || path.endsWith('/d') ? <></> : <header className={`absolute inset-x-0 top-0 z-50 ${backgroundColour || ''}`.trim()}>
-    <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 px-8 xl:px-0">
       <div className="flex lg:flex-1 items-center">
         <Link href="/" className="-m-1.5 p-1.5">
           {organization?.logo_url && <img
