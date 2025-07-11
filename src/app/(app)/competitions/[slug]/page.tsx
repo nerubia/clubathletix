@@ -79,8 +79,8 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                                             We&rsquo;ll be in touch with more details after receiving your registration fee!
                                                         </p>
                                                     </> : <div className='mt-6 text-center'>
-                                                        <Heading force="text-white text-center">Each team plays each other once</Heading>
-                                                        <Heading force="text-white text-center">Top 2 teams advance to the finals</Heading>
+                                                        {/* <Heading force="text-white text-center">Each team plays each other once</Heading>
+                                                        <Heading force="text-white text-center">Top 2 teams advance to the finals</Heading> */}
                                                     </div>
                                                     }
                                                 </div>
