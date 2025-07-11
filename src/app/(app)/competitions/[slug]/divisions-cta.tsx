@@ -1,3 +1,5 @@
+import { Button } from "@/components/button"
+
 const posts = [
   {
     id: 1,
@@ -75,12 +77,12 @@ export default function DivisionsCTA({items, data}: {items: Record<string, any>,
                   </div>
                 </div>
               </div>
-              <h3 className="mt-3 text-lg/6 font-semibold text-white">
-                <a href={`${data.slug}/${item.id}/register`} className="flex items-center justify-between">
+              <h3 className="mt-3 text-lg/6 font-semibold text-white flex items-center justify-between">
+                <span>{item.name} Division</span>
+                <Button href={`${data.slug}/${item.id}/register`} color="white" className="flex items-center justify-between">
                   <span className="absolute inset-0" />
-                    <span>{item.name} Division</span>
-                    <small>Register &rarr;</small>
-                </a>
+                  Register &rarr;
+                </Button>
               </h3>
             </article>
           ))}
