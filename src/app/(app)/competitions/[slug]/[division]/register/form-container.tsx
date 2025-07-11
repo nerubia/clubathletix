@@ -33,12 +33,12 @@ type FormState = {
 }
 export default function FormContainer({competition}: {competition: CompetitionFormContainerData}) {
     const [formState, setFormState] = useState<FormState>({
-        club_academy: 'Progress Footy Football Academy',
-        team_name: 'PF Atlético Roja',
-        first_name: 'Gerard',
-        last_name: 'Rey',
-        email_address: 'rey@progressfooty.com',
-        phone_number: '236-777-1283',
+        club_academy: '',
+        team_name: '',
+        first_name: '',
+        last_name: '',
+        email_address: '',
+        phone_number: '',
         ...competition,
     } as FormState & {agree?: boolean, description?: string
     });
