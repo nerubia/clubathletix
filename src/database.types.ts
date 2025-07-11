@@ -1548,6 +1548,7 @@ export type Database = {
           half_time_length: number | null
           has_tier: boolean | null
           id: number
+          image_url: string
           name: string | null
           organization_id: number | null
           sequence_no: number | null
@@ -1570,6 +1571,7 @@ export type Database = {
           half_time_length?: number | null
           has_tier?: boolean | null
           id?: number
+          image_url?: string
           name?: string | null
           organization_id?: number | null
           sequence_no?: number | null
@@ -1592,6 +1594,7 @@ export type Database = {
           half_time_length?: number | null
           has_tier?: boolean | null
           id?: number
+          image_url?: string
           name?: string | null
           organization_id?: number | null
           sequence_no?: number | null

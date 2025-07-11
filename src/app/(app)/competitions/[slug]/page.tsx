@@ -92,6 +92,7 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                     <CTA key={division.id} title={`${division.name} Division`} data-register={{
                                         href: `/competitions/${competition.slug}/${division.id}/register`,
                                         text: 'Register Now',
+                                        image_url: division.image_url,
                                     }} description={`🎫 ${division.currency_code}${division.fee} team entry fee\n⚖️ ${division.game_format}\n⏲️ ${division.game_length} minutes • ${division.half_time_length} min-halves`} image_url={images[idx] || 'https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/pfa/uploads/competitions/u8.jpg'} />
                                 ))
                             }

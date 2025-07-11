@@ -45,7 +45,7 @@ export default function CTA(props: {
           </div>
           <div className="relative mt-16 h-80 lg:mt-8">
             <img
-              alt="App screenshot"
+              alt={props.title}
               src={props.image_url}
               width={1824}
               height={1080}
