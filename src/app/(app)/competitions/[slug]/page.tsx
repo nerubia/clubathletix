@@ -54,7 +54,7 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                     <div className="w-screen">
                         <div className="relative isolate overflow-hidden py-24 sm:py-20 lg:overflow-visible">
                             <div className="mx-auto max-w-7xl">
-                                <div className="overflow-hidden py-1 px-1 rounded-3xl bg-slate-900">
+                                <div className="overflow-hidden py-1 px-1 sm:rounded-3xl bg-slate-900">
                                     <div className="relative isolate">
                                         <div className="w-full sm:rounded-3xl">
                                             <div className="mx-auto max-w-2xl bg-white/[0.03] px-6 py-16 ring-1 ring-white/10 sm:rounded-3xl sm:p-8 lg:mx-0 lg:max-w-none lg:py-20 xl:gap-x-20 xl:px-20">
