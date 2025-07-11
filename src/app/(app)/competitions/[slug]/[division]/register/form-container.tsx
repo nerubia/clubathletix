@@ -2,7 +2,7 @@
 import { Button } from '@/components/button';
 import { Checkbox, CheckboxField } from '@/components/checkbox';
 import { Field, Label } from '@/components/fieldset';
-import { Heading } from '@/components/heading';
+import { Heading, Subheading } from '@/components/heading';
 import { Input } from '@/components/input';
 import { Text } from '@/components/text';
 import { useState } from 'react';
@@ -186,7 +186,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 						<Heading className="mb-4 text-4xl font-semibold tracking-tight text-pretty text-white">
 							Competition Waiver
 						</Heading>
-						<Text data-theme="dark" className="text-justify">
+						<Text data-theme="dark" className="text-justify mb-4">
 							I, the undersigned coach, acknowledge that I am registering a team to participate in the{' '}
 							{competition?.name || 'competition'}, organized by {competition?.organizations.name || 'academy'}. I
 							understand that participation in this competition involves physical activity that carries an inherent risk
@@ -198,7 +198,11 @@ export default function FormContainer({ competition }: { competition: Competitio
 							not complete until payment has been received and confirmed.
 						</Text>
 
-						<Text data-theme="dark" className="text-justify mt-6">
+
+                        <Subheading level={4} className="mb-2 font-semibold tracking-tight text-pretty text-white">
+                            Photography/Video Usage Policy
+                        </Subheading>
+						<Text data-theme="dark" className="text-justify">
 							By registering for this event, you are consenting to the use of any photographs and/or video recordings,
 							of any team player(s) or staff member(s), taken by {competition?.organizations.name || 'academy'} for use
 							on our website, social media sites, and/or in any marketing materials. 
