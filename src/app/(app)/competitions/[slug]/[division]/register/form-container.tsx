@@ -30,6 +30,7 @@ type FormState = {
 	phone_number: string;
 	description?: string;
 	agree?: boolean;
+	logo_url?: string;
 };
 export default function FormContainer({ competition }: { competition: CompetitionFormContainerData }) {
 	const [formState, setFormState] = useState<FormState>({
@@ -80,6 +81,24 @@ export default function FormContainer({ competition }: { competition: Competitio
 								)
 							}
 							defaultValue={formState.team_name}
+						/>
+					</Field>
+
+
+					<Field data-theme="light" className='col-span-2'>
+						<Label data-theme="light">Crest URL<sup className='text-zinc-600 italic'>(Optional. PNG or SVG are recommended.)</sup></Label>
+						<Input
+							name="logo_url"
+							data-theme="light"
+							onChange={(e) =>
+								setFormState(
+									(prev) =>
+										({
+											...prev,
+											[e.target.name]: e.target.value,
+										}) as unknown as FormState
+								)
+							}
 						/>
 					</Field>
 				</div>

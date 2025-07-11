@@ -26,6 +26,7 @@ export async function submitAction(formData: FormData) {
         phone: organization_phone,
         email: organization_email,
         fee,
+        logo_url,
     } = Object.fromEntries(formData.entries()) as unknown as Record<string, string>;
 
     const waiver_signed_at = new Date();
@@ -39,6 +40,7 @@ export async function submitAction(formData: FormData) {
         phone_number: phone_number as string,
         waiver_signed_at,
         description: description as string,
+        logo_url: logo_url as string,
         division_id: Number(division_id),
         competition_id: Number(competition_id),
     };
