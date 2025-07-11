@@ -198,7 +198,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 							not complete until payment has been received and confirmed.
 						</Text>
 
-						<Text data-theme="dark" className="text-justify">
+						<Text data-theme="dark" className="text-justify mt-6">
 							By registering for this event, you are consenting to the use of any photographs and/or video recordings,
 							of any team player(s) or staff member(s), taken by {competition?.organizations.name || 'academy'} for use
 							on our website, social media sites, and/or in any marketing materials. 
