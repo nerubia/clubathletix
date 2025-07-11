@@ -35,7 +35,7 @@ export default function FormContainer({competition}: {competition: Competition})
                 </div>
             </div>
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <h2 className='sm:col-span-2 text-2xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-3xl'>Coach's Information</h2>
+              <h2 className='sm:col-span-2 text-2xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-3xl'>Coach'&rsquo;s Information</h2>
               <div>
                 <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900">
                   First name
