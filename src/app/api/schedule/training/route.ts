@@ -64,6 +64,7 @@ export async function POST(request: NextRequest) {
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
             email: athlete.parent.email || '',
             parent_name: `${athlete.parent.first_name || athlete.parent.full_name || ''}`.split(',').pop()?.trim() || '',
+            slack_users: (athlete.slack_users || []),
             date_of_birth: athlete.date_of_birth,
         };
     }));
@@ -79,11 +80,13 @@ export async function POST(request: NextRequest) {
             time: text.split(' ').slice(0, 2).join(' '),
         });
 
-        return submitSlackRequest('chat.postEphemeral', {
-            channel: 'C09666BQ8BS',
-            user: user_id,
-            blocks,
-        });
+        return Promise.all(athlete.slack_users.map(user => {
+            return submitSlackRequest('chat.postEphemeral', {
+                channel: 'C09666BQ8BS',
+                user,
+                blocks,
+            })
+        }))
     }))
 	
 
