@@ -51,7 +51,7 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
             
             if (competition) {
                 return (
-                    <div className="w-screen">
+                    <div className="w-screen" id="top">
                         <div className='sm:hidden w-full h-18' />
                         <div className="relative isolate overflow-hidden sm:py-20 lg:overflow-visible">
                             <div className="mx-auto max-w-7xl">
