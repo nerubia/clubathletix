@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
             id: athlete.id,
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
             email: athlete.parent.email || '',
-            parent_name: `${athlete.parent.first_name || athlete.parent.full_name || ''}`.split(',').pop()?.trim() || '',,
+            parent_name: `${athlete.parent.first_name || athlete.parent.full_name || ''}`.split(',').pop()?.trim() || '',
             date_of_birth: athlete.date_of_birth,
         };
     }));
