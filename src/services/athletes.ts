@@ -64,6 +64,7 @@ export async function getAthleteViaSlack(username: string): Promise<Database['pu
 }
 type AthleteRecord = Database['public']['Tables']['athletes']['Row'] & {
     parent: Database['public']['Tables']['customers']['Row']
+    slack_users: string[]
 }
 
 export async function getAthlete(id: number): Promise<AthleteRecord | undefined> {
@@ -121,6 +122,7 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
         else results = data.map((athlete) => ({
             ...athlete,
             parent: athlete.customers,
+            slack_users: athlete.slack_users.map((user: Database['public']['Tables']['slack_users']['Row']) => user.username)
         }))
     } catch (e) {
         console.error(e)

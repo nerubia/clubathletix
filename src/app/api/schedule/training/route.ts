@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
 	const {
 		command,
 		channel_id,
-		user_id,
 		text, // This is the text input from the user,
 		response_url, // Use this to submit a response back to Slack
 	} = params as Record<string, string>;
@@ -68,24 +67,7 @@ export async function POST(request: NextRequest) {
             date_of_birth: athlete.date_of_birth,
         };
     }));
-    // const parents: {
-    //     slack_username: string;
-    //     name: string;
-    //     email: string;
-    //     children: {
-    //         id: number;
-    //         name: string;
-    //         date_of_birth: string;
-    //     }[];
-    // }[] = [];
-    // for (const athlete of athletes) {
-    //     for (const parent of parents) {
-    //         if (parents.find(parent => parent.name === athlete.parent_name)) {
-    //             parents
-    //         }
-    //     }
-        
-    // }
+
     console.table(athletes);
     const results = await Promise.all(athletes.map(athlete => {
         const {blocks} = getSlackTrainingNotification({
