@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     }));
     console.log('Year groups:', applicable_years.split(',').map(Number));
     console.table(athletes);
-	const blocks = getSlackTrainingNotification({
+	const {blocks} = getSlackTrainingNotification({
 		organization_name: 'PF',
 		parent_name: 'Test Parent',
 		players: [
