@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
             players: [
                 athlete,
             ],
-            time: text.split(' ').slice(0, 2).join(' '),
+            time: str_time,
         });
 
     }))
