@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 	});
 
 	const { message_ts } = await submitSlackRequest('chat.postEphemeral', {
-		channel: channel_id,
+		channel: 'C09666BQ8BS',
 		user: user_id,
 		blocks,
 	});
