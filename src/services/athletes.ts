@@ -94,7 +94,7 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
         const { data, error } =  await supabase
             .from('athletes')
             .select('*, customers (full_name, first_name, last_name, email, phone)')
-            .ilike('date_of_birth', `${year}-`)
+            .ilike('date_of_birth', `${year}-%`)
 
         if (error)
         console.warn(error)
