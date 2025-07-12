@@ -13,9 +13,8 @@ export async function POST(req: NextRequest) {
 			const {
 				user,
 				actions,
-				message,
 				channel,
-				container: { channel_id },
+				container: { channel_id, message_ts },
 			} = JSON.parse(payload as unknown as string) as unknown as {
 				response_url: string;
 				user: {
@@ -28,19 +27,17 @@ export async function POST(req: NextRequest) {
 					value: string;
 					action_ts: number;
 				}[];
-				message: {
-					ts: number;
-				};
 				channel: {
 					id: string;
 					name: string;
 				};
 				container: {
 					channel_id: string;
+					message_ts: string;
 				};
 			};
 
-			const thread_ts = message.ts;
+			const thread_ts = message_ts;
 			const action = actions.pop();
 			const channels = await getSlackChannels();
 			const replyInChannel = channels.find((c) => c.id === channel_id || c.name === channel.name);
@@ -71,14 +68,14 @@ export async function POST(req: NextRequest) {
 					}
 
 					if (applicablePlayers && applicablePlayers.length) {
-						const results = await submitSlackRequest('chat.postMessage', {
+						const results = await submitSlackRequest('chat.postEphemeral', {
 							channel: replyInChannel.id,
 							text: applicablePlayers
 								.map((name) => `:${answer === 'yes' ? 'white_check_mark' : 'x'}: *${name}*`)
 								.join('\n'),
 							thread_ts,
 							mrkdwn: true,
-							reply_broadcast: true,
+							replace: true,
 							username: applicablePlayers.join(' • '),
 						});
 
