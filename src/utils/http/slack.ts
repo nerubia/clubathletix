@@ -210,7 +210,7 @@ export async function getSlackMatchNotification({
 				type: 'section',
 				text: {
 					type: 'mrkdwn',
-					text: `Hi ${parent_name}! *Match ${organization.name || ''}* posted by our coaches.\n\n:date: ${time} for ${playerNames}\n\n:round_pushpin: ${location}`,
+					text: `Hi ${parent_name}! *Match vs ${organization.name || ''}* posted by our coaches.\n\n:date: ${time} for ${playerNames}\n\n:round_pushpin: ${location}`,
 				},
 				accessory: {
 					type: 'image',
