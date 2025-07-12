@@ -88,7 +88,7 @@ export async function getAthlete(id: number): Promise<AthleteRecord | undefined>
 }
 export async function getAthleteViaEmail(email: string): Promise<Database['public']['Tables']['customers']['Row'] & {
     athletes: Database['public']['Tables']['athletes']['Row'][]
-    slack_users: string[],
+    slack_users: Database['public']['Tables']['slack_users']['Row'][],
 } | undefined> {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
