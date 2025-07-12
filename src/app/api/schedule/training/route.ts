@@ -1,5 +1,5 @@
 import { getSlackTrainingNotification } from "@/utils/http/slack";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
@@ -20,8 +20,7 @@ export async function POST(request: NextRequest) {
 //     time: params.time,
 //   });
 
-  return new Response(JSON.stringify({ message: "Training schedule created successfully", data: params }), {
-    status: 201,
-    headers: { "Content-Type": "application/json" },
+  return NextResponse.json({ message: "Training schedule created successfully", data: params }, {
+    status: 200,
   });
 }
