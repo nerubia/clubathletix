@@ -1,41 +1,12 @@
 import { getCompetitionBySlug } from '@/services/competition';
 import { notFound } from 'next/navigation';
-import CTA from './cta';
 import { stringFromBase64URL } from '@supabase/ssr';
 import { Heading, Subheading } from '@/components/heading';
-import { Text } from '@/components/text';
 import DivisionsCTA from './divisions-cta';
+import { Button } from '@/components/button';
 
-function Backdrop() {
-	return (
-		<div className="absolute inset-0 -z-10 overflow-hidden">
-			<svg
-				aria-hidden="true"
-				className="absolute top-0 left-[max(50%,25rem)] h-[64rem] w-[128rem] -translate-x-1/2 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] stroke-gray-200"
-			>
-				<defs>
-					<pattern
-						x="50%"
-						y={-1}
-						id="e813992c-7d03-4cc4-a2bd-151760b470a0"
-						width={200}
-						height={200}
-						patternUnits="userSpaceOnUse"
-					>
-						<path d="M100 200V.5M.5 .5H200" fill="none" />
-					</pattern>
-				</defs>
-				<svg x="50%" y={-1} className="overflow-visible fill-gray-50">
-					<path
-						d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
-						strokeWidth={0}
-					/>
-				</svg>
-				<rect fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" width="100%" height="100%" strokeWidth={0} />
-			</svg>
-		</div>
-	);
-}
+
+
 export default async function CompetitionPage(props: { params: Promise<{ slug: string }>, searchParams: Promise<{ team?: string }> }) {
 	const params = await props.params;
 	const search = await props.searchParams;
@@ -77,6 +48,10 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                                                             We&rsquo;ve sent you a confirmation email with the details to your registration. <br />Please check your inbox and spam folder for the confirmation email.<br />
                                                             We&rsquo;ll be in touch with more details after receiving your registration fee!
                                                         </p>
+                                                        
+                                                        <Button color='white' href={`${competition.slug}`} className="w-full sm:w-auto mt-8">
+                                                            Got it, thanks!
+                                                        </Button>
                                                     </> : <div className='mt-6 text-center'>
                                                         {/* <Heading force="text-white text-center">Each team plays each other once</Heading>
                                                         <Heading force="text-white text-center">Top 2 teams advance to the finals</Heading> */}
@@ -102,12 +77,12 @@ export default async function CompetitionPage(props: { params: Promise<{ slug: s
                             </div>
                         </div>
 
-                        <section className='flex flex-col gap-6 mb-6'>
+                        {!search.team && <section className='flex flex-col gap-6 mb-6'>
                             <DivisionsCTA items={competition.divisions} data={{
                                 ...competition,
                                 divisions: undefined,
                             } as Record<string, any>} />
-                        </section>
+                        </section>}
                     </div>
                 );
             }
