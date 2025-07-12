@@ -44,9 +44,11 @@ export async function POST(request: NextRequest) {
     const [applicable_years, time_portion, ...rest] = text.split(' ');
     
     const [date,time] = time_portion.split('T');
+    const [h,min] = time.split(':');
     const dt = new Date();
     const [y,m,d] = date.split('-').map(Number);
     dt.setFullYear(y, m - 1, d);
+    dt.setHours(Number(h), Number(min) || 0, 0, 0);
 
     console.log('Parsed date:', dt.toLocaleDateString('en-CA', {
         day: 'numeric',
