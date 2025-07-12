@@ -230,6 +230,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 				<div className="mt-8 flex justify-end">
 					<Button
 						type="submit"
+                        color='rose'
 						disabled={Boolean(
 							!formState?.agree ||
 								!formState?.team_name ||
