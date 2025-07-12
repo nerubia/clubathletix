@@ -81,12 +81,14 @@ export async function POST(request: NextRequest) {
 		time: text.split(' ').slice(0, 2).join(' '),
 	});
 
-	const { message_ts } = await submitSlackRequest('chat.postEphemeral', {
+	const { message_ts, ...slack_response } = await submitSlackRequest('chat.postEphemeral', {
 		channel: 'C09666BQ8BS',
 		user: user_id,
 		blocks,
 	});
-
+    
+    console.log('Slack response:', slack_response);
+    
 	return NextResponse.json(
 		{ message_ts, message: 'Training schedule created successfully' },
 		{
