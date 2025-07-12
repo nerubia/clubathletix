@@ -62,8 +62,8 @@ export async function POST(request: NextRequest) {
         return {
             id: athlete.id,
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
-            email: athlete.parent.email || '',
-            parent_name: `${athlete.parent.first_name || athlete.parent.full_name || ''}`.split(',').pop()?.trim() || '',
+            email: athlete.parent?.email || '',
+            parent_name: `${athlete.parent?.first_name || athlete.parent?.full_name || ''}`.split(',').pop()?.trim() || '',
             slack_users: (athlete.slack_users || []),
             date_of_birth: athlete.date_of_birth,
         };
