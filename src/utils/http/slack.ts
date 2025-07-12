@@ -103,14 +103,14 @@ export function getSlackEventNotification({
 }
 
 export function getSlackTrainingNotification({
-    organization_name,
+	organization_name,
 	parent_name,
 	players,
 	time,
 	location = 'Cambridge Elementary Park\n6115 150 St, Surrey, BC V3S 3H7',
-    crest_url = 'https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/pfa/logo.png',
+	crest_url = 'https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/pfa/logo.png',
 }: {
-    organization_name: string;
+	organization_name: string;
 	parent_name: string;
 	players: {
 		id: number;
