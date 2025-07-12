@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
                 ...messages[index],
             })
         }))
-    });
+    }));
 	
 
 	return NextResponse.json(
