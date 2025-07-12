@@ -37,7 +37,6 @@ export default async function Icon() {
 				}}
 			/>
 		),
-
 		// ImageResponse options
 		{
 			// For convenience, we can re-use the exported icons size metadata
