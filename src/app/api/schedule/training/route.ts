@@ -56,10 +56,18 @@ export async function POST(request: NextRequest) {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
-    }), 'Time:', time);
+    }));
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
-    console.log('Year groups:', applicable_years.split(',').map(Number), yearGroups);
+    const athletes = yearGroups.flatMap((group) => group.map((athlete) => {
+        return {
+            id: athlete.id,
+            name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
+            email: athlete.parent.email || '',
+        };
+    }));
+    console.log('Year groups:', applicable_years.split(',').map(Number));
+    console.table(athletes);
 	const blocks = getSlackTrainingNotification({
 		organization_name: 'PF',
 		parent_name: 'Test Parent',

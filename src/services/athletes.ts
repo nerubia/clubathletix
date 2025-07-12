@@ -98,8 +98,10 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
 
         if (error)
         console.warn(error)
-        else results = data as unknown as AthleteRecord[]
-
+        else results = data.map((athlete) => ({
+            ...athlete,
+            parent: athlete.customers
+        }))
 
     } catch (e) {
         console.error(e)
