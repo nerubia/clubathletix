@@ -124,6 +124,9 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
             parent: athlete.customers,
         }))
 
+
+        console.table(results)
+
     } catch (e) {
         console.error(e)
     }
