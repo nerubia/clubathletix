@@ -82,3 +82,28 @@ export async function getAthleteViaEmail(email: string): Promise<Database['publi
         console.error(e)
     }
 }
+
+type AthleteRecord = Database['public']['Tables']['athletes']['Row'] & {
+    parent: Database['public']['Tables']['customers']['Row']
+}
+export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> {
+    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    let results: AthleteRecord[]  = []
+    try {
+
+        const { data, error } =  await supabase
+            .from('athletes')
+            .select('*, customers (full_name, first_name, last_name, email, phone)')
+            .ilike('date_of_birth', `${year}-`)
+
+        if (error)
+        console.warn(error)
+        else results = data as unknown as AthleteRecord[]
+
+
+    } catch (e) {
+        console.error(e)
+    }
+
+    return results
+}
