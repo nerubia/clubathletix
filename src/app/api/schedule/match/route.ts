@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
 
     const results = await Promise.all(athletes.map((athlete, index) => { 
         return Promise.all(athlete.slack_users.map(user => {
+            console.log(user)
             return submitSlackRequest('chat.postEphemeral', {
                 channel: 'C09666BQ8BS',
                 user,
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest) {
 	
 
 	return NextResponse.json(
-		{ results, text: 'Training schedule created successfully' },
+		{ results, text: 'Match schedule created successfully' },
 		{
 			status: 200,
 		}
