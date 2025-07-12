@@ -41,7 +41,20 @@ export async function POST(request: NextRequest) {
 	//     status: xhr.status,
 	//     statusText: xhr.statusText,
 	// });
-    const [applicable_years, time, ...rest] = text.split(' ');
+    const [applicable_years, time_portion, ...rest] = text.split(' ');
+    
+    const [date,time] = time_portion.split('T');
+    const dt = new Date();
+    const [y,m,d] = date.split('-').map(Number);
+    dt.setFullYear(y, m - 1, d);
+
+    console.log('Parsed date:', dt.toLocaleDateString('en-CA', {
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    }), 'Time:', time);
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     console.log('Year groups:', applicable_years.split(',').map(Number), yearGroups);
