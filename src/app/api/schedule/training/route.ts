@@ -68,16 +68,31 @@ export async function POST(request: NextRequest) {
             date_of_birth: athlete.date_of_birth,
         };
     }));
+    // const parents: {
+    //     slack_username: string;
+    //     name: string;
+    //     email: string;
+    //     children: {
+    //         id: number;
+    //         name: string;
+    //         date_of_birth: string;
+    //     }[];
+    // }[] = [];
+    // for (const athlete of athletes) {
+    //     for (const parent of parents) {
+    //         if (parents.find(parent => parent.name === athlete.parent_name)) {
+    //             parents
+    //         }
+    //     }
+        
+    // }
     console.table(athletes);
     const results = await Promise.all(athletes.map(athlete => {
         const {blocks} = getSlackTrainingNotification({
             organization_name: 'PF',
             parent_name: athlete.parent_name,
             players: [
-                {
-                    id: athlete.id,
-                    name: athlete.name,
-                },
+                athlete,
             ],
             time: text.split(' ').slice(0, 2).join(' '),
         });
