@@ -5,11 +5,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
 	const hdr = await req.headers;
-	console.log('Received request to /api/slack/route.ts', hdr.get('content-type'));
 	const data = await req.formData();
 	try {
-		console.log('Received data for /api/slack/route.ts', data);
-		const { payload } = Object.fromEntries(data);
+        const { payload } = Object.fromEntries(data);
+		console.log('Received data for /api/slack/route.ts', {payload});
 		if (payload) {
 			const {
 				user,
