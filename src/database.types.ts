@@ -3490,24 +3490,24 @@ export type Database = {
       slack_users: {
         Row: {
           athlete_id: number
-          channel_id: string | null
+          id: number
           username: string
         }
         Insert: {
           athlete_id: number
-          channel_id?: string | null
+          id?: number
           username: string
         }
         Update: {
           athlete_id?: number
-          channel_id?: string | null
+          id?: number
           username?: string
         }
         Relationships: [
           {
             foreignKeyName: "slack_users_athlete_id_fkey"
             columns: ["athlete_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "athletes"
             referencedColumns: ["id"]
           },
