@@ -1,5 +1,6 @@
 import { getAthleteViaYear } from '@/services/athletes';
 import { submitSlackRequest } from '@/services/http';
+import { getOrganization } from '@/services/organization';
 import { getSlackMatchNotification, getSlackTrainingNotification } from '@/utils/http/slack';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -28,6 +29,16 @@ export async function POST(request: NextRequest) {
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     const slackUsers: string[] = [];
+
+    let organization = await getOrganization(organization_id);
+    if (!organization) {
+        organization = {
+            id: 0,
+            name: 'Academy',
+            logo_url: 'https://viplaril6wogm0dr.public.blob.vercel-storage.com/clubathletix/pfa/logo-sm.png',
+        }
+    }
+
     const messages = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
         if (athlete.slack_users?.length) console.log(athlete.full_name);
         for (const user of athlete.slack_users) {
@@ -35,7 +46,10 @@ export async function POST(request: NextRequest) {
             if (!slackUsers.includes(slack_athlete)) {
                 slackUsers.push(slack_athlete);
                 return getSlackMatchNotification({
-                    organization_id,
+                    organization: {
+                        name: organization.name || 'Academy',
+                        logo_url: organization.logo_url || '',
+                    },
                     parent_name: `${athlete.parent?.first_name || athlete.parent?.full_name || ''}`.split(',').pop()?.trim() || '',
                     players: [{
                         id: athlete.id,
