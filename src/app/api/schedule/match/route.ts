@@ -27,6 +27,8 @@ export async function POST(request: NextRequest) {
         minute: '2-digit',
         hour12: true,
     })
+    
+    console.log({str_time});
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     
