@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     // }));
 	slackUsers.map((slack_athlete, idx) => {
         const [user, athlete_id] = slack_athlete.split(':');
-        console.log(user, athlete_id, messages[idx]);
+        console.log(user, athlete_id, JSON.stringify(messages[idx], null, 2));
     })
 	return NextResponse.json(
 		{ messages, text: 'Match schedule created successfully' },
