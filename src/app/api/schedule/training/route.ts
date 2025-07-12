@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
 	});
 
 	return NextResponse.json(
-		{ message_ts, blocks },
+		{ message_ts, message: 'Training schedule created successfully' },
 		{
 			status: 200,
 		}
