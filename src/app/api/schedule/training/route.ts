@@ -71,7 +71,6 @@ export async function POST(request: NextRequest) {
         };
     }));
 
-    console.table(athletes);
     const results = await Promise.all(athletes.map(athlete => {
         const {blocks} = getSlackTrainingNotification({
             organization_name: 'PF',
