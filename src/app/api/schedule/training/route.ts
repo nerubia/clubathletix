@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
 	});
 
 	return NextResponse.json(
-		{ blocks },
+		{ message_ts, blocks },
 		{
 			status: 200,
 		}
