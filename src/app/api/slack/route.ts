@@ -152,7 +152,7 @@ export async function POST(req: NextRequest) {
 			message: 'Slack integration is not available yet.',
 		});
 	} catch (error) {
-		console.error('Error parsing payload:', error);
-		return NextResponse.json({ error: 'Invalid payload format.' }, { status: 400 });
+		console.warn('Error parsing payload:', error);
+		return NextResponse.json({ error: 'Invalid payload format.' });
 	}
 }
