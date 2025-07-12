@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     const slackUsers: string[] = [];
-    const messageQueue = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
+    const messages = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
         if (athlete.slack_users?.length) console.log(athlete.full_name);
         for (const user of athlete.slack_users) {
             const slack_athlete = `${user}:${athlete.id}`;
@@ -82,9 +82,9 @@ export async function POST(request: NextRequest) {
     //     }))
     // }));
 	
-
+    console.table(messages)
 	return NextResponse.json(
-		{ messageQueue, text: 'Match schedule created successfully' },
+		{ messages, text: 'Match schedule created successfully' },
 		{
 			status: 200,
 		}
