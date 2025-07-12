@@ -95,5 +95,7 @@ export async function getOrganization(id: number): Promise<{
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
     const { data, error } = await supabase.from('organizations').select('id, name, short_name, logo_url, colours').eq('id', id).single()
     
+        if (error) console.warn('Error fetching organization:', error)
+
     return data
 }
