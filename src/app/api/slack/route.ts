@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
 			const action = actions.pop();
 
             const [yes_no, s_athlete_id] = action?.action_id.split('-') || []
+            console.log({yes_no, s_athlete_id, action})
             const athlete_id = Number(s_athlete_id);
             if (athlete_id) {
                 const athlete = await getAthlete(athlete_id);
