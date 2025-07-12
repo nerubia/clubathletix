@@ -8,14 +8,13 @@ export async function POST(request: NextRequest) {
 	const params = Object.fromEntries(formData.entries());
 
 	const {
-		command,
-		channel_id,
 		text, // This is the text input from the user,
 	} = params as Record<string, string>;
 
     const [applicable_years, s_organization_id, month, day, time] = text.split(' ');
     const organization_id = Number(s_organization_id);
     
+    console.log({organization_id}, applicable_years, month, day, time);
     
     const [h,min] = time.split(':');
     const dt = new Date(new Date().getFullYear(), Number(month) - 1, Number(day));
