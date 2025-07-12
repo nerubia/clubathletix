@@ -1,4 +1,4 @@
-import {Text} from '@/components/text'
+import { Text } from '@/components/text';
 export default async function Redirect() {
-    return <Text>test</Text>
+	return <Text>test</Text>;
 }
