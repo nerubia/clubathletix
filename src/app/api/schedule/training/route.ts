@@ -64,33 +64,39 @@ export async function POST(request: NextRequest) {
             id: athlete.id,
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
             email: athlete.parent.email || '',
+            parent_name: `${athlete.parent.first_name || athlete.parent.full_name || ''}`.split(',').pop()?.trim() || '',,
             date_of_birth: athlete.date_of_birth,
         };
     }));
-    console.log('Year groups:', applicable_years.split(',').map(Number));
     console.table(athletes);
-	const {blocks} = getSlackTrainingNotification({
-		organization_name: 'PF',
-		parent_name: 'Test Parent',
-		players: [
-			{
-				id: 1,
-				name: 'Test Player',
-			},
-		],
-		time: text.split(' ').slice(0, 2).join(' '),
-	});
-    console.log('Blocks:', blocks);
-	const { message_ts, ...slack_response } = await submitSlackRequest('chat.postEphemeral', {
-		channel: 'C09666BQ8BS',
-		user: user_id,
-		blocks,
-	});
-    
-    console.log('Slack response:', slack_response);
+    const results = await Promise.all(athletes.map(athlete => {
+        const {blocks} = getSlackTrainingNotification({
+            organization_name: 'PF',
+            parent_name: 'Test Parent',
+            players: [
+                {
+                    id: 1,
+                    name: 'Test Player',
+                },
+            ],
+            time: text.split(' ').slice(0, 2).join(' '),
+        });
+
+        const { message_ts, ...slack_response } = await submitSlackRequest('chat.postEphemeral', {
+            channel: 'C09666BQ8BS',
+            user: user_id,
+            blocks,
+        });
+
+        return {
+            message_ts,
+            user_id,
+        }
+    }))
+	
 
 	return NextResponse.json(
-		{ message_ts, text: 'Training schedule created successfully' },
+		{ results, text: 'Training schedule created successfully' },
 		{
 			status: 200,
 		}
