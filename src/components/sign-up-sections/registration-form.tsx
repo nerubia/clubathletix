@@ -117,7 +117,9 @@ export default function RegistrationForm() {
                 </label>
                 
                 <Birthdate id="child-birthdate" 
-                    value={`${formData?.date_of_birth || ''}`} onChange={e => {
+                    value={`${formData?.date_of_birth || ''}`}
+                    data-theme="light"
+                    onChange={e => {
                     setFormData(prev => ({
                         ...prev,
                         date_of_birth: e

@@ -118,6 +118,7 @@ export default function FormContents() {
                 </label>
                 
                 <Birthdate id="child-birthdate" 
+                    data-theme="light"
                     value={`${formData?.date_of_birth || ''}`} onChange={e => {
                     setFormData(prev => ({
                         ...prev,
