@@ -14,8 +14,6 @@ export async function POST(request: NextRequest) {
     const [applicable_years, s_organization_id, month, day, time] = text.split(' ');
     const organization_id = Number(s_organization_id);
     
-    console.log({organization_id}, applicable_years, month, day, time);
-    
     const [h,min] = time.split(':');
     const dt = new Date(new Date().getFullYear(), Number(month) - 1, Number(day));
     dt.setHours(Number(h), Number(min) || 0, 0, 0);
@@ -27,8 +25,6 @@ export async function POST(request: NextRequest) {
         minute: '2-digit',
         hour12: true,
     })
-    
-    console.log({str_time});
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     const slackUsers: string[] = [];
