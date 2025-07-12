@@ -64,6 +64,7 @@ export async function POST(request: NextRequest) {
             id: athlete.id,
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
             email: athlete.parent.email || '',
+            date_of_birth: athlete.date_of_birth,
         };
     }));
     console.log('Year groups:', applicable_years.split(',').map(Number));
