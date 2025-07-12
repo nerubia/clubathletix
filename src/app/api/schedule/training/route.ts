@@ -88,9 +88,9 @@ export async function POST(request: NextRequest) {
 	});
     
     console.log('Slack response:', slack_response);
-    
+
 	return NextResponse.json(
-		{ message_ts, message: 'Training schedule created successfully' },
+		{ message_ts, text: 'Training schedule created successfully' },
 		{
 			status: 200,
 		}
