@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
     
     const athletes = yearGroups.flatMap((group) => group.map((athlete) => {
-        console.log(athlete.full_name, JSON.stringify(athlete, null, 2));
+        if (athlete.slack_users?.length) console.log(athlete.full_name, JSON.stringify(athlete, null, 2));
         return {
             id: athlete.id,
             name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
