@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
 		],
 		time: text.split(' ').slice(0, 2).join(' '),
 	});
-
+    console.log('Blocks:', blocks);
 	const { message_ts, ...slack_response } = await submitSlackRequest('chat.postEphemeral', {
 		channel: 'C09666BQ8BS',
 		user: user_id,
