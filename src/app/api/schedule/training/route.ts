@@ -2,7 +2,8 @@ import { getSlackTrainingNotification } from "@/utils/http/slack";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const params = await request.json();
+  const formData = await request.formData();
+  const params = Object.fromEntries(formData.entries());
   console.log("Received request to /api/schedule/training/route.ts", params);
   // Here you would typically handle the training schedule creation logic
   // For example, saving the training data to a database or sending it to an external service
