@@ -39,13 +39,13 @@ export async function POST(request: NextRequest) {
         }
     }
 
-    const messages = yearGroups.flatMap((group) => group.map((athlete) => {
+    const messages = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
         if (athlete.slack_users?.length) console.log(athlete.full_name);
-        return athlete.slack_users.map(user => {
+        return Promise.all(athlete.slack_users.map(user => {
             const slack_athlete = `${user}:${athlete.id}`;
             if (!slackUsers.includes(slack_athlete)) {
                 slackUsers.push(slack_athlete);
-                return getSlackMatchNotification({
+                const { blocks } = getSlackMatchNotification({
                     organization: {
                         name: organization.name || 'Academy',
                         logo_url: organization.logo_url || '',
@@ -57,6 +57,12 @@ export async function POST(request: NextRequest) {
                     }],
                     time: str_time,
                 });
+
+                return submitSlackRequest('chat.postEphemeral', {
+                    channel: 'C09666BQ8BS',
+                    user,
+                    blocks,
+                })
                 return {
                     id: athlete.id,
                     name: athlete.full_name.split(',').pop()?.trim() || athlete.full_name,
@@ -65,9 +71,9 @@ export async function POST(request: NextRequest) {
                     date_of_birth: athlete.date_of_birth,
                 };
             }
-        });
+        }));
         
-    }));
+    })));
 
     // const messages = await Promise.all(athletes.map(athlete => {
     //     return getSlackMatchNotification({
