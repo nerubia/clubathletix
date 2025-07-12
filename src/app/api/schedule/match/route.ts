@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
 
     // }))
 
-    // const results = await Promise.all(athletes.map((athlete, index) => { 
+    // const results = await Promise.all(messages.map(({ block }, index) => { 
     //     return Promise.all(athlete.slack_users.map(user => {
     //         console.log(user)
     //         return submitSlackRequest('chat.postEphemeral', {
@@ -81,8 +81,10 @@ export async function POST(request: NextRequest) {
     //         })
     //     }))
     // }));
-	
-    console.table(messages)
+	slackUsers.map((slack_athlete, idx) => {
+        const [user, athlete_id] = slack_athlete.split(':');
+        console.log(user, athlete_id, messages[idx]);
+    })
 	return NextResponse.json(
 		{ messages, text: 'Match schedule created successfully' },
 		{
