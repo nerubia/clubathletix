@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
 
     const messages = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
         if (athlete.slack_users?.length) console.log(athlete.full_name);
-        for (const user of athlete.slack_users) {
+        return athlete.slack_users.map(user => {
             const slack_athlete = `${user}:${athlete.id}`;
             if (!slackUsers.includes(slack_athlete)) {
                 slackUsers.push(slack_athlete);
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
                     date_of_birth: athlete.date_of_birth,
                 };
             }
-        }
+        });
         
     })));
 
