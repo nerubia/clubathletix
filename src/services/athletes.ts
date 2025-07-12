@@ -88,6 +88,7 @@ export async function getAthlete(id: number): Promise<AthleteRecord | undefined>
 }
 export async function getAthleteViaEmail(email: string): Promise<Database['public']['Tables']['customers']['Row'] & {
     athletes: Database['public']['Tables']['athletes']['Row'][]
+    slack_users: string[],
 } | undefined> {
     const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
@@ -113,14 +114,14 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
 
         const { data, error } =  await supabase
             .from('athletes')
-            .select('*, customers (full_name, first_name, last_name, email, phone)')
+            .select('*, customers (full_name, first_name, last_name, email, phone), slack_users (username)')
             .ilike('date_of_birth', `${year}-%`)
 
         if (error)
         console.warn(error)
         else results = data.map((athlete) => ({
             ...athlete,
-            parent: athlete.customers
+            parent: athlete.customers,
         }))
 
     } catch (e) {
