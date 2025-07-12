@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 	const data = await req.formData();
 	try {
         const { payload } = Object.fromEntries(data);
-		console.log('Received data for /api/slack/route.ts', {payload});
+		
 		if (payload) {
 			const {
 				user,

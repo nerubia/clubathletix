@@ -1,3 +1,5 @@
+import { getOrganization, getOrganizationByDomain } from "@/services/organization";
+
 const AGE_GROUPS_HOOKS: {
 	[k: string]: string;
 } = {
@@ -139,6 +141,81 @@ export function getSlackTrainingNotification({
 					type: 'image',
 					alt_text: 'Academy',
 					image_url: crest_url,
+				},
+			},
+			{
+				type: 'divider',
+			},
+			...players.map(({ id, name }) => ({
+				type: 'actions',
+				elements: [
+					{
+						type: 'button',
+						text: {
+							type: 'plain_text',
+							text: `Yes, ${name} is going :thumbsup:`,
+							emoji: true,
+						},
+						style: 'primary',
+						value: 'going',
+						action_id: `yes-${id}`,
+					},
+					{
+						type: 'button',
+						text: {
+							type: 'plain_text',
+							text: `Sorry, ${name} can't make it.`,
+							emoji: true,
+						},
+						value: 'going',
+						action_id: `no-${id}`,
+					},
+				],
+			})),
+		],
+	};
+}
+
+export async function getSlackMatchNotification({
+	organization_id,
+	parent_name,
+	players,
+	time,
+	location = 'Cambridge Elementary Park\n6115 150 St, Surrey, BC V3S 3H7',
+}: {
+	organization_id: number;
+	parent_name: string;
+	players: {
+		id: number;
+		name: string;
+	}[];
+	time: string;
+	location?: string;
+	
+}) {
+	let playerNames = '';
+	for (let i = 0; i < players.length; i++) {
+		const player = players[i];
+		if (players.length === 1) playerNames += `*${player.name}*`;
+		else if (players.length === i + 1) playerNames += `and *${player.name}*`;
+		else playerNames += `, *${player.name}*`;
+	}
+
+    const organization = await getOrganization(organization_id)
+    if (!organization) return { blocks: [] };
+
+	return {
+		blocks: [
+			{
+				type: 'section',
+				text: {
+					type: 'mrkdwn',
+					text: `Hi ${parent_name}! *Match ${organization.name || ''}* posted by our coaches.\n\n:date: ${time} for ${playerNames}\n\n:round_pushpin: ${location}`,
+				},
+				accessory: {
+					type: 'image',
+					alt_text: organization.short_name || organization.name || 'Academy',
+					image_url: organization.logo_url,
 				},
 			},
 			{

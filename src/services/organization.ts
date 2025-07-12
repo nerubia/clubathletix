@@ -81,3 +81,49 @@ export async function getOrganizationByDomain(domain: string): Promise<{
         error: JSON.stringify(error)
     }
 }
+
+export async function getOrganization(id: number): Promise<{
+            id?: number;
+            name?: string;
+            short_name?: string;
+            logo_url?: string;
+            media?: Record<string, string[]>
+            bgColours?: string[]
+            textColours?: string[]
+            error?: string
+        }> {
+    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const { data, error } = await supabase.from('domains').select('id, name, organizations (id, name, short_name, logo_url, colours)').eq('id', id).single()
+    
+    if (data?.organizations) {
+        const o = data.organizations as unknown as {
+            [k: string]: string
+        } & {
+            media: string[]
+        }
+        const { data: components } = await supabase.from('media_components').select('*').eq('organization_id', o.id)
+        let media: Record<string, string[]> = {}
+        const textColours = (o.colours || '').split(',').filter(w => w.startsWith('text-'))
+        const bgColours = (o.colours || '').split(',').filter(w => w.startsWith('bg-'))
+        ;(components || []).sort((a, b) => {
+            if (a.segment_name > b.segment_name) return -1
+            if (a.segment_name < b.segment_name) return 1
+            return 0
+        })
+        for (const comp of (components || [])) {
+            media = {
+                ...media,
+                [comp.segment_name]: [...media[comp.segment_name] || [], comp.url]
+            }
+        }
+        return {
+            ...o,
+            media,
+            textColours,
+            bgColours,
+        }
+    }
+    return {
+        error: JSON.stringify(error)
+    }
+}
