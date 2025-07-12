@@ -12,6 +12,7 @@
  * ```
  */
 export async function submitSlackRequest(api: string, payload?: Record<string, any>) {
+    console.log(JSON.stringify(payload, null, 2))
     const response = await fetch(`https://slack.com/api/${api}`, {
         method: 'POST',
         headers: {
