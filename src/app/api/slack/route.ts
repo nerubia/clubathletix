@@ -4,9 +4,10 @@ import { getSlackChannels, getSlackUserProfile } from '@/services/schedule';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
+    console.log('Received request to /api/slack/route.ts', req.method, req.headers.get('content-type'));
 	const data = await req.formData();
-	const { payload } = Object.fromEntries(data);
 	try {
+        const { payload } = Object.fromEntries(data);
 		const {
 			user,
 			actions,
