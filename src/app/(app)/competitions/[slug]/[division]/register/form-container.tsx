@@ -48,7 +48,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 			<div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
 				<Heading force="text-zinc-950 mb-2">Team information</Heading>
 				<div className="mb-12 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-					<Field data-theme="light">
+					<Field data-theme="light" className='col-span-2 md:col-span-1'>
 						<Label data-theme="light">Club / Academy name</Label>
 						<Input
 							name="club_academy"
@@ -66,7 +66,7 @@ export default function FormContainer({ competition }: { competition: Competitio
 						/>
 					</Field>
 
-					<Field data-theme="light">
+					<Field data-theme="light" className='col-span-2 md:col-span-1'>
 						<Label data-theme="light">Team name</Label>
 						<Input
 							name="team_name"
