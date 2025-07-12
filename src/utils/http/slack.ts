@@ -176,14 +176,17 @@ export function getSlackTrainingNotification({
 	};
 }
 
-export async function getSlackMatchNotification({
-	organization_id,
+export function getSlackMatchNotification({
+	organization,
 	parent_name,
 	players,
 	time,
 	location = 'Cambridge Elementary Park\n6115 150 St, Surrey, BC V3S 3H7',
 }: {
-	organization_id: number;
+	organization: {
+        name: string;
+        logo_url: string;
+    };
 	parent_name: string;
 	players: {
 		id: number;
@@ -201,9 +204,6 @@ export async function getSlackMatchNotification({
 		else playerNames += `, *${player.name}*`;
 	}
 
-    const organization = await getOrganization(organization_id)
-    if (!organization) return { blocks: [] };
-
 	return {
 		blocks: [
 			{
@@ -214,7 +214,7 @@ export async function getSlackMatchNotification({
 				},
 				accessory: {
 					type: 'image',
-					alt_text: organization.short_name || organization.name || 'Academy',
+					alt_text: organization.name,
 					image_url: organization.logo_url,
 				},
 			},
