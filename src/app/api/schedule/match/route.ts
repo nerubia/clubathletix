@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         }
     }
 
-    const messages = await Promise.all(yearGroups.flatMap((group) => group.map((athlete) => {
+    const messages = yearGroups.flatMap((group) => group.map((athlete) => {
         if (athlete.slack_users?.length) console.log(athlete.full_name);
         return athlete.slack_users.map(user => {
             const slack_athlete = `${user}:${athlete.id}`;
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
             }
         });
         
-    })));
+    }));
 
     // const messages = await Promise.all(athletes.map(athlete => {
     //     return getSlackMatchNotification({
