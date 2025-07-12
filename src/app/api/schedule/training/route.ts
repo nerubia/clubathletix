@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     const [applicable_years, time, ...rest] = text.split(' ');
 
     const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
-
+    console.log('Year groups:', yearGroups);
 	const blocks = getSlackTrainingNotification({
 		organization_name: 'PF',
 		parent_name: 'Test Parent',
