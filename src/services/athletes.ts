@@ -117,16 +117,11 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
             .select('*, customers (full_name, first_name, last_name, email, phone), slack_users (username)')
             .ilike('date_of_birth', `${year}-%`)
 
-        if (error)
-        console.warn(error)
+        if (error) console.warn(error)
         else results = data.map((athlete) => ({
             ...athlete,
             parent: athlete.customers,
         }))
-
-
-        console.table(results)
-
     } catch (e) {
         console.error(e)
     }
