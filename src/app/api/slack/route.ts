@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 	const data = await req.formData();
 	try {
         const { payload } = Object.fromEntries(data);
-		
+		console.log('Received request to /api/slack/route.ts', payload);
 		if (payload) {
 			const {
 				user,
@@ -82,13 +82,13 @@ export async function POST(req: NextRequest) {
 		//     rest
 		// }, null, 2));
 
-		// return NextResponse.json(applicablePlayers);
-
-		return NextResponse.json({
-			message: 'Slack integration is not available yet.',
-		});
 	} catch (error) {
-		console.warn('Error parsing payload:', error);
+        console.warn('Error parsing payload:', error);
 		return NextResponse.json({ error: 'Invalid payload format.' });
 	}
+    // return NextResponse.json(applicablePlayers);
+
+    return NextResponse.json({
+        message: 'Slack integration is not available yet.',
+    });
 }
