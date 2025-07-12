@@ -1,3 +1,4 @@
+import { getAthleteViaYear } from '@/services/athletes';
 import { submitSlackRequest } from '@/services/http';
 import { getSlackTrainingNotification } from '@/utils/http/slack';
 import { NextRequest, NextResponse } from 'next/server';
@@ -40,6 +41,9 @@ export async function POST(request: NextRequest) {
 	//     status: xhr.status,
 	//     statusText: xhr.statusText,
 	// });
+    const [applicable_years, time, ...rest] = text.split(' ');
+
+    const yearGroups = await Promise.all(applicable_years.split(',').map(Number).map(getAthleteViaYear));
 
 	const blocks = getSlackTrainingNotification({
 		organization_name: 'PF',
@@ -60,7 +64,7 @@ export async function POST(request: NextRequest) {
 	});
 
 	return NextResponse.json(
-		{ message_ts, message: 'Training schedule created successfully', data: params },
+		{ message_ts, message: 'Training schedule created successfully', yearGroups, data: params },
 		{
 			status: 200,
 		}
