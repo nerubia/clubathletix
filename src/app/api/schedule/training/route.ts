@@ -72,11 +72,11 @@ export async function POST(request: NextRequest) {
     const results = await Promise.all(athletes.map(athlete => {
         const {blocks} = getSlackTrainingNotification({
             organization_name: 'PF',
-            parent_name: 'Test Parent',
+            parent_name: athlete.parent_name,
             players: [
                 {
-                    id: 1,
-                    name: 'Test Player',
+                    id: athlete.id,
+                    name: athlete.name,
                 },
             ],
             time: text.split(' ').slice(0, 2).join(' '),
