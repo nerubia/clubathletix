@@ -93,7 +93,7 @@ export default async function CompetitionPage(props: {
 						</div>
 
 						{!search.team && (
-							<section className="mb-6 flex flex-col gap-6">
+							<section className="md:mb-6 flex flex-col gap-6">
 								<DivisionsCTA
 									items={competition.divisions}
 									data={
