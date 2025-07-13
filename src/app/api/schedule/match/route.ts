@@ -57,43 +57,18 @@ export async function POST(request: NextRequest) {
                     }],
                     time: str_time,
                 });
-
-                return submitSlackRequest('chat.postEphemeral', {
-                    channel: 'C09666BQ8BS',
-                    user,
-                    blocks,
-                })
+                if (blocks) {
+                    return submitSlackRequest('chat.postEphemeral', {
+                        channel: 'C09666BQ8BS',
+                        user,
+                        blocks,
+                    })
+                }
             }
         }));
         
     })));
 
-    // const messages = await Promise.all(athletes.map(athlete => {
-    //     return getSlackMatchNotification({
-    //         organization_id,
-    //         parent_name: athlete.parent_name,
-    //         players: [
-    //             athlete,
-    //         ],
-    //         time: str_time,
-    //     });
-
-    // }))
-
-    // const results = await Promise.all(messages.map(({ block }, index) => { 
-    //     return Promise.all(athlete.slack_users.map(user => {
-    //         console.log(user)
-    //         return submitSlackRequest('chat.postEphemeral', {
-    //             channel: 'C09666BQ8BS',
-    //             user,
-    //             ...messages[index],
-    //         })
-    //     }))
-    // }));
-	slackUsers.map((slack_athlete, idx) => {
-        const [user, athlete_id] = slack_athlete.split(':');
-        console.log(user, athlete_id, JSON.stringify(messages[idx], null, 2));
-    })
 	return NextResponse.json(
 		{ messages, text: 'Match schedule created successfully' },
 		{
