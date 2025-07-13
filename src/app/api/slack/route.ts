@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
                     await Promise.all([submitSlackRequest('chat.postEphemeral', {
                         channel: 'C09666BQ8BS',
                         user: 'U094WFETMJ8',
-                        text: `:${yes_no === 'yes' ? 'white_check_mark' : 'x'}: *${athlete.full_name}*`,
+                        text: `*${athlete.full_name}* is going to the match!`,
                     }),fetch(response_url, {
                         method: 'POST',
                         headers: {
