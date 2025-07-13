@@ -63,6 +63,8 @@ export async function POST(request: NextRequest) {
                         user,
                         blocks,
                     })
+                } else {
+                    console.log('Invalid blocks for athlete:', athlete.full_name, 'in organization:', organization.name);
                 }
             }
         }));
