@@ -4,7 +4,6 @@ import { getSlackChannels, getSlackUserProfile } from '@/services/schedule';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-	const hdr = await req.headers;
 	const data = await req.formData();
 	try {
         const { payload } = Object.fromEntries(data);
@@ -46,13 +45,11 @@ export async function POST(req: NextRequest) {
             if (athlete_id) {
                 const athlete = await getAthlete(athlete_id);
                 if (athlete) {
-            
-                    return submitSlackRequest('chat.postEphemeral', {
+                    await Promise.all([submitSlackRequest('chat.postEphemeral', {
                         channel: 'C09666BQ8BS',
                         user: 'U094WFETMJ8',
                         text: `:${yes_no === 'yes' ? 'white_check_mark' : 'x'}: *${athlete.full_name}*`,
-                    })
-                    await fetch(response_url, {
+                    }),fetch(response_url, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -65,7 +62,7 @@ export async function POST(req: NextRequest) {
                             mrkdwn: true,
                             name: "heart"
                         }),
-                    });
+                    })];
                 }
             }
 		}
