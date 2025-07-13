@@ -11,8 +11,8 @@
  * await submitSlackRequest('reactions.add', { channel: 'C123', name: 'thumbsup', timestamp: '1234567890.123456' });
  * ```
  */
-export async function submitSlackRequest(api: string, payload?: Record<string, any>) {
-    console.log(JSON.stringify(payload, null, 2))
+export async function submitSlackRequest(api: string, payload: Record<string, any>) {
+    console.log(JSON.stringify({payload}, null, 2))
     const response = await fetch(`https://slack.com/api/${api}`, {
         method: 'POST',
         headers: {
