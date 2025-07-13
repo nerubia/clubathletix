@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
 				};
 			};
 
+            console.log(user);
 			const thread_ts = message_ts;
 			const action = actions.pop();
 
