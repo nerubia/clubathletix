@@ -8,10 +8,7 @@ export async function POST(request: NextRequest) {
 	const params = Object.fromEntries(formData.entries());
 
 	const {
-		command,
-		channel_id,
 		text, // This is the text input from the user,
-		response_url, // Use this to submit a response back to Slack
 	} = params as Record<string, string>;
 	console.log('Received request to /api/schedule/training/route.ts', params);
 	// Here you would typically handle the training schedule creation logic

@@ -5,8 +5,12 @@ import { getSlackMatchNotification, getSlackTrainingNotification } from '@/utils
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-	const formData = await request.formData();
-	const params = Object.fromEntries(formData.entries());
+	const formData = await request.formData();]
+    const contentType = request.headers.get('content-type');
+
+    console.log({contentType})
+
+    const params = Object.fromEntries(formData.entries());
 
 	const {
 		text, // This is the text input from the user,
