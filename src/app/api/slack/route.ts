@@ -46,6 +46,12 @@ export async function POST(req: NextRequest) {
             if (athlete_id) {
                 const athlete = await getAthlete(athlete_id);
                 if (athlete) {
+            
+                    return submitSlackRequest('chat.postEphemeral', {
+                        channel: 'C09666BQ8BS',
+                        user: 'U094WFETMJ8',
+                        text: `:${yes_no === 'yes' ? 'white_check_mark' : 'x'}: *${athlete.full_name}*`,
+                    })
                     await fetch(response_url, {
                         method: 'POST',
                         headers: {
