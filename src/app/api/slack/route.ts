@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
                             mrkdwn: true,
                             name: "heart"
                         }),
-                    })];
+                    })]);
                 }
             }
 		}
