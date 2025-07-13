@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
                 });
                 if (blocks) {
                     return submitSlackRequest('chat.postEphemeral', {
-                        channel: 'C09666BQ8BS',
+                        channel: process.env.SLACK_SCHEDULING_CHANNEL_ID!,
                         user,
                         blocks,
                     })

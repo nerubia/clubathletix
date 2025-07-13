@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
                 const athlete = await getAthlete(athlete_id);
                 if (athlete) {
                     await Promise.all([submitSlackRequest('chat.postEphemeral', {
-                        channel: 'C09666BQ8BS',
+                        channel: process.env.SLACK_SCHEDULING_CHANNEL_ID!,
                         user: 'U094WFETMJ8',
                         text: `*${athlete.full_name}* is going to the match!`,
                     }),fetch(response_url, {

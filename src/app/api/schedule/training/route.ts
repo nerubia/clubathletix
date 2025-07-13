@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
         return Promise.all(athlete.slack_users.map(user => {
             return submitSlackRequest('chat.postEphemeral', {
-                channel: 'C09666BQ8BS',
+                channel: process.env.SLACK_SCHEDULING_CHANNEL_ID!,
                 user,
                 blocks,
             })
