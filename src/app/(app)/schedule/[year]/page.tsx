@@ -22,7 +22,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ year:
         showPrint: 0,
         showCalendars: 0,
         // showTitle: 0,
-        showTabs: 0,
+        // showTabs: 0,
         // showTz: 0,
         // showDate: 0,
         // showNav: 0,
