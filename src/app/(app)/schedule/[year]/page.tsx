@@ -19,13 +19,13 @@ export default async function SchedulePage({ params }: { params: Promise<{ year:
     const config: {
         [k: string]: number;
     } = {
-        showTitle: 0,
         showPrint: 0,
-        showTabs: 0,
         showCalendars: 0,
-        showTz: 0,
-        showDate: 0,
-        showNav: 0,
+        // showTitle: 0,
+        showTabs: 0,
+        // showTz: 0,
+        // showDate: 0,
+        // showNav: 0,
     }
     let url = `https://calendar.google.com/calendar/embed?src=${CALENDAR_GROUPS[year]}%40group.calendar.google.com&ctz=America%2FVancouver&mode=AGENDA`
     Object.keys(config).forEach((key) => {
