@@ -1,4 +1,4 @@
-
+import { NextRequest, NextResponse } from "next/server";
 const CALENDAR_GROUPS: {
     [k: string]: string;
 } = {
@@ -14,8 +14,9 @@ const CALENDAR_GROUPS: {
     '2019': 'c_440de78c41481d14827406fc0f4fa02e4f7c6725bc993f6082c79adca71bc0b3',
     'league': 'c_81c36e7143cac591b55b7ce574099210a62c7c15ee5f43b7f6fb85794b248784',
 }
-export default async function SchedulePage({ params }: { params: Promise<{ year: string }> }) {
-    const { year } = await (params as Promise<{ year: string }>);
+export async function GET(req: NextRequest) {
+    const year = new URLSearchParams(req.nextUrl.searchParams).get("year") || "league";
+
     const config: {
         [k: string]: number;
     } = {
@@ -27,12 +28,16 @@ export default async function SchedulePage({ params }: { params: Promise<{ year:
         showDate: 0,
         showNav: 0,
     }
-    let url = `https://calendar.google.com/calendar/embed?src=${CALENDAR_GROUPS[year]}%40group.calendar.google.com&ctz=America%2FVancouver&mode=AGENDA`
+
+    let url = `https://calendar.google.com/calendar/embed?src=${CALENDAR_GROUPS[year]}%40group.calendar.google.com&ctz=America%2FVancouver&mode=AGENDA`;
     Object.keys(config).forEach((key) => {
         url = `${url}&${key}=${config[key]}`;
     });
-	return (<div>
-        <iframe className="w-screen max-w-7xl mx-auto rounded-2xl h-[calc(100vh-11.5rem)] mt-16 md:mb-8" src={url} />
-    </div>
-	);
+    let data = await fetch(url)
+    let html = await (data.text() as Promise<string>);
+    html = html.split('</body>')[0] + `<script>alert('testt);</script>`;
+
+    return NextResponse.json({
+        html,
+    })
 }
