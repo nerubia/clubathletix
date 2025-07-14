@@ -2478,6 +2478,36 @@ export type Database = {
           },
         ]
       }
+      organization_events: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          event_type: string
+          id: number
+          location: string
+          organization_id: number
+          starts_at: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          event_type?: string
+          id?: number
+          location: string
+          organization_id: number
+          starts_at: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          event_type?: string
+          id?: number
+          location?: string
+          organization_id?: number
+          starts_at?: string
+        }
+        Relationships: []
+      }
       organization_users: {
         Row: {
           created_at: string
