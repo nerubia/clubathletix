@@ -7,9 +7,7 @@ import { usePathname } from "next/navigation"
 import { Heading } from "../heading"
 
 const navigation = [
-  { name: 'Schedule', href: '/schedule' },
   { name: 'Parents', href: '/parental-expectations' },
-  { name: 'Match Video & Analysis', href: '/videos' },
   // { name: 'Management', href: '#' },
 ]
 
