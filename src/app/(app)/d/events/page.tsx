@@ -9,13 +9,15 @@ import { getEvents } from '@/data';
 import { EllipsisVerticalIcon, MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import type { Metadata } from 'next';
 import Form from './form';
+import { getLocations } from '@/services/locations';
+import { getTeams } from '@/services/teams';
 
 export const metadata: Metadata = {
 	title: 'Events',
 };
 
 export default async function Events() {
-	let events = await getEvents();
+	let [events, locations, teams] = await Promise.all([getEvents(), getLocations(), getTeams()]);
 
 	return (
 		<>
@@ -37,8 +39,8 @@ export default async function Events() {
 						</div>
 					</div>
 				</div>
-				<DialogTrigger title="New Event" button-label="Create event" size="3xl">
-                    <Form />
+				<DialogTrigger title="New Event" button-label="Create event" size="2xl">
+                    <Form data-locations={locations} data-teams={teams} />
 				</DialogTrigger>
 			</div>
 			<ul className="mt-10">
