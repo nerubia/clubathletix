@@ -17,7 +17,7 @@ type OrganizationEvent = {
     ends_at: string;
 };
 type Location = {
-    id: number;
+    id: string;
     name: string;
     street_1: string;
     street_2?: string;
@@ -26,7 +26,7 @@ type Location = {
     postal_zip_code: string;
 };
 type Team = {
-    id: number;
+    id: string;
     short_name: string;
     name: string;
     logo_url?: string;
@@ -248,7 +248,7 @@ export default function Form({
                         <div className='mt-3 w-full'>
                             <Dropdown>
                                 <DropdownButton outline className='w-full text-left justify-between!' aria-label="Select team" disabled={teams.length === 0}>
-                                    Opponent
+                                    {selectedOpponent?.name || 'Select team'}
                                     <ChevronDownIcon />
                                 </DropdownButton>
                                 <DropdownMenu>
@@ -257,6 +257,7 @@ export default function Form({
                                             ...prev,
                                             id: t.id.toString(),
                                             name: t.name,
+                                            logo_url: t.logo_url || t.organizations.logo_url,
                                         }))} key={t.id}>
                                             {(t.logo_url || t.organizations.logo_url) && <Image src={`${t.logo_url || t.organizations.logo_url}`} alt={t.name} width={24} height={24} className="inline-block mr-2 rounded-full" />}
                                             {t.organizations.short_name}{t.organizations.short_name === t.name ? '' : ` ${t.name}`}
