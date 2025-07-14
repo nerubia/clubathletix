@@ -31,6 +31,6 @@ export default async function SchedulePage({ params }: { params: Promise<{ year:
         url = `${url}&${key}=${config[key]}`;
     });
 	return (
-        <iframe className="w-screen h-[calc(100vh-11.5rem)] mt-16" src={url} />
+        <iframe className="w-screen max-w-7xl mx-auto rounded-2xl h-[calc(100vh-11.5rem)] mt-16" src={url} />
 	);
 }
