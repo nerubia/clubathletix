@@ -1,4 +1,4 @@
-import { getAthlete } from '@/services/athletes';
+import { answerAttendance, getAthlete } from '@/services/athletes';
 import { submitSlackRequest } from '@/services/http';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -89,11 +89,13 @@ export async function POST(req: NextRequest) {
 
 				if (athlete) {
 					await Promise.all([
-                        submitSlackRequest('chat.update', {
-							channel: process.env.SLACK_SCHEDULING_CHANNEL_ID!,
-							ts: 'thread_ts',
-							text: `*${athlete.full_name}* is going to the match!`,
-						}),
+                        answerAttendance({
+                            athlete_id: athlete.id,
+                            title: `Aattendance for ${athlete.full_name}`,
+                            going: yes_no === 'yes',
+                            location: 'Matchday',
+                            event_starts: 'event starts',
+                        }),
 						submitSlackRequest('chat.postEphemeral', {
 							channel: process.env.SLACK_SCHEDULING_CHANNEL_ID!,
 							user: 'U094WFETMJ8',
