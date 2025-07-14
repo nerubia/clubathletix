@@ -130,3 +130,27 @@ export async function getAthleteViaYear(year: number): Promise<AthleteRecord[]> 
 
     return results
 }
+export async function answerAttendance(p: {
+    athlete_id: number;
+    title: string;
+    going?: boolean;
+    event_starts: string;
+    location: string;
+}): Promise<Database['public']['Tables']['attendance']['Row'] | undefined> {
+    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    let result: Database['public']['Tables']['attendance']['Row'] | undefined;
+    try {
+
+        const { data, error } =  await supabase
+            .from('attendance')
+            .insert(p)
+            .select('*, athletes (id, full_name, date_of_birth, customers (full_name, first_name, last_name, email, phone), slack_users (username))').single()
+
+        if (error) console.warn(error)
+        else result = data
+    } catch (e) {
+        console.error(e)
+    }
+
+    return result
+}
