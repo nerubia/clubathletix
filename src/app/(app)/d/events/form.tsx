@@ -27,7 +27,6 @@ type Location = {
 };
 type Team = {
     id: string;
-    short_name: string;
     name: string;
     logo_url?: string;
     organizations: {
