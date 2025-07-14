@@ -32,6 +32,7 @@ type Team = {
     organizations: {
         id: number;
         short_name: string;
+        logo_url?: string;
     }
 }
 
@@ -71,6 +72,8 @@ export default function Form({
         starts_at: new Date().toISOString(),
         ends_at: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
     });
+
+    const [selectedOpponent, setSelectedOpponent] = useState<{ id: string; name: string; logo_url?: string } | null>(null);
 
 	useEffect(() => {
 		let year = Number(time.year);
@@ -243,18 +246,19 @@ export default function Form({
                         <Label>Team</Label>
                         <div className='mt-3 w-full'>
                             <Dropdown>
-                                <DropdownButton outline>
+                                <DropdownButton outline className='w-full text-left justify-between!' aria-label="Select team" disabled={teams.length === 0}>
                                     Opponent
                                     <ChevronDownIcon />
                                 </DropdownButton>
                                 <DropdownMenu>
                                     {teams.map(t => (
-                                        <DropdownItem onClick={() => setForm(prev => ({
+                                        <DropdownItem onClick={() => setSelectedOpponent(prev => ({
                                             ...prev,
-                                            team_id: t.id.toString(),
+                                            id: t.id.toString(),
+                                            name: t.name,
                                         }))} key={t.id}>
-                                            {t.logo_url && <Image src={t.logo_url} alt={t.name} width={24} height={24} className="inline-block mr-2" />}
-                                            {t.organizations.short_name} {t.name}
+                                            {(t.logo_url || t.organizations.logo_url) && <Image src={`${t.logo_url || t.organizations.logo_url}`} alt={t.name} width={24} height={24} className="inline-block mr-2 rounded-full" />}
+                                            {t.organizations.short_name}{t.organizations.short_name === t.name ? '' : ` ${t.name}`}
                                         </DropdownItem>
                                     ))}
                                 </DropdownMenu>
