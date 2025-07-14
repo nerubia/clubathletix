@@ -904,6 +904,44 @@ export type Database = {
           },
         ]
       }
+      attendance: {
+        Row: {
+          athlete_id: number
+          created_at: string
+          event_starts: string
+          going: boolean
+          id: number
+          location: string | null
+          title: string
+        }
+        Insert: {
+          athlete_id: number
+          created_at?: string
+          event_starts: string
+          going?: boolean
+          id?: number
+          location?: string | null
+          title: string
+        }
+        Update: {
+          athlete_id?: number
+          created_at?: string
+          event_starts?: string
+          going?: boolean
+          id?: number
+          location?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athletes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       competition_registrations: {
         Row: {
           competition_id: number | null
@@ -1125,6 +1163,8 @@ export type Database = {
           id: number
           name: string | null
           organization_id: number | null
+          reg_end_date: string | null
+          reg_start_date: string | null
           slug: string | null
           start_date: string | null
           status: string | null
@@ -1141,6 +1181,8 @@ export type Database = {
           id?: number
           name?: string | null
           organization_id?: number | null
+          reg_end_date?: string | null
+          reg_start_date?: string | null
           slug?: string | null
           start_date?: string | null
           status?: string | null
@@ -1157,6 +1199,8 @@ export type Database = {
           id?: number
           name?: string | null
           organization_id?: number | null
+          reg_end_date?: string | null
+          reg_start_date?: string | null
           slug?: string | null
           start_date?: string | null
           status?: string | null
