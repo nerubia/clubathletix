@@ -82,7 +82,7 @@ export default function DivisionsCTA({ items, data }: { items: Record<string, an
 									className="flex items-center justify-between"
 								>
 									<span className="absolute inset-0" />
-									Register &rarr;
+									More Info &rarr;
 								</Button>
 							</h3>
 						</article>

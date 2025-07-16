@@ -39,7 +39,7 @@ export default async function Events() {
 						</div>
 					</div>
 				</div>
-				<DialogTrigger title="New Event" button-label="Create event" size="2xl">
+				<DialogTrigger title="New Event" button-label="Create event" size="xl">
                     <Form data-locations={locations} data-teams={teams} />
 				</DialogTrigger>
 			</div>

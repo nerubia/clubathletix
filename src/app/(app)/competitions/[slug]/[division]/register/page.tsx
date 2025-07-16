@@ -1,3 +1,5 @@
+import { Heading } from '@/components/heading';
+import { Text } from '@/components/text';
 import { getCompetitionBySlug } from '@/services/competition';
 import { getCompetitionDivision } from '@/services/division';
 import Image from 'next/image';
@@ -19,7 +21,7 @@ export default async function CompetitionRegistrationPage(props: {
 	return (
 		<div className="relative isolate bg-white">
 			<div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-				<div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
+				<div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:py-48 lg:pl-0">
 					<div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
 						<div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2">
 							<svg
@@ -48,10 +50,15 @@ export default async function CompetitionRegistrationPage(props: {
 						<h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
 							{division?.name} Division Registration
 						</h2>
-						<p className="mt-6 text-lg/8 text-gray-600">
-							Limited spots available! Register now to secure your place in the {division?.name} division of the
-							competition.
-						</p>
+						{division?.image_url && (
+							<Image
+								src={division?.image_url || '/default-division-image.jpg'}
+								alt={division?.name || ''}
+								width={600}
+								height={400}
+								className="mt-8 w-full rounded-lg object-cover shadow-2xl"
+							/>
+						)}
 						{Boolean(division) && (
 							<dl className="mt-10 space-y-4 text-base/7 text-gray-600">
 								<div className="flex gap-x-4">
@@ -99,18 +106,27 @@ export default async function CompetitionRegistrationPage(props: {
 							</p>
 						</div>
 
-						{division?.image_url && (
-							<Image
-								src={division?.image_url || '/default-division-image.jpg'}
-								alt={division?.name || ''}
-								width={600}
-								height={400}
-								className="mt-8 w-full rounded-lg object-cover shadow-2xl"
-							/>
-						)}
+						<div className='bg-zinc-200 dark:bg-gray-900 mt-6 rounded-lg p-6'>
+							{Boolean(division) && <Heading>{`${division?.description || ''}`.split('\n').slice(0, 1).pop()}</Heading>}
+
+							{Boolean(division) && (
+								<Text className="whitespace-break-spaces text-zinc-800! dark:text-white!">
+									{`${division?.description || ''}`.split('\n').slice(1).join('\n')}
+								</Text>
+							)}
+
+                            
+						</div>
+
+                        <p className='mt-6 italic text-zinc-800!'>
+                            <sub>
+                                Limited spots available! Register now to secure your place in the {division?.name} division of the
+                                competition.
+                            </sub>
+                        </p>
 					</div>
 				</div>
-				<form action={submitAction} className="px-6 pt-20 pb-24 sm:pb-32 lg:px-8 lg:py-48">
+				<form action={submitAction} className="px-6 pt-20 pb-24 sm:pb-32 lg:py-48 lg:pr-0">
 					<input type="hidden" name="competition_id" value={competition?.id || ''} />
 					<input type="hidden" name="competition_name" value={competition?.name || ''} />
 					<input type="hidden" name="organization_name" value={competition?.organizations.name || ''} />
