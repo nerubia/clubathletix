@@ -13,6 +13,7 @@ const CALENDAR_GROUPS: {
     '2018': 'c_2deb412e20a7fd86a591ea7d3567551c71109fbde73e66a1779d370aee3c4b43',
     '2019': 'c_440de78c41481d14827406fc0f4fa02e4f7c6725bc993f6082c79adca71bc0b3',
     'league': 'c_81c36e7143cac591b55b7ce574099210a62c7c15ee5f43b7f6fb85794b248784',
+    'sparkle': 'c_f519e8020f30dc5567736ddd9b287481be58e3f2a4368f93cf6f7d045e788093',
 }
 export default async function SchedulePage({ params }: { params: Promise<{ year: string }> }) {
     const { year } = await (params as Promise<{ year: string }>);
