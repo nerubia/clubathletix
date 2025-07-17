@@ -15,6 +15,8 @@ const CALENDAR_GROUPS: {
     'league': 'c_81c36e7143cac591b55b7ce574099210a62c7c15ee5f43b7f6fb85794b248784',
     'sparkle': 'c_f519e8020f30dc5567736ddd9b287481be58e3f2a4368f93cf6f7d045e788093',
     'bn-academy': 'c_b58b5976d69f39ad576ff6dc73e25dcb4fcb0daf96c5ed38061c95d30fa42ad3',
+    'orix': 'c_078692089c06457b8db5866f971ce391c0867e7aea79aa24dccc4b566ab01167',
+    'sounders': 'c_cb70dd42d18eb4a8df26a313b2c3581811aa7b47270345db341c84ac0ed00b03',
 }
 export default async function SchedulePage({ params }: { params: Promise<{ year: string }> }) {
     const { year } = await (params as Promise<{ year: string }>);
