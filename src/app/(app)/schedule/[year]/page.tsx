@@ -19,6 +19,7 @@ const CALENDAR_GROUPS: {
     'orix': 'c_078692089c06457b8db5866f971ce391c0867e7aea79aa24dccc4b566ab01167',
     'sounders': 'c_cb70dd42d18eb4a8df26a313b2c3581811aa7b47270345db341c84ac0ed00b03',
     'pf-u12': 'c_cb70dd42d18eb4a8df26a313b2c3581811aa7b47270345db341c84ac0ed00b03',
+    'pmfc-u12': 'c_2257010a3fe8cb8d4fbca41b10156105f45d1ebd7a64a2a8b5e1a9938dc12807',
 }
 export default async function SchedulePage({ params }: { params: Promise<{ year: string }> }) {
     const { year } = await (params as Promise<{ year: string }>);
