@@ -147,9 +147,9 @@ export function ApplicationLayout({
 								<Square2StackIcon />
 								<SidebarLabel>Events</SidebarLabel>
 							</SidebarItem>
-							<SidebarItem href="/d/members" current={pathname.startsWith('/d/members')}>
+							<SidebarItem href="/d/organizations" current={pathname.startsWith('/d/organizations')}>
 								<UserGroupIcon />
-								<SidebarLabel>Members</SidebarLabel>
+								<SidebarLabel>Organizations</SidebarLabel>
 							</SidebarItem>
 							<SidebarItem href="/d/settings" current={pathname.startsWith('/d/settings')}>
 								<Cog6ToothIcon />

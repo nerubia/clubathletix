@@ -31,14 +31,14 @@ export default async function Member({ params }: { params: Promise<{ id: string 
 	return (
 		<>
 			<div className="max-lg:hidden">
-				<Link href="/members" className="inline-flex items-center gap-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
+				<Link href="/organizations" className="inline-flex items-center gap-2 text-sm/6 text-zinc-500 dark:text-zinc-400">
 					<ChevronLeftIcon className="size-4 fill-zinc-400 dark:fill-zinc-500" />
-					Members
+					Organizations
 				</Link>
 			</div>
 			<div className="mt-4 lg:mt-8">
 				<div className="flex items-center gap-4">
-					<Heading>Member #{member.id}</Heading>
+					<Heading>Organization #{member.id}</Heading>
 					<Badge color="lime">Successful</Badge>
 				</div>
 				<div className="isolate mt-2.5 flex flex-wrap justify-between gap-x-6 gap-y-4">

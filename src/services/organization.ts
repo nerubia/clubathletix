@@ -99,3 +99,12 @@ export async function getOrganization(id: number): Promise<{
 
     return data
 }
+
+export async function getOrganizations(filter?: Record<string, unknown>) {
+    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const { data, error } = await supabase.from('organizations').select('id, created_at, name, short_name, subdomain, logo_url, colours').match(filter || {}).order('created_at')
+
+    if (error) console.warn('Error fetching organization:', error)
+
+    return data
+}
